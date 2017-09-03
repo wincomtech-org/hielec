@@ -1,0 +1,88 @@
+
+<script type="text/JavaScript">
+    // parent.document.title = '论坛定制 管理中心 - 用户 - 编辑用户';if(parent.$('admincpnav')) parent.$('admincpnav').innerHTML='用户&nbsp;&raquo;&nbsp;编辑用户&nbsp;&nbsp;<a target="main" title="添加到常用操作" href="admin.php?action=misc&operation=custommenu&do=add&title=%E7%BC%96%E8%BE%91%E7%94%A8%E6%88%B7&url=action%253Dmembers%2526operation%253Dedit%2526uid%253D1">[+]</a>';
+</script>
+<div class="floattop">
+    <div class="itemtitle">
+        <h3>提现配置</h3>
+        <ul class="tab1">
+        <li><a href="<?php echo $withdraw_url ?>list"><span>提现列表</span></a></li>
+        <li class="current"><a href="<?php echo $withdraw_url ?>config"><span>提现配置</span></a></li>
+        <li><a href="<?php echo $withdraw_url ?>blacklist"><span>黑名单</span></a></li>
+        </ul>
+    </div>
+</div>
+<div class="floattopempty"></div>
+
+<form method="post" autocomplete="off" action="<?php echo $withdraw_url ?>config" id="withdrawform">
+    <input type="hidden" name="formhash" value="<?php echo FORMHASH ?>">
+    <table class="tb tb2">
+        <tbody>
+            <tr><td colspan="2" class="td27">提现开关:</td></tr>
+            <tr class="noborder" >
+                <td class="vtop rowform">
+                    <label><input <?php if ($wdval['withdraw_switch']==1): ?>checked<?php endif ?> type="radio" name="withdraw_switch" value="1"> 开</label>
+                    <label><input <?php if ($wdval['withdraw_switch']!=1): ?>checked<?php endif ?> type="radio" name="withdraw_switch" value="0"> 关</label>
+                </td>
+            </tr>
+
+            <tr><td colspan="2" class="td27">最低提现额度:</td></tr>
+            <tr class="noborder" >
+                <td class="vtop rowform">
+                    <input type="number" name="<?php echo $wdkey['withdraw_min'] ?>" value="<?php echo $wdval['withdraw_min'] ?>">
+                </td>
+                <td class="vtop tips2"></td>
+            </tr>
+            <tr><td colspan="2" class="td27">最高提现额度:</td></tr>
+            <tr class="noborder">
+                <td class="vtop rowform">
+                    <input name="<?php echo $wdkey['withdraw_max'] ?>" value="<?php echo $wdval['withdraw_max'] ?>" class="txt">
+                </td>
+                <td class="vtop tips2"></td>
+            </tr>
+
+            <tr><td colspan="2" class="td27">扣除手续费:</td></tr>
+            <tr class="noborder">
+                <td class="vtop rowform">
+                    <input name="<?php echo $wdkey['withdraw_ratio'] ?>" value="<?php echo $wdval['withdraw_ratio'] ?>" class="txt">
+                </td>
+                <td class="vtop tips2"><span> % 百分比</span></td>
+            </tr>
+
+            <tr><td colspan="2" class="td27">每日提现次数限制:</td></tr>
+            <tr class="noborder" >
+                <td class="vtop rowform">
+                    <input type="number" name="<?php echo $wdkey['withdraw_day'] ?>" value="<?php echo $wdval['withdraw_day'] ?>">
+                </td>
+                <td class="vtop tips2"></td>
+            </tr>
+
+            <tr title="提示："><td colspan="2" class="td27">账户类型:</td></tr>
+            <tr class="noborder">
+                <td class="vtop rowform">
+                    <textarea readonly name="<?php echo $wdkey['withdraw_type'] ?>" id="bio" class="pt" rows="3" cols="40" tabindex="1"><?php echo $wdval['withdraw_type'] ?></textarea>
+                </td>
+                <td class="vtop tips2">如：支付宝，微信，银行卡，QQ。<b style="color: #F00">非专业人士勿改！</b></td>
+            </tr>
+
+            <tr title="提示："><td colspan="2" class="td27">黑名单:</td></tr>
+            <tr class="noborder">
+                <td class="vtop rowform">
+                    <textarea name="<?php echo $wdkey['withdraw_blacklist'] ?>" id="bio" class="pt" rows="3" cols="40" tabindex="1"><?php echo $wdval['withdraw_blacklist'] ?></textarea>
+                    <div class="rq mtn" id="showerror_bio"></div>
+                </td>
+                <td class="vtop tips2">用户ID组</td>
+            </tr>
+
+            <tr>
+                <td colspan="15">
+                    <div class="fixsel">
+                        <input type="submit" class="btn" id="submit_editsubmit" name="editsubmit" value="提交">
+                    </div>
+                </td>
+            </tr>
+            <script type="text/JavaScript">_attachEvent(document.documentElement, 'keydown', function (e) { entersubmit(e, 'editsubmit'); });</script>
+        </tbody>
+    </table>
+</form>
+

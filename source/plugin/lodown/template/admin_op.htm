@@ -1,0 +1,113 @@
+
+<!--{template _public/admin_common_head}-->
+<div>{if $loid}编辑{else}新增{/if}{$head_title}</div><br>
+
+<form action="{$formcheck['url']}" method="post" enctype="multipart/form-data" class="lothar_form">
+	<div class="lothar_div">
+		<label><span>名称:</span> <input type="text" name="name" value="{$page[name]}" required tabindex="1" />
+		</label>
+	</div>	
+	<div class="lothar_div">
+		<label><span>标签:</span> <textarea cols="40" rows="3" name="tags">{$page[tags]}</textarea></label>
+	</div>
+	<div class="lothar_div">
+		<label><span>积分:</span> <input type="number" name="price" value="{$page[price]}" tabindex="3" /></label>
+	</div>
+	<div class="lothar_div">
+
+		<div class="lothar_div">
+			<span>资源属性:</span> 
+			<select name="resource_property">
+				<!--{loop $resource_properties $v}-->
+				<option  {eval if (in_array($v[cid],json_decode($page[cid])))
+				echo 'selected';} value="{$v[cid]}">{$v[name]}</option>
+				<!--{/loop}-->
+			</select>
+		</div>
+		<div class="lothar_div">
+			<span>模块:</span> 
+			<select name="module">
+				<!--{loop $modules $v}-->
+				<option {eval if (in_array($v[cid],json_decode($page[cid])))
+				echo 'selected';} value="{$v[cid]}">{$v[name]}</option>
+				<!--{/loop}-->
+			</select>
+		</div>
+		<div class="lothar_div">
+			<span>软件:</span> 
+			<select name="software">
+				<!--{loop $softwares $v}-->
+				<option {eval if (in_array($v[cid],json_decode($page[cid])))
+				echo 'selected';} value="{$v[cid]}">{$v[name]}</option>
+				<!--{/loop}-->
+			</select>
+		</div>
+		<div class="lothar_div">
+			<span>编程语言:</span>
+			<select name="program_language">
+				<!--{loop $program_languages $v}-->
+				<option {eval if (in_array($v[cid],json_decode($page[cid])))
+				echo 'selected';} value="{$v[cid]}">{$v[name]}</option>
+				<!--{/loop}-->
+			</select>
+		</div>
+		<div class="lothar_div">
+			<span>热点技术:</span> 
+			<select name="hot_skill">
+				<!--{loop $hot_skills $v}-->
+				<option {eval if (in_array($v[cid],json_decode($page[cid])))
+				echo 'selected';} value="{$v[cid]}">{$v[name]}</option>
+				<!--{/loop}-->
+			</select>
+		</div>
+		<div class="lothar_div">
+			<span>应用: </span>
+			<select name="use">
+				<!--{loop $uses $v}-->
+				<option {eval if (in_array($v[cid],json_decode($page[cid])))
+				echo 'selected';} value="{$v[cid]}">{$v[name]}</option>
+				<!--{/loop}-->
+			</select>
+		</div>
+		<div class="lothar_div">
+			<span>电子基础:</span> 
+			<select name="eletron_basis">
+				<!--{loop $eletron_basises $v}-->
+				<option {eval if (in_array($v[cid],json_decode($page[cid])))
+				echo 'selected';} value="{$v[cid]}">{$v[name]}</option>
+				<!--{/loop}-->
+			</select>
+		</div>
+
+		<div class="lothar_div">
+			<label><span>简述:</span> <textarea cols="40" rows="5" name="brief">{$page[brief]}</textarea></label>
+		</div>
+		<div class="lothar_div">
+			<label><span>详情:</span> <textarea cols="40" rows="8" name="details">{$page[details]}</textarea></label>
+		</div>
+		<div class="lothar_div">
+			<label><span>相关链接:</span> <input type="text" name="url" value="{$page[url]}" /></label>
+		</div>
+		<div class="lothar_div">
+			<label><span>图片: </span><input type="file" name="pic" tabindex="4" /></label>
+			<!--{if $page[pic]}--><a href="{$page[pichref]}">{$page[pic]}</a><!--{/if}-->
+		</div>
+		<div class="lothar_div">
+			<label><span>附件:</span> <input type="file" name="attach" tabindex="5" /></label>
+			<!--{if $page[attach]}--><a href="{$page[attachhref]}">{$page[attach]}</a><!--{/if}-->
+		</div>
+		<div class="lothar_div"><label><span>状态:</span>
+			<select name="status">
+				<!--{loop $lostatus $l $m}-->
+				<option value="{$l}" {if $page[status]==$l}selected{/if}>{$m}</option>
+				<!--{/loop}-->
+			</select>
+		</label></div>
+
+		<div class="lothar_div">
+			<input type="hidden" name="formhash" value="{FORMHASH}" />
+			<input type="hidden" name="loid" value="{$loid}">
+			<input type="submit" value="提交" />
+		</div>
+	</form>
+	<!--{template _public/admin_common_foot}-->

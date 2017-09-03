@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+	<meta charset="UTF-8">
+	<title>官网首页</title>
+	<link rel="stylesheet" type="text/css" href="{LO_PUB_CSS}common.css">
+	<link rel="stylesheet" type="text/css" href="{LO_PUB_CSS}home.css">
+	<script type="text/javascript" src="{LO_PUB_JS}jquery-1.12.1.min.js"></script>
+	<!-- <base href="{$_G[siteurl]}"> -->
+</head>
+
+<body>
+<div class="header">
+	<div class="h_cont">
+		欢迎访问<!--{$navtitle}-->
+		<!--{if $_G['uid']}-->
+		<a href="member.php?mod=logging&action=logout&formhash={FORMHASH}">{lang logout}</a>
+		<strong class="vwmy{if $_G['setting']['connect']['allow'] && $_G[member][conisbind]} qq{/if}"><a href="home.php?mod=space&uid=$_G[uid]" target="_blank" title="{lang visit_my_space}">{$_G[member][username]}</a></strong>
+		<!--{else}-->
+		<a href="member.php?mod=register">注册</a>
+		<a href="member.php?mod=logging&action=login" class="a_bor">登录</a>
+		<!--{/if}-->
+	</div>
+</div>
+
+<div class="container">
+	<!--{$adv_customs[1]}-->
+	<div class="logo_ad">
+		<!--{if !isset($_G['setting']['navlogos'][$mnid])}--><a class="logo_home_a" href="{if $_G['setting']['domain']['app']['default']}http://{$_G['setting']['domain']['app']['default']}/{else}./{/if}" title="$_G['setting']['bbname']">{$_G['style']['boardlogo']}</a><!--{else}-->$_G['setting']['navlogos'][$mnid]<!--{/if}-->
+		<!--{$adv_customs[2]}-->
+		<!--{$adv_customs[3]}-->
+	</div>
+	<!-- 首页主导航 -->
+	<div class="menu">
+		<ul>
+			<!--{loop $_G['setting']['navs'] $nav}-->
+				<!--{if $nav['available'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1))}-->
+				<li class="nav {if $mnid==$nav[navid]}current{/if}" {$nav[nav]}></li>
+				<!--{/if}-->
+			<!--{/loop}-->
+		</ul>
+	</div>
+
+
+
+	<!-- 主体 -->
+	<div class="main_cont">
+		<!-- 左栏内容 -->
+		<div class="left_cont fl">
+			<div class="l_zone">热门版区：
+				<ul>
+				<!--{loop $forum_hot $fhot}-->
+					<li><a href="{$thread_url}{$fhot[fid]}"><!--{eval echo cutstr($fhot[name],12)}--></a></li>
+				<!--{/loop}-->
+				</ul>
+			</div>
+			<div class="l_cf">
+				<!--{$adv_customs[4]}-->
+			</div>
+			<div class="l_cf">
+				<div class="cf_head">
+					<img src="{LO_PUB_IMG}ico1_yh.png" height="24">
+					<span>十大精华帖</span>
+				</div>
+				<div class="cf_cont">
+					<ul>
+					<!--{loop $thread_digest $tk $tdig}-->
+						<li>
+						<span class="ico{if $tk<3}{$tk}{/if}">{eval echo $tk+1}</span>
+						<a {if $tk<3}class="top"{/if} href="{$post_url}{$tdig[tid]}">{$tdig[subject]}</a>
+						</li>
+					<!--{/loop}-->
+					</ul>
+				</div>
+			</div>
+			<div class="l_cf">
+				<div class="cf_head">
+					<img src="{LO_PUB_IMG}ico2_yh.png" height="24">
+					<span>十大热门帖</span>
+				</div>
+				<div class="cf_cont">
+					<ul class="circle">
+					<!--{loop $thread_hots $thot}-->
+						<li><a href="{$post_url}{$thot[tid]}">{$thot[subject]}</a></li>
+					<!--{/loop}-->
+					</ul>
+				</div>
+			</div>
+			<div class="l_cf">
+				<div class="cf_head">
+					<img src="{LO_PUB_IMG}ico1_yh.png" height="24">
+					<span>十大新鲜帖</span>
+				</div>
+				<div class="cf_cont">
+					<ul>
+					<!--{loop $thread_news $tk $tnew}-->
+						<li>
+						<span class="ico{if $tk<3}{$tk}{/if}">{eval echo $tk+1}</span>
+						<a {if $tk<3}class="top"{/if} href="{$post_url}{$tnew[tid]}">{$tnew[subject]}</a>
+						</li>
+					<!--{/loop}-->
+					</ul>
+				</div>
+			</div>
+			<div class="l_wid">
+				<div class="cf_head">
+					<img src="{LO_PUB_IMG}ico3_yh.png" alt="小图标" height="24">
+					<span>版块</span>
+					<a href="forum.php" class="more fr">更多>></a>
+				</div>
+				<p class="bk_head">{$fup[name]}</p>
+				<div class="bk_cont">
+					<ul class="tab_fk">
+						<!--<li class="current">技术交流</li>-->
+						<!--{loop $forum_index $forum}-->
+						<li>{$forum[name]}</li>
+						<!--{/loop}-->
+					</ul>
+					<!--{loop $threadlist $fk $forumfid}-->
+					<ul class="tab_fk_cont circle" {if $fk}style="display:none;"{/if}>
+						<!--{loop $forumfid $thread}-->
+						<li><a href="{$post_url}{$thread[tid]}">{$thread[subject]}</a></li>
+						<!--{/loop}-->
+					</ul>
+					<!--{/loop}-->
+					<script>
+					$(".tab_fk li").mouseover(function(){
+						$(this).addClass("current");
+						$(this).siblings().removeClass("current");
+						var souyin=$(this).index();
+						$(".tab_fk_cont").eq(souyin).show().siblings(".tab_fk_cont").hide();
+					});
+					</script>
+				</div>
+				<div class="bq_cont">
+					<!--{$adv_customs[5]}-->
+					<!--{$adv_customs[6]}-->
+				</div>
+				<div class="bq_cont" id="bq1">
+					<div class="bq_head">
+						<span class="bq_title">下　载</span><span>DOWNLOAD</span>
+						<a href="{$down_url}" class="fr more"> 查看更多》</a>
+					</div>
+					<ul class="tab_head">
+						<!--{loop $down_nav $k $nav}-->
+						<li {if $k==0}class="current"{/if}>{$nav}<span class="triangle {if $k<>0}hide{/if}"></span></li>
+						<!--{/loop}-->
+					</ul>
+					<ul class="tab_cont">
+						<li class="down_data">
+							<a href="#">php学习手册php学习手册php学习手册php学习手册</a>
+						</li>
+						<li class="down_data">
+							<a href="#">smhfue</a>
+						</li>
+						<li class="down_data">
+							<a href="#">smhfue</a>
+						</li>
+						<li class="down_data last">
+							<a href="#">smhfue</a>
+						</li>
+						<li class="down_data">
+							<a href="#">php学习手册</a>
+						</li>
+						<li class="down_data">
+							<a href="#">smhfue</a>
+						</li>
+						<li class="down_data">
+							<a href="#">smhfue</a>
+						</li>
+						<li class="down_data last">
+							<a href="#">smhfue</a>
+						</li>
+						<li class="down_data">
+							<a href="#">php学习手册</a>
+						</li>
+						<li class="down_data">
+							<a href="#">smhfue</a>
+						</li>
+						<li class="down_data">
+							<a href="#">smhfue</a>
+						</li>
+						<li class="down_data last">
+							<a href="#">smhfue</a>
+						</li>
+					</ul>
+					<!-- 下载排行 -->
+					<ul class="tab_cont" style="display:none;">
+						<li class="down">
+							<p>月下载排行</p>
+							<ul class="down_top">
+								<li><span class="topico">1</span><a href="#">LSM358</a></li>
+								<li><span class="topico">2</span><a href="#">LSM358</a></li>
+								<li><span class="topico">3</span><a href="#">LSM358</a></li>
+								<li><span>4</span><a href="#">LSM358</a></li>
+								<li><span>5</span><a href="#">LSM358</a></li>
+								<li><span>6</span><a href="#">LSM358</a></li>
+								<li><span>7</span><a href="#">LSM358</a></li>
+								<li><span>8</span><a href="#">LSM358LSM358LSM358LSM358LSM358LSM358LSM358LSM358LSM358LSM358</a></li>
+								<li><span>9</span><a href="#">LSM358</a></li>
+								<li class="last"><span>10</span><a href="#">LSM358</a></li>
+							</ul>
+						</li>
+						<li class="down">
+							<p>周下载排行</p>
+							<ul class="down_top">
+								<li><span class="topico">1</span><a href="#">LSM358</a></li>
+								<li><span class="topico">2</span><a href="#">LSM358</a></li>
+								<li><span class="topico">3</span><a href="#">LSM358</a></li>
+								<li><span>4</span><a href="#">LSM358</a></li>
+								<li><span>5</span><a href="#">LSM358</a></li>
+								<li><span>6</span><a href="#">LSM358</a></li>
+								<li><span>7</span><a href="#">LSM358</a></li>
+								<li><span>8</span><a href="#">LSM358</a></li>
+								<li><span>9</span><a href="#">LSM358</a></li>
+								<li class="last"><span>10</span><a href="#">LSM358</a></li>
+							</ul>
+						<li>
+						</li>
+						<li class="down last">
+							<p>日下载排行</p>
+							<ul class="down_top">
+								<li><span class="topico">1</span><a href="#">LSM358</a></li>
+								<li><span class="topico">2</span><a href="#">LSM358</a></li>
+								<li><span class="topico">3</span><a href="#">LSM358</a></li>
+								<li><span>4</span><a href="#">LSM358</a></li>
+								<li><span>5</span><a href="#">LSM358</a></li>
+								<li><span>6</span><a href="#">LSM358</a></li>
+								<li><span>7</span><a href="#">LSM358</a></li>
+								<li><span>8</span><a href="#">LSM358</a></li>
+								<li><span>9</span><a href="#">LSM358</a></li>
+								<li class="last"><span>10</span><a href="#">LSM358</a></li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="tab_cont" style="display:none;">
+						<li class="down_data">
+							<a href="#">php学习手册</a>
+						</li>
+						<li class="down_data">
+							<a href="#">smhfue</a>
+						</li>
+						<li class="down_data">
+							<a href="#">smhfue</a>
+						</li>
+						<li class="down_data last">
+							<a href="#">smhfue</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="bq_cont" id="bq2">
+					<div class="bq_head">
+						<span class="bq_title">外　包</span><span>PROJECT</span>
+						<a href="{$pro_url}" class="fr more">查看更多》</a>
+					</div>
+					<ul class="tab_head">
+						<!--{loop $pro_nav $k $nav}-->
+						<li {if $k==0}class="current"{/if}>{$nav}<span class="triangle {if $k<>0}hide{/if}"></span></li>
+						<!--{/loop}-->
+					</ul>
+					<!--{loop $prolist $k $list}-->
+					<ul class="tab_cont circle" {if $k!=0}style="display:none"{/if}>
+						<!--{loop $list $lk $c}-->
+						<li>
+							<a href="{$pro_url}&pluginop=page&loid={$c[id]}">
+								<span class="pro_name"><!--{eval echo cutstr($c[name],12)}--></span>
+								<span class="pro_price">{$c[price]}</span>
+								<span class="pro_date">{$c[addtime]}</span>
+							</a>
+						</li>
+						<!--{/loop}-->
+					</ul>
+					<!--{/loop}-->
+				</div>
+				<div class="bq_cont" id="bq3">
+					<div class="bq_head">
+						<span class="bq_title">二手交易</span><span>TRADING</span>
+						<a href="{$trade_url}" class="fr more">查看更多》</a>
+					</div>
+					<ul class="tab_head">
+						<!--{loop $trade_nav $k $nav}-->
+						<li {if $k==0}class="current"{/if}>{$nav}<span class="triangle {if $k<>0}hide{/if}"></span></li>
+						<!--{/loop}-->
+					</ul>
+					<!--{loop $downlist $k $list}-->
+					<ul class="tab_cont" {if $k!=0}style="display:none"{/if}>
+						<!--{loop $list $lk $c}-->
+						<li {if $lk%3==2}class="last"{/if}>
+							<a href="{$trade_url}&pluginop=page&loid={$c[id]}"><img src="{if $c[pic]}{eval echo $upload_common_path.($k==2?'trade/':'trade/').LO_PIC.$c[pic]}{else}{/if}" alt="{$no_pic_alt}" width="278px" height="188px"></a>
+							<p class="trad_row1"><!--{eval echo cutstr($c[name],12)}--></p>
+							<p class="trad_row2"><span>2016年1月上牌regtime</span><span class="last">行驶1.8万公里mileage</span></p>
+							<p class="trad_row3">
+								<span class="price">{$c[shop_price]}23.80万</span><span>原价：{$c[market_price]}33.68万</span><span class="price_ico">超值</span>
+							</p>
+						</li>
+						<!--{/loop}-->
+					</ul>
+					<!--{/loop}-->
+					<ul >
+					</ul>
+				</div>
+				<script>
+					$("#bq1 .tab_head li").mouseover(function(){
+						$(this).addClass('current');
+						$(this).siblings().removeClass('current');
+						$("#bq1>.tab_head>li>span").addClass('hide')
+						var souyin=$(this).index(); 
+						$("#bq1>.tab_head>li>span").eq(souyin).removeClass('hide')
+						$("#bq1 .tab_cont").eq(souyin).show().siblings("#bq1 .tab_cont").hide();
+					});
+					$("#bq2 .tab_head li").mouseover(function(){
+						$(this).addClass('current');
+						$(this).siblings().removeClass('current');
+						$("#bq2>.tab_head>li>span").addClass('hide')
+						var souyin=$(this).index(); 
+						$("#bq2>.tab_head>li>span").eq(souyin).removeClass('hide')
+						$("#bq2 .tab_cont").eq(souyin).show().siblings("#bq2 .tab_cont").hide();
+					});
+					$("#bq3 .tab_head li").mouseover(function(){
+						$(this).addClass('current');
+						$(this).siblings().removeClass('current');
+						$("#bq3>.tab_head>li>span").addClass('hide')
+						var souyin=$(this).index(); 
+						$("#bq3>.tab_head>li>span").eq(souyin).removeClass('hide')
+						$("#bq3 .tab_cont").eq(souyin).show().siblings("#bq3 .tab_cont").hide();
+					});
+				</script>
+			</div>
+		</div>
+
+
+		<!-- 右栏内容 -->
+		<div class="right_cont fr">
+			<!-- 搜索 -->
+			<div class="r_bq">
+				<form action="search.php" method="post" autocomplete="on" name="form_research" class="form_research">
+					<select name="mod" class="fl">
+						<option value="portal">文章</option>
+						<option value="forum" selected>帖子</option>
+						<!-- <option value="group">群组</option> -->
+						<option value="user">用户</option>
+						<!-- <option value="project">项目</option>
+						<option value="product">商品</option>
+						<option value="file">文件</option>
+						<option value="act">活动</option> -->
+					</select>
+					<input type="text" name="srchtxt" class="keywords" value="请输入关键词" onfocus="if(this.value=='请输入关键词'){this.value=''}" onblur="if(this.value==''){this.value='请输入关键词'}">
+					<input type="hidden" name="formhash" value="{FORMHASH}">
+					<input type="hidden" name="searchsubmit" value="yes">
+					<input type="submit" class="research fr" value="搜索">
+				</form>
+			</div>
+			<!-- 是否登录注册 -->
+			<div class="r_bq">
+				<!--{if $_G[uid]}-->
+				<div class="form_login">
+					<div class="lf"><a href="home.php?mod=space&uid=$_G[uid]"><!--{avatar($_G[uid],small)}--></a></div>
+					<p class="lf" style="margin-left:10px;font-size:14px;">欢迎回来，<a href="home.php?mod=space&uid={$_G[uid]}&do=profile" target="_blank" title="访问我的空间">{$_G[member][username]}</a>！<a class="close" href="member.php?mod=logging&action=logout&formhash={FORMHASH}">{lang logout}</a></p><div class="clear"></div>
+					<div class="lg1"><a href="home.php?mod=spacecp&ac=credit&showcredit=1">余额：<!--{if $curcredits}-->{$curcredits} {$creditname}<!--{/if}--></a></div>
+					<div class="lg2"><a href="home.php?mod=spacecp&ac=usergroup">{lang usergroup}: {$_G[group][grouptitle]}<!--{if $_G[member]['freeze']}--><span>({lang freeze})</span><!--{/if}--></a></div>
+					<div class="lg3">上次登录：{$lastvisit}</div>
+				</div>
+				<!--{else}-->
+				<form action="member.php?mod=logging&action=login&loginsubmit=yes&infloat=yes&lssubmit=yes" method="post" name="form_login" class="form_login">
+					<p>登录</p>
+					<!-- <select name="fastloginfield">
+						<option value="username">{lang username}</option>
+						{if getglobal('setting/uidlogin')}
+						<option value="uid">{lang uid}</option>
+						{/if}
+						<option value="email">{lang email}</option>
+					</select> -->
+					<div>
+						<input type="text" class="username" name="username" value="用户名/Email" onfocus="$('.username').css('color','#616c7b');if(this.value=='用户名/Email'){this.value='';}" onblur="if(this.value==''){$('.username').css('color','#b2b2b2');this.value='用户名/Email';}">
+					</div>
+					<div>
+						<input type="text" class="password" name="password" placeholder="密码">
+					</div>
+					<div class="l_row">
+						<label><input type="checkbox" name="cookietime" value="2592000" >自动登录</label>
+						<a href="member.php?mod=logging&action=login&viewlostpw=1" class="fr">找回密码</a>
+					</div>
+					<div class="clear">
+						<input type="submit" class="fl login" name="login" value="登录">
+						<input type="button" class="fr register" id="Is_register" name="register" value="注册">
+					</div>
+					<input type="hidden" name="quickforward" value="yes">
+					<input type="hidden" name="handlekey" value="ls">
+				</form>
+				<!--{/if}-->
+			</div>
+			<!-- 网站公告 -->
+			<div class="r_bq">
+				<div class="r_bd">
+					<p>网站公告：</p>
+					<ul>
+						<!--{loop $announcements $item}-->
+						<li><a href="forum.php?mod=announcement&id={$item[id]}"><!--{$item[subject]}--></a></li>
+						<!--{/loop}-->
+					</ul>
+				</div>
+			</div>
+			<!-- 推荐型号 -->
+			<div class="r_bq b_w">
+				<p class="r_zq">原厂专区</p>
+				<ul class="r_link">
+					<!--{loop $sheets $item}-->
+					<li><a href="{$sheet_url}&pluginop=page&loid={$item[id]}"><!--{eval echo cutstr($item[name],12)}--></a></li>
+					<!--{/loop}-->
+				</ul>
+			</div>
+			<div class="r_bq">
+				<!--{$adv_customs[7]}-->
+			</div>
+			<!-- 活动栏目 -->
+			<div class="r_bq">
+				<div class="r_bd">
+				<!--{loop $activitys $k $item}-->
+					<!--{if $k==0}-->
+					<div class="r_row">
+						<a href="{$activity_url}&pluginop=page&loid={$item[id]}">
+							<img class="fl" src="{if $item[pic]}{eval echo $upload_common_path.'activity/'.LO_PIC.$item[pic]}{else}{/if}" alt="{$no_pic_alt}" width="127" height="90">
+						</a>
+						<span class="fr"><!--{eval echo cutstr($item[name],12)}--></span>
+						<a class="fr" href="{$activity_url}&pluginop=page&loid={$item[id]}"><!--{eval echo cutstr($item[brief],10)}-->[详细]</a>
+					</div>
+					<!--{else}-->
+					<!--{if $k==1}-->
+					<p>更多活动：</p>
+					<ul>
+					<!--{/if}-->
+						<li><a href="{$activity_url}&pluginop=page&loid={$item[id]}"><!--{eval echo cutstr($item[name],12)}--></a></li>
+					<!--{/if}-->
+				<!--{/loop}-->
+					</ul>
+				</div>
+			</div>
+			<!-- 网站帮助 -->
+			<div class="r_bq">
+				<div class="r_bd">
+					<p>站点帮助：</p>
+					<ul>
+					{loop $faqs $item}
+						<li><a href="misc.php?mod=faq&action=faq&id={$item[fpid]}&messageid={$item[id]}">{$item[title]}</a></li>
+					{/loop}
+					</ul>
+				</div>
+			</div>
+			<!-- 网站达人 -->
+			<div class="r_bq last">
+				<div class="r_bd">
+					<div class="r_row">
+						<a href="#">
+							<img class="fl" src="{LO_PUB_IMG}rh.png" alt="产品图片" width="127" height="90">
+						</a>
+						<span class="fr">什么是集成电路</span><a class="fr" href="#">无损耗的奇迹......[详细]</a>
+					</div>
+					<p>放点什么好：达人、排行榜还是？</p>
+					<ul>
+						<li><a href="#">联网技术</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+<script type="text/javascript">
+	$('#Is_register').click(function(){
+		// name = $(this).attr('name');
+		location.href = 'member.php?mod=register';
+	})
+</script>
+
+
+		<!-- 底部栏目 -->
+		<div class="user_img">
+			<p class="bk_head">用户自拍</p>
+			<ul>
+				<!--{loop $usrinfos $ufo}-->
+				<li>
+					<a href="home.php?mod=space&uid=$ufo[uid]"><!--{avatar($ufo[uid],big)}--></a>
+					<p><!--{eval echo cutstr($ufo[bio],75)}--></p>
+				</li>
+				<!--{/loop}-->
+			</ul>
+		</div>
+
+		<div class="friend_links clear">
+			<p>友情链接</p>
+			<ul>
+				<!--{loop $friendlinks $link}-->
+				<li><a href="{$link[url]}">{if $link[logo]}<img src="{$link[logo]}" title="{$link[name]}">{else}$link[name]{/if}</a></li>
+				<!--{/loop}-->
+			</ul>
+		</div>
+	</div>
+</div>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

@@ -1,0 +1,355 @@
+
+<!--{template _public/header}-->
+<!--{template _public/nav_main}-->
+
+<script type="text/javascript" src="{LO_PUB_JS}jquery-1.11.3.min.js"></script>
+<script>
+    $(function() {            
+        $('#add_arr').click(function () {
+            $('#addresstable').toggle();
+        });
+
+        $('#morenAddr').click(function(){
+            $('#moren').toggle();
+        });
+        $('.r1').click(function(){
+            $('#moren').toggle();
+        });
+        $('#otherAddr').click(function(){
+            $('#otherAddr_content').toggle();
+        });
+        $('.r2').click(function(){
+            $('#otherAddr_content').toggle();
+        });
+    });
+</script>
+<link rel="stylesheet" href="{LO_PUB_CSS}talents.css"/>
+
+    <div class="credits_exchange">
+        <form action="{$url}" id="gift_form" method="post"  onsubmit="return checkFields(this)" autofocus>
+            <div class="gift_car">积分购物车</div>
+            <div class="row">
+                <div class="gift_goods">
+                    <table class="gift_table">
+                        <colgroup>
+                            <col class="w10">
+                            <col class="">
+                            <col class="w12">
+                            <col class="w10">
+                            <col class="w10">
+                            <col class="w10">
+                            <col class="w12">
+                            <col class="w6">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <td class="f_checked">
+                                <input type="checkbox" id="allCheck" class="ck"/>
+                                </td>
+                                <td class="tc">商品</td>
+                                <td>名称</td>
+                                <td>IC币</td>
+                                <td>副标题</td>
+                                <td>数量</td>
+                                <td>发布时间</td>
+                                <td>所需IC币</td>
+                                <td>操作</td>
+                            </tr>
+                        </thead>
+                        <tbody id="gift_content">
+
+                        <!--{loop $arrorder $nav}-->
+                        <tr class="tr">
+                                <td class="f_check"><input type="checkbox" name="orderid[]" value="{$nav[id]}" class="ck" checked="checked"/></td>
+                                <td class="tc">
+                                    <img src="{IMG_TPL}{$nav[pic]}" />
+                                </td>
+                                <td> {$nav[name]} </td>
+                                <td>
+                                    <span class="icbcost">{$nav[price]}</span>IC币
+                                </td>
+                                <td>{$nav[subhead]}</td>
+                                <td>
+                                    <div class="count_content">
+                                        <span class="subtract">-</span>
+                                        <input type="text" class="count" name="nums[]" value="{$nav[number]}" old="1" disabled="disabled"/>
+                                        <span class="add"  >+</span>
+                                    </div>
+                                </td>
+                                <td>{date($nav[addtime])}</td>
+                                <td><span class="icb">{echo ($nav[price]*$nav[number])}</span>IC币</td>
+                               
+                                <td><a href="{LO_CURURL}&pluginop=order&type=2&did={$nav[id]}" class="remove red">删除</a></td>
+                            </tr>
+                        <!--{/loop}-->                        
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="8">
+                                    礼品数量总计：<span class="paycount" id="paycount" >0</span>件&nbsp;&nbsp;IC币总计：<span class="payic" id="payic">0</span>
+                                    <input type="hidden" name="coountsum" id="payic1" value="0" >
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="row credit_return">
+                    <a href="{LO_CURURL}" class="btn btn-default">返回</a>
+                </div>
+                <div class="row credit_addr">
+                    <div class="mt30">
+                        <label for="morenAddr" class="r1" style="cursor:pointer;">
+                        默认收货地址<br/>
+                        </label>
+                        <div class="morenAddr" id="moren" style="display:none;">
+                            <ul id="arrdefault"></ul>
+                        </div>
+                        <label for="otherAddr" class="r2" style="cursor:pointer;">使用其他地址</label>
+                        <div class="otherAddr" id="otherAddr_content" style="display:none;">
+                            <ul id="arraddress"></ul>
+                            <p id="add_arr" style="cursor:pointer;">添加新的地址</p>
+                            <div id="addresstable" style="display:none;">
+                                <table class="addresstable">
+                                    <tbody>
+                                    <tr>
+                                        <td>收货人</td>
+                                        <td><input type="text" id="username" class="form-control" name="receiverName" placeholder="请输入收货人信息"/><span class="shr"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>收货地址</td>
+                                        <td>
+                                            <input type="text" id="address" class="form-control" name="receiverAddr" placeholder="请输入收货地址"/><span class="shaddr"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>手机号码</td>
+                                        <td>
+                                            <input type="tel" id="phone" class="form-control" name="receiverTel" placeholder="请输入收货号码" step="11"/><span class="shtel"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    <td colspan="2">
+                                    <a href="javascript:void(0)" id="addaddress" style="cursor:pointer;">提交</a>
+                                    </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="memo">
+                        <p>您的备注</p>
+                        <textarea class="form-control" name="remark"></textarea>
+                    </div>
+                    <p>
+                        <input type="checkbox" id="buyHistory" name="ishidden" value="1" class="no-icheck"/>
+                        <label for="buyHistory">不显示兑换记录</label>
+                    </p>
+                </div>
+                <div class="row tc complete_converti">
+                    <input type="submit" class="btn btn-theme btn-lg ptb5" value="完成兑换">
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+arrdefault();//默认地址
+function arrdefault(){
+    $.post('{LO_CURURL}', {pluginop:'ajax',sign:'arrdefault'},
+     function(data) {
+        // data 是返回的数据            
+            $("#arrdefault").html(data);        
+       // },"json"); 
+    },"html");
+};
+arraddress();//收货地址
+function arraddress(){
+    $.post('{LO_CURURL}', {pluginop:'ajax',sign:'arraddress'},
+     function(data) {
+        // data 是返回的数据            
+            $("#arraddress").html(data);
+       // },"json"); 
+    },"html");
+};
+//添加地址
+$('#addaddress').click(function(){
+    var username = $('#username').val(),
+        address = $('#address').val(),
+        phone = $('#phone').val();            
+
+    $.post('{LO_CURURL}', {pluginop:'ajax',sign:'addaddress',username:username,address:address,phone:phone},
+     function(data) {
+        // data 是返回的数据
+        
+            alert(data);
+            arraddress();
+       // },"json"); 
+    },"html");
+});
+//删除地址
+function delarr(did){
+   if(confirm("确认删除么，此操作不可恢复")){
+        $.post('{LO_CURURL}', {pluginop:'ajax',sign:'delarr',did:did},
+             function(data) {
+                // data 是返回的数据            
+                    alert(data);
+                    arrdefault();
+                    arraddress();
+               // },"json"); 
+            },"html");
+    }
+}
+//添加默认地址
+function defadd(did){
+    $.post('{LO_CURURL}', {pluginop:'ajax',sign:'defadd',did:did},
+         function(data) {
+            // data 是返回的数据            
+                alert(data);
+                arrdefault();
+                arraddress();
+           // },"json"); 
+        },"html");
+}
+
+(function(){
+    var listObj=document.getElementsByClassName('tr');
+    var totalPrice = document.getElementById("payic");
+    var totalPrice1 = document.getElementById("payic1");
+    var totalCount=document.getElementById("paycount");
+    var allCheck = document.getElementById("allCheck");
+    /***计算价格*****/
+    var cks = document.querySelectorAll(".ck");
+    function getTotalPrice() {
+        cks = document.querySelectorAll("tbody .ck");
+        var sum = 0;
+        for(var i = 0, len = cks.length; i < len; i++) {
+            if(cks[i].checked) { //如果当前被选中
+                var tr = cks[i].parentNode.parentNode;
+
+                var temp = tr.children[7].firstElementChild.innerHTML;
+                sum = Number(temp) + sum;
+            }
+        }
+        return sum;
+    }
+    function getTotalCount() {
+        cks = document.querySelectorAll("tbody .ck");
+        var col = 0;
+        for(var i = 0, len = cks.length; i < len; i++) {
+            if(cks[i].checked) { //如果当前被选中
+                var tr = cks[i].parentNode.parentNode;
+
+                var count = tr.children[5].firstElementChild.firstElementChild.nextElementSibling.value;
+                console.log(count);
+                col = Number(count) + col;
+            }
+        }
+        return col;
+    }
+    /*循环遍历为每一个checkbox添加一个onchange事件*/
+    console.log(123);
+    for(var i = 0, len = cks.length; i < len; i++) {
+        cks[i].onchange = function() {
+            //checkAllChecked();
+            //$(cks[i]).prop("checked", checkedOfAll);
+            totalPrice.innerHTML = getTotalPrice();
+            totalPrice1.value = totalPrice.innerHTML;
+            totalCount.innerHTML=getTotalCount();
+        }
+    }
+
+    /*全选实现*/
+    allCheck.onchange = function() {
+        if(this.checked) {
+            for(var i = 0, len = cks.length; i < len; i++) {
+                cks[i].checked = true;
+            }
+        } else {
+            for(var i = 0, len = cks.length; i < len; i++) {
+                cks[i].checked = false;
+            }
+        }
+        totalPrice.innerHTML = getTotalPrice();
+        totalPrice1.value=totalPrice.innerHTML;
+        totalCount.innerHTML=getTotalCount();
+    }
+
+    var downs = document.querySelectorAll(".subtract"); //一组减的按钮
+    var ups = document.querySelectorAll(".add"); //一组加的按钮
+    var dels = document.querySelectorAll(".remove.red");
+    for(var j = 0, len1 = downs.length; j < len1; j++) {
+        downs[j].onclick = function() {
+            var txtObj = this.nextElementSibling;//下一个兄弟节点
+            console.log(txtObj);
+            var tr = this.parentNode.parentNode.parentNode;
+            var pid = tr.getAttribute("pid");
+            txtObj.value = txtObj.value - 1;
+            if(txtObj.value < 1) {
+                txtObj.value = 1;
+                alert("不能再减！");
+            } else {
+                 tr.children[0].firstElementChild.checked = true;
+                //checkAllChecked();
+                var price = tr.children[3].firstElementChild.innerHTML;
+                var orderid = tr.children[0].firstElementChild.value;
+                tr.children[7].firstElementChild.innerHTML = price * txtObj.value;
+                totalPrice.innerHTML = getTotalPrice();
+                totalPrice1.value=totalPrice.innerHTML;
+                totalCount.innerHTML=getTotalCount();
+                
+                $.post('{LO_CURURL}', {pluginop:'ajax',sign:'minusnum',orderid:orderid,num:totalCount.innerHTML},
+                 function(data) {
+                   
+                },"html");
+
+            }       
+        }
+        ups[j].onclick = function() {
+            var txtObj = this.previousElementSibling;//上一个兄弟节点
+            var tr = this.parentNode.parentNode.parentNode;
+            txtObj.value = Number(txtObj.value) + 1;
+            tr.children[0].firstElementChild.checked = true;
+
+            var orderid = tr.children[0].firstElementChild.value;
+            var price = tr.children[3].firstElementChild.innerHTML;
+            tr.children[7].firstElementChild.innerHTML = price * txtObj.value;
+            totalPrice.innerHTML = getTotalPrice();
+            totalPrice1.value=totalPrice.innerHTML;
+            totalCount.innerHTML=getTotalCount();
+
+            $.post('{LO_CURURL}', {pluginop:'ajax',sign:'addnum',orderid:orderid,num:totalCount.innerHTML},
+                function(data) {
+
+                },"html");
+        }
+        dels[j].onclick = function() {
+            var tr = this.parentNode.parentNode;
+            if(confirm("确定删除？")) {
+                tr.remove();
+            }
+            totalPrice.innerHTML = getTotalPrice();
+            totalPrice1.value=totalPrice.innerHTML;
+            totalCount.innerHTML=getTotalCount();
+        }
+    }
+    function checkFields(formobj){
+        var cks = document.querySelectorAll(".ck");
+        cks = document.querySelectorAll("tbody .ck");       
+        for(var i = 0, len = cks.length; i < len; i++) {
+            if(cks[i].checked) { //如果当前被选中
+                return true;
+            }
+        }
+        alert("未选择商品，不能提交");
+        return false;
+    }
+    totalPrice.innerHTML = getTotalPrice();
+    totalPrice1.value=totalPrice.innerHTML;
+    totalCount.innerHTML=getTotalCount();
+}());
+</script>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

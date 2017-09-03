@@ -1,0 +1,6 @@
+@charset "utf-8";
+#is_col{background:url(../../../_public/image/starBlue.png) no-repeat 2px -3px;}
+#is_bid{background-color:rgb(119,119,119);}
+#select_bid{color:#fff;background-color:rgba(14,111,186,.7);padding:3px 10px;border-radius:2px;height:22px;line-height:22px;cursor:pointer;}
+.bid_over{float: right;}
+#is_black{color:rgba(13,111,186,1);}

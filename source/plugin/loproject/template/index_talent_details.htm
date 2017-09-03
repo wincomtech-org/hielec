@@ -1,0 +1,160 @@
+
+<!--{template loproject:layout/header}-->
+<link rel="stylesheet" href="{LO_PUB_CSS}talents.css">
+
+<div class="findtalents">
+    <div class="find_talents">
+        <div class="talents">
+            <div class="talents_pic lf"><!--{avatar($page[uid])}--></div>
+            <div class="talents_mess lf">
+                <h3>{$page[username]}<img src="{LO_PUB_IMG}phone.png"></h3>
+                <p>
+                    <span class="gray">会员等级：</span>{$page[grouptitle]}
+                    <!-- <span>发包方：<b class="fabao"></b></span>
+                    <span>接包方：<b class="jiebao"></b></span> -->
+                </p>
+                <p><span class="gray">会员身份：</span>{$page[user_type]}</p>
+                <p><span class="gray">注册时间：</span>{$page[regdate]}</p>
+                <p><span class="gray">所在地：</span>{$page[reside_address]}</p>
+            </div>
+            <div class="talents_invite rt">
+                <div class="talents_shoucang"><a href="{$jumpurl}&c=col&loid={$page[uid]}">收藏</a></div>
+                <div class="invite_project"><a href="{$jumpurl}&c=comeon&loid={$page[uid]}">邀请我做项目</a></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="talents_content">
+        <div class="talents_details lf">
+            <ul class="talents_detail">
+                <li>
+                    <p>会员介绍</p>
+                    <ul class="talents_d talents_inst">
+                        <li><span class="gray">线上收入：</span>0.00元</li>
+                        <li><span class="gray">职位类型：</span>{$page[position]}</li>
+                        <li><span class="gray">工作年限：</span>{$page[field5]}</li>
+                        <li><span class="gray">毕业院校：</span>{$page[graduateschool]}</li>
+                        <li><span class="gray">曾就业公司：</span>{$page[company]}</li>
+                        <li><span class="gray">擅长领域：</span><b>{$page[field4]}</b></li>
+                        <!-- <li><span class="gray">激素标签：</span><b>{$page[field6]}</b></li> -->
+                        <li style="overflow:hidden;">
+                            <span class="gray">简&nbsp;&nbsp;&nbsp;&nbsp;介：</span>
+                            <span>{$page[bio]}</span>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <p>项目动态</p>
+                    <!-- <ul class="talents_Dynamic"> <li> </li> </ul> -->
+                    <div class="new_project" style="margin-top:0">
+                        <table border="1" cellspacing="0" ce>
+                            <thead>
+                                <tr>
+                                    <td width="10%">项目状态</td>
+                                    <td width="45%">项目名称</td>
+                                    <td width="10%">项目类型</td>
+                                    <td width="10%">竞标人数</td>
+                                    <td width="25%">发布日期</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--{loop $tasks $v}-->
+                                <tr>
+                                    <td><!--{$arrProTaskStatus[$v[task_status]]}--></td>
+                                    <td><a href="{$mainurl}&pluginop=pds&loid={$v[tid]}"><!--{eval echo cutstr($v['task_title'],30,'…');}--></a></td>
+                                    <td>{$v[name]}</td>
+                                    <td>{$v[bid_num]}</td>
+                                    <td><!--{eval echo dgmdate($v[pub_time])}--></td>
+                                </tr>
+                                <!--{/loop}-->
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+                <li >
+                    <p>用户案例</p>
+                    <ul class="talents_d talents_pro_case">
+                        <!--{if $cases}-->
+                        <!--{loop $cases $v}-->
+                        <li>
+                            <div class="talents_pro_case_pic lf">
+                                <a><img src="{LO_PUB_IMG}user.png"></a>
+                            </div>
+                            <div class="project_case_content lf">
+                                <h4><a class="orange">{$v[case_title]}</a></h4>
+                                <p>{$v[case_desc]}</p>
+                                <p class="gray">项目类型：<a>{$v[name]}</a></p>
+                            </div>
+                        </li>
+                        <!--{/loop}-->
+                        <!--{else}-->
+                        <li>{$lang[no_resource]}</li>
+                        <!--{/if}-->
+                    </ul>
+                </li>
+                <li class="">
+                    <p>信誉评价</p>
+                    <div class="talents_d talents_evaluate">
+                        <!-- <div class="evaluate">
+                            <div class="evaluate_l lf">
+                                好评率：<span class="orange">75.%</span>
+                            </div>
+                            <div class="evaluate_m lf">
+                                <p class="evaluate_c1">好评：3</p>
+                                <p class="evaluate_c2">中评：2</p>
+                                <p class="evaluate_c3">差评：1</p>
+                            </div>
+                            <div class="evaluate_r rt">
+                                <div class="evaluate_r_star">
+                                    <span class="">配合态度</span>
+                                    <span class="evaluate_star"></span>
+                                    <span class=" orange">4.0分</span>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="evaluate_content">
+                            <!--{if $comments}-->
+                            <!--{loop $comments $v}-->
+                            <div class="evaluate_content_piece">
+                                <div class="evaluate_content_t lf">
+                                    <p ><span class="orange"><!-- [好评] --></span><a>{$v[title]}</a></p>
+                                    <p class="evaluate_user"><a class="blue">用户名{$v[uname]}</a>给的评价：<span class="orange">{$v[content]}</span></p>
+                                </div>
+                                <div class="evaluate_content_date rt">
+                                    <span class="gray rt"><!--{eval echo dgmdate($v[addtime])}--></span>
+                                </div>
+                            </div>
+                            <!--{/loop}-->
+                            <!--{else}-->
+                            <div class="evaluate_content_piece">
+                               {$lang[no_resource]}
+                            </div>
+                            <!--{/if}-->
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="recent_visitors rt">
+            <h3>最新访客</h3>
+            <ul class="visitor">
+                <!--{if $visits}-->
+                <!--{loop $visits $v}-->
+                <li>
+                    <p class="lf"><a href="{$userurl}{$v[uid]}"><!--{avatar($v[uid])}--></a></p>
+                    <div class="lf">
+                        <h5><a href="{$userurl}{$v[uid]}">{$v[uname]}</a></h5>
+                        <p class="gray">访问时间：<!--{eval echo dgmdate($v[addtime])}--></p>
+                    </div>
+                </li>
+                <!--{/loop}-->
+                <!--{else}-->
+                <li>{$lang[no_resource]}</li>
+                <!--{/if}-->
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

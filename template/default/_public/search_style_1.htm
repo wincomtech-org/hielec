@@ -1,0 +1,66 @@
+<style type="text/css">
+    .site_qq{display:inline-block;line-height: 40px;padding:0 5px;color:#fff;margin-left:10px;}
+    .dtsearch_srctype{text-align:center;font-size:18px;line-height:45px;}
+    #jk{text-align:center;margin:10px auto;}
+    #jk img{width:70px;height:70px;}
+</style>
+<div class="top_head">
+    <form action="{$formsearch['action']}" method="post" class="form_research" id="form_research">
+        <div>  
+            <span class="dtsearch_srctype">
+                <label title="类似：var"><input type="radio" name="srctype" value="1" {if $srctype==1}checked{/if}> 精确</label>&nbsp;&nbsp;&nbsp;
+                <label title="类似：%var%"><input type="radio" name="srctype" value="2" {if $srctype==2||!$srctype}checked{/if}> 模糊1</label>&nbsp;&nbsp;&nbsp;
+                <label title="类似：var%"><input type="radio" name="srctype" value="3" {if $srctype==3}checked{/if}> 模糊2</label>&nbsp;&nbsp;&nbsp;
+            </span>
+        </div>
+        <div class="search_group">
+            <input type="text" id="qwe" name="{$formsearch['keyword']}" class="keywords lf" value="{if $formsearch['keyval']}{$formsearch['keyval']}{else}请输入关键词{/if}" onfocus="if(this.value=='请输入关键词'){this.value=''}" onblur="if(this.value==''){this.value='请输入关键词'}">
+            <input type="button" id="common_search" class="research lf" onclick="waitfor();" value="搜索">
+        </div>
+        <a class="site_qq" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$_G[setting][site_qq]}&site=qq&menu=yes">搜不到，联系客服QQ</a>
+        <span id="isecond" style="display:none;"></span>
+    </form>         
+</div>
+<div class="clear"></div>
+<div id="jk">
+    <div id="jk1">
+        <img src="{LO_PUB_IMG}3333.gif">
+        <p>结果搜索中。。。。</p>
+    </div>
+    <!--{if $srctxt || $mfg_name}-->
+    <!--{if $jk==2}-->
+    <div id="jk2">
+        <img src="{LO_PUB_IMG}ehd.png">
+        <p>搜索超时？换个关键词试一试</p>
+    </div>
+    <!--{elseif $jk==3}-->
+    <div id="jk3">
+        <img src="{LO_PUB_IMG}ehd.png">
+        <p>对结果不满意？点击“搜索”再搜一次</p>
+    </div>
+    <!--{/if}-->
+    <!--{/if}-->
+</div>
+<script type="text/javascript">
+    $("input").keydown(function(){$("#common_search").attr("disabled",false);});
+    $("#jk1").hide();
+    function waitfor(){
+        var ddd = $("#qwe").val();
+        if(ddd!='请输入关键词'){
+        // $("#jk").show();
+        $("#jk1").show();
+        $("#jk2").hide();
+        $("#jk3").hide();
+        $('#form_research').submit();
+        setTimeout("tasktime2()",16000);
+    } else {
+        $("#common_search").attr("disabled",true);
+        alert('请输入关键词')
+    }
+}
+function tasktime2(){
+    $("#jk2").show();
+    $("#jk3").show();
+    $("#jk1").hide();
+}
+</script>

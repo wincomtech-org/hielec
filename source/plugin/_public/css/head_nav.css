@@ -1,0 +1,9 @@
+/* CSS Document */
+@charset "utf-8";
+
+/* 模块导航 */
+section{width:1200px;margin:0 auto;}
+.title{border-bottom:2px solid #0e6fba;height:43px; font-size: 16px; margin-bottom: 33px;}
+.title .nav_t li{width:144px;line-height: 43px;text-align: center;}
+.title .nav_t li.on{border-top-left-radius:5px; border-top-right-radius:5px;background-color:#0e6fba;}
+.nav_t li.on a{color:#fff;}

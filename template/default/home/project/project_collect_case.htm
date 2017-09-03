@@ -1,0 +1,24 @@
+
+<div class="phr_dc" style="display:block;">
+    <ul class="talents_d talents_pro_case">
+        <!--{if $list}-->
+        <!--{loop $list $v}-->
+        <li>
+            <div class="talents_pro_case_pic lf">
+                <a ><img src="{LO_PUB_IMG}user_c.png">{$v[case_img]}</a>
+            </div>
+            <div class="project_case_content lf">
+                <h4><a class="orange">{$v[case_title]}</a></h4>
+                <p class="project_case_txt">{$v[case_desc]}</p>
+                <p class="gray">
+                    项目类型：<a>{$v[name]}</a>
+                    <!-- <button type="button" class="rt outsourcing_remove">删除</button> -->
+                </p>
+            </div>
+        </li>
+        <!--{/loop}-->
+        <!--{else}-->
+        <li>{$lang[no_resource]}</li>
+        <!--{/if}-->
+    </ul>
+</div>

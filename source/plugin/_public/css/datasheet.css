@@ -1,0 +1,131 @@
+.contain_bg{
+	width:1200px;
+	margin:0 auto;
+}
+.xfad{
+	width:90px;
+	position: fixed;	
+	top:245px;
+}
+.xfad a{
+	float:right;
+	font-size:12px;
+	line-height:20px;
+	color:#999;
+}
+#l_xfad{
+	left:45%;
+	margin-left:-515px;
+}
+#r_xfad{
+	right:45%;
+	margin-right:-515px;
+}
+.contain{
+	width:950px;
+	margin:0 auto;
+	padding-bottom:12px;
+}
+.top_head{
+	width:590px;
+	margin:0 auto;
+}
+.dtlogo{
+	width:320px;
+	margin:17px auto;
+	background: url(../image/datasheet.png) no-repeat right top;
+}
+
+.form_research{
+	height:45px;
+	margin:22px 0;
+}
+.search_group{
+	float:left;
+	height:41px;
+	border:2px solid #0e6fba;
+}
+.keywords{
+	width:330px;
+	height:41px;
+	line-height:41px;
+	padding-left:8px;
+	font-size:14px;
+	color:#151616;
+}
+.research{
+	width:80px;
+	height:41px;
+	line-height:41px;
+	background: #0d68b6 url(../image/research.png) no-repeat 47px center;
+	color: white;
+	font-size:16px;
+	text-align:left;
+	padding-left:8px;
+	cursor:pointer;
+}
+.form_research a{
+	float:right;
+	background: #fca412;
+	width:140px;
+	height:40px;
+	font-size:14px;
+	line-height: 40px;
+	color:white;
+}
+.datasheet_ad{
+	margin-bottom: 27px;
+}
+.nav_contain p{
+	border-bottom: 2px solid #0e6fba;
+	font-size:16px;
+	color:white;
+}
+.nav_contain p span{
+	display: inline-block;
+	width:144px;
+	height:43px;
+	line-height: 41px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	background: #0e6fba;
+}
+.nav_contain ul{
+	padding:20px 0;
+	overflow: hidden;
+}
+.nav_contain li{
+	float:left;
+	height:24px;
+	margin-right:19px;
+	margin-bottom:7px;
+}
+.nav_contain a{
+	display:inline-block;
+	border-bottom: 1px solid #064e83;
+	color:#064e83;
+	font-size:15px;
+	line-height: 23px;
+	padding:0 3px;
+}
+.nav_contain a:hover{
+	color:#ff4e00;
+}
+.datasheet_index,.datasheet_index a{
+	color:#827f7f;
+	font-size:16px;
+}
+.datasheet_index a{
+	display:inline-block;
+}
+.datasheet_index a:hover{
+	text-decoration:underline;
+	color:#ff4e00;
+}
+.datasheet_index dl{
+	overflow: hidden;
+	margin-bottom:20px;
+}
+.datasheet_index dt,.datasheet_index dd{
+	float:left;
+}

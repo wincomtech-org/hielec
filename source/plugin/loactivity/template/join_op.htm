@@ -1,0 +1,160 @@
+<!--{template _public/header}-->
+
+<!--{template _public/nav_main}-->
+
+	<section>
+		<div id="left_nav" class="lf">
+			<h3 >活动分类</h3>
+			<ul>
+				<li>
+					<p>赛事报名</p>
+					<img src="{LO_PUB_IMG}active_10.jpg" />
+				</li>
+				<li>
+					<p>积分兑换</p>
+					<img src="{LO_PUB_IMG}active_03.jpg" />
+				</li>
+			</ul>
+		</div>
+		<div id="right_nav" class="rt">
+			<p class="act_apply">申请报名</p>
+
+			<form action="{$formcheck['url']}" method="post" enctype="multipart/form-data"  onsubmit="return send()">
+			<div class="act_form"><span>活动名<b>*</b>：</span>
+            <input type="text" name="activityname" placeholder="请填写相应的活动名" onBlur="" value="{$list[name]}">
+            <input type="hidden" name="activityid" value="{$list[id]}">
+            </div>
+
+
+           <div class="act_form"><span>姓名<b>*</b>：</span>
+           <input type="text" name="username" id="name" placeholder="请填写真实姓名" onBlur="name1()"><i class="om1">此项不能为空</i>
+           </div>
+            
+            <div class="act_form"><span>学校或者工作单位<b>*</b>：</span>
+            <input type="text" name="unit" id="adr" placeholder="请填写学校或者工作单位" onBlur="adr1()"><i class="om2">此项不能为空</i>
+            </div>
+            
+            
+            <div class="act_form"><span>邮箱<b>*</b>：</span>
+            <input type="email" placeholder="" id="email" name="email" onblur="email1()"/><i class="om4">此项不能为空</i><i class="om5">邮箱填写错误</i>
+			</div>
+
+            <div class="act_form"><span>手机<b>*</b>：</span>
+            <input type="tel" placeholder="" id="phone" name="phone" onblur="phone1()"/><i class="om6">此项不能为空</i><i class="om7">号码填写错误</i>
+            </div>
+
+            <div class="act_form"><span>参与活动的原因<b>*</b>：</span>
+            <textarea rows="10" cols="30" type="text" name="reason" placeholder="请填写参加活动的原因" id="rea" onBlur="rea1()"></textarea><i class="om3">此项不能为空</i>
+            </div>
+
+            <div class="act_form"><span>留言：</span>
+            <textarea type="text" name="message" rows="5" cols="30" placeholder="请填写对活动的相关建议" ></textarea>
+            </div>
+
+             <div class="act_form2"><input type="submit" value="提交申请" /></div>
+
+            </form>
+	
+			
+		</div>
+	</section>
+
+<script type="text/javascript" src="{LO_PUB_JS}jquery-1.12.1.min.js"></script>	
+<script>
+function name1(){
+var cval = $("#name").val();	
+if(cval!=""){ //如果非空 显示正确
+$(".om1").hide();
+	return true;
+}
+else{
+$(".om1").show();//显示必填
+return false;
+}
+	};
+	
+function adr1(){
+var cval = $("#adr").val();	
+if(cval!=""){ //如果非空 显示正确
+$(".om2").hide();
+	return true;
+}
+else{
+$(".om2").show();//显示必填
+return false;
+}
+	};
+	
+function rea1(){
+var cval = $("#rea").val();	
+if(cval!=""){ //如果非空 显示正确
+$(".om3").hide();
+	return true;
+}
+else{
+$(".om3").show();//显示必填
+return false;
+}
+	};
+function phone1(){
+var cval = $("#phone").val();		
+var telReg = cval.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+//如果手机号码不能通过验证
+if(cval!=""){ //如果非空 显示正确
+$(".om6").hide();
+	$(".om7").hide();
+	
+	if(telReg == null){
+	
+ 	$(".om6").hide();//显示必填
+	$(".om7").show();
+	return false;
+	}
+	else  {
+	
+	$(".om6").hide();//显示必填
+	$(".om7").hide();
+	return true;
+	}
+}
+else{
+$(".om6").show();//显示必填
+	$(".om7").hide();
+return false;
+}
+};
+
+
+function email1(){
+var cval =$("#email").val();
+var cl =cval.match(  /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/);
+if(cval!=""){
+	$(".om4").hide();
+	$(".om5").hide();
+	if(cl== null){
+		
+		$(".om4").hide();
+	$(".om5").show();
+	return false;
+		}else{
+   $(".om4").hide();
+	$(".om5").hide();
+		return true;	
+			}
+	}
+	
+	else{
+		$(".om4").show();
+		$(".om5").hide();
+		return false;
+		}
+    
+};
+function send(){
+		return (name1()&&adr1()&&rea1()&&email1()&&phone1()) ;
+}
+
+</script>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

@@ -1,0 +1,32 @@
+
+<!--{template common/header}-->
+<div class="person_home">
+    <!--{template home/home_left}-->
+    <div class="person_homer rt">
+        <!--{template home/home_righton}-->
+        <div class="phr_content">
+            <div class="phr_bordermess"></div>
+            <div class="phr_MyReward">
+                <ul class="phr_tab">
+                    <!-- <li class="{if $ac=='case'}phr_active{/if}">收藏的案例</li>
+                    <li class="{if $ac=='talent'}phr_active{/if}">收藏的人才</li>
+                    <li class="{if $ac=='task'}phr_active{/if}">收藏的项目</li> -->
+                    <li {if $ac=='list'}class="phr_active"{/if}><a href="{$jumpurl}">收藏的项目</a></li>
+                    <li {if $ac=='talent'}class="phr_active"{/if}><a href="{$jumpurl}&ac=talent">收藏的人才</a></li>
+                    <li {if $ac=='case'}class="phr_active"{/if}><a href="{$jumpurl}&ac=case">收藏的案例</a></li>
+                </ul>
+                <div class="phr_tab_content">
+                    <!--{if $ac=='list'}-->
+                    <!--{template home/project/project_collect_task}-->
+                    <!--{elseif $ac=='talent'}-->
+                    <!--{template home/project/project_collect_talent}-->
+                    <!--{elseif $ac=='case'}-->
+                    <!--{template home/project/project_collect_case}-->
+                    <!--{/if}-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 通用底部 -->
+<!--{template common/footer}-->

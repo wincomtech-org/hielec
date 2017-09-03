@@ -1,0 +1,262 @@
+
+<!--{template _public/head_core}-->
+<link rel="stylesheet" href="{LO_PUB_CSS}talents.css"/>
+<script src="{LO_PUB_JS}jquery-1.11.3.min.js"></script>
+</head>
+
+<body class="body_zone">
+    <!--{template _public/nav_main}-->
+    <div class="zone">
+        <!--{template home/zone_com_nav}-->
+        <div class="zone_content">
+            <div class="zone_contentl lf">
+                <!--{template home/zone_com_uc}-->
+                <div class="statis_info">
+                    <h3 class="zct"><a href="javascript:void(0);" class="h1">统计信息</a><span>Statistics</span></h3>
+                    <p>已有<span class="red">{$mInfo[views]}</span>人来访问过</p>
+                    <ul>
+                        <li>积分：<a href="javascript:void(0);">{$mInfo[credits]}</a></li>
+                        <li>威望：<a href="javascript:void(0);">{$mInfo[extcredits1]}</a></li>
+                        <li>金钱：<a href="javascript:void(0);">{$mInfo[extcredits2]}</a></li>
+                        <li>贡献：<a href="javascript:void(0);">{$mInfo[extcredits3]}</a></li>
+                        <li>主题：<a href="javascript:void(0);">{$mInfo[threads]}</a></li>
+                        <li>帖子：<a href="javascript:void(0);">{$mInfo[posts]}</a></li>
+                        <li>精华：<a href="javascript:void(0);">{$mInfo[digestposts]}</a></li>
+                        <li>记录：<a href="javascript:void(0);">{$mInfo[doings]}</a></li>
+                        <li>日志：<a href="javascript:void(0);">{$mInfo[blogs]}</a></li>
+                        <li>关注：<a href="javascript:void(0);">{$mInfo[following]}</a></li>
+                        <li>粉丝：<a href="javascript:void(0);">{$mInfo[follower]}</a></li>
+                        <li>好友：<a href="javascript:void(0);">{$mInfo[friends]}</a></li>
+                    </ul>
+                </div>
+                <!--<div class="zone_photos">-->
+                    <!--<h3 class="zct"><a href="javascript:void(0);">相册</a></h3>-->
+                    <!--<div class="zone_photos_tit">-->
+                        <!--<p>现在还没有相册</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="zone_notes">
+                    <h3 class="zct"><a href="javascript:void(0);" class="h1">记录</a><span>Record</span><a href="{$module_url}&do=record" class="rt">更多</a></h3>
+                    <ul class="notes">
+                        <li><p class="txt">暂无……</p><a href="javascript:void(0);">回复</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="zone_contentm lf">
+                <div class="pearson_datas">
+                    <h3 class="zct"><a href="javascript:void(0);" class="h1">个人资料</a><span>Personal Data</span></h3>
+                    <div class="person_datas_content">
+                        <p>暂无资料或无权查看</p>
+                        <p><a href="{$module_url}&do=person_data">查看全部个人资料</a></p>
+                    </div>
+                </div>
+                <div class="dynamic">
+                    <h3 class="zct"><a href="javascript:void(0);" class="h1">动态</a><span>Dynamic</span><a href="{$module_url}&do=dynamic" class="rt">更多</a></h3>
+                    <ul class="dynamic_content">
+                        <li>
+                            <span class="t4"></span>
+                            <a href="javascript:void(0);">用户1</a>和<a href="javascript:void(0);">用户2</a>成为了好友
+                            <span class="rt date">2017-03-03 11:11:11</span>
+                        </li>
+                        <li>
+                            <span class="t4"></span>
+                            <a href="javascript:void(0);">用户1</a>和<a href="javascript:void(0);">用户2</a>成为了好友
+                            <span class="rt date">2017-03-03 11:11:11</span>
+                        </li>
+                        <li>
+                            <span class="t4"></span>
+                            <a href="javascript:void(0);">用户1</a>和<a href="javascript:void(0);">用户2</a>成为了好友
+                            <span class="rt date">2017-03-03 11:11:11</span>
+                        </li>
+                        <li>
+                            <span class="t4"></span>
+                            <a href="javascript:void(0);">用户1</a>和<a href="javascript:void(0);">用户2</a>成为了好友
+                            <span class="rt date">2017-03-03 11:11:11</span>
+                        </li>
+                        <li>
+                            <span class="t4"></span>
+                            <a href="javascript:void(0);">用户1</a>和<a href="javascript:void(0);">用户2</a>成为了好友
+                            <span class="rt date">2017-03-03 11:11:11</span>
+                        </li>
+                    </ul>
+                </div>
+                <!--<div class="zone_share">-->
+                    <!--<h3 class="zct"><a href="javascript:void(0);">分享</a></h3>-->
+                    <!--<div class="share_content">-->
+                        <!--<p>现在还没有分享</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="zone_theme">
+                    <h3 class="zct"><a href="javascript:void(0);" class="h1">主题</a><span>Theme</span></h3>
+                    <ul class="zone_theme_content">
+                       <li><a href="javascript:void(0);">主题1</a></li>
+                       <li><a href="javascript:void(0);">主题1</a></li>
+                       <li><a href="javascript:void(0);">主题1</a></li>
+                       <li><a href="javascript:void(0);">主题1</a></li>
+                       <li><a href="javascript:void(0);">主题1</a></li>
+                       <li><a href="javascript:void(0);">主题1</a></li>
+                    </ul>
+                </div>
+                <div class="zone_board">
+                    <h3 class="zct"><a href="javascript:void(0);" class="h1">留言板</a><span>Message Board</span><a href="javascript:void(0);" class="rt">更多</a></h3>
+                    <div class="zone_board_content">
+                        <form action="" method="get" name="borad" autocomplete>
+                            <div class="zb_guang">
+                                <p>你需要登陆后才可以留言 <a href="javascript:void(0);">登录</a>|<a href="javascript:void(0);">注册</a></p>
+                            </div>
+                            <p class="zb_btn">
+                                <button>留言</button>
+                            </p>
+                        </form>
+                        <div class="zb_content">
+                            <dl class="zb_c">
+                                <dd class="lf">
+                                    <a href="javascript:void(0);"><img src="{LO_PUB_IMG}user.png" alt="" target="_blank"/></a>
+                                </dd>
+                                <dt >
+                                    <a href="javascript:void(0);" target="_blank" class="lf border_name">刘丽丽</a>
+                                    <span class="rt border_date">2017-03-03 11:11:11</span>
+                                </dt>
+                                <dt class="zb_mess">
+                                    你好，希望能和你交个朋友，我的微信是123，加我呗，刚入行，什么都不懂，求指教……
+                                </dt>
+                            </dl>
+                            <dl class="zb_c zb_c_footer">
+                                <dt class="rt"><span><a href="javascript:void(0);">查看全部</a></span></dt>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="zone_contentr rt">
+                <!--<div class="application">-->
+                    <!--<h3 class="zct"><a href="javascript:void(0);">应用</a></h3>-->
+                    <!--<div class="appli_content">-->
+                        <!--<p>现在还没有其他应用</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="friends">
+                    <h3 class="zct"><a href="javascript:void(0);" class="h1">好友</a><span>Hail-fellow</span><a href="{$module_url}&do=friends" class="rt" >更多</a></h3>
+                    <ul class="friends_content">
+                        <li>
+                            <a href="javascript:void(0);" class="fc_img"><img src="{LO_PUB_IMG}user.png" alt=""/></a>
+                            <a href="javascript:void(0);" class="fc_name">好友1</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="fc_img"><img src="{LO_PUB_IMG}user.png" alt=""/></a>
+                            <a href="javascript:void(0);" class="fc_name">好友1</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="fc_img"><img src="{LO_PUB_IMG}user.png" alt=""/></a>
+                            <a href="javascript:void(0);" class="fc_name">好友1</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="fc_img"><img src="{LO_PUB_IMG}user.png" alt=""/></a>
+                            <a href="javascript:void(0);" class="fc_name">好友1</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="fc_img"><img src="{LO_PUB_IMG}user.png" alt=""/></a>
+                            <a href="javascript:void(0);" class="fc_name">好友1</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="fc_img"><img src="{LO_PUB_IMG}user.png" alt=""/></a>
+                            <a href="javascript:void(0);" class="fc_name">好友1</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="fc_img"><img src="{LO_PUB_IMG}user.png" alt=""/></a>
+                            <a href="javascript:void(0);" class="fc_name">好友1</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="fc_img"><img src="{LO_PUB_IMG}user.png" alt=""/></a>
+                            <a href="javascript:void(0);" class="fc_name">好友1</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="fc_img"><img src="{LO_PUB_IMG}user.png" alt=""/></a>
+                            <a href="javascript:void(0);" class="fc_name">好友1</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="recent_friends">
+                    <h3 class="zct"><a href="javascript:void(0);" class="h1">最近访客</a><span>Recent Visitors</span></h3>
+                    <ul class="rc_content">
+                        <li>
+                            <a href="javascript:void(0);" class="rc_img"><img src="{LO_PUB_IMG}user.png" alt=""/></a>
+                            <a href="javascript:void(0);" class="rc_name">好友1</a>
+                            <span class="rc_date">2017-03-12 01:11:11</span>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="rc_img"><img src="{LO_PUB_IMG}user.png" alt=""/></a>
+                            <a href="javascript:void(0);" class="rc_name">好友1</a>
+                            <span class="rc_date">2017-03-12 01:11:11</span>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="rc_img"><img src="{LO_PUB_IMG}user.png" alt=""/></a>
+                            <a href="javascript:void(0);" class="rc_name">好友1</a>
+                            <span class="rc_date">2017-03-12 01:11:11</span>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="rc_img"><img src="{LO_PUB_IMG}user.png" alt=""/></a>
+                            <a href="javascript:void(0);" class="rc_name">好友1</a>
+                            <span class="rc_date">2017-03-12 01:11:11</span>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="rc_img"><img src="{LO_PUB_IMG}user.png" alt=""/></a>
+                            <a href="javascript:void(0);" class="rc_name">好友1</a>
+                            <span class="rc_date">2017-03-12 01:11:11</span>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="rc_img"><img src="{LO_PUB_IMG}user.png" alt=""/></a>
+                            <a href="javascript:void(0);" class="rc_name">好友1</a>
+                            <span class="rc_date">2017-03-12 01:11:11</span>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="rc_img"><img src="{LO_PUB_IMG}user.png" alt=""/></a>
+                            <a href="javascript:void(0);" class="rc_name">好友1</a>
+                            <span class="rc_date">2017-03-12 01:11:11</span>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="rc_img"><img src="{LO_PUB_IMG}user.png" alt=""/></a>
+                            <a href="javascript:void(0);" class="rc_name">好友1</a>
+                            <span class="rc_date">2017-03-12 01:11:11</span>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="rc_img"><img src="{LO_PUB_IMG}user.png" alt=""/></a>
+                            <a href="javascript:void(0);" class="rc_name">好友1</a>
+                            <span class="rc_date">2017-03-12 01:11:11</span>
+                        </li>
+                    </ul>
+                </div>
+                <!--<div class="zone_group">-->
+                <!--    <h3 class="zct"><a href="javascript:void(0);">群组</a></h3>-->
+                    <!--<div class="zg_content">-->
+                        <!--<p style="display:none;">现在还没有群组</p>-->
+                        <!--<ul class="zgc">-->
+                            <!--<li>-->
+                                <!--<a href="javascript:void(0);" class="zgc_img"><img src="{LO_PUB_IMG}weixin.png" alt=""/></a>-->
+                                <!--<a href="javascript:void(0);" class="zgc_title">21学堂</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="javascript:void(0);" class="zgc_img"><img src="{LO_PUB_IMG}weixin.png" alt=""/></a>-->
+                                <!--<a href="javascript:void(0);" class="zgc_title">21学堂</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="javascript:void(0);" class="zgc_img"><img src="{LO_PUB_IMG}weixin.png" alt=""/></a>-->
+                                <!--<a href="javascript:void(0);" class="zgc_title">21学堂</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+    <script>
+       $(function(){
+           var num=$(".txt").html();
+           if(num.length>50){
+               $(".txt").html(num.substr(0,40)+"……")
+           }
+       })
+    </script>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

@@ -1,0 +1,21 @@
+
+<div class="phr_dc" style="display:block;">
+    <ul class="talents_d talents_pro_case">
+        <!--{loop $list $v}-->
+        <li>
+            <div class="talents_pro_case_pic lf">
+                <a href="home.php?mod=space&uid={$gUid}"><img src="{LO_PUB_IMG}user_c.png"></a>
+            </div>
+            <div class="project_case_content lf">
+                <h4><a href=""  class="orange">{$v[case_title]}</a></h4>
+                <p class="project_case_txt">{$v[case_desc]}</p>
+                <p class="gray">
+                    项目类型：<a>{$v[name]}</a>
+                    <a class="rt my_case_remove" href="{$jumpurl}&ac=del&loid={$v[$lokey]}">删除</a>
+                    <a class="rt my_case_remove" href="{$jumpurl}&ac=page&loid={$v[$lokey]}">修改</a>
+                </p>
+            </div>
+        </li>
+        <!--{/loop}-->
+    </ul>
+</div>

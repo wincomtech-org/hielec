@@ -1,0 +1,81 @@
+
+<script type="text/JavaScript">
+    // parent.document.title = '论坛定制 管理中心 - 用户 - 编辑用户';if(parent.$('admincpnav')) parent.$('admincpnav').innerHTML='用户&nbsp;&raquo;&nbsp;编辑用户&nbsp;&nbsp;<a target="main" title="添加到常用操作" href="admin.php?action=misc&operation=custommenu&do=add&title=%E7%BC%96%E8%BE%91%E7%94%A8%E6%88%B7&url=action%253Dmembers%2526operation%253Dedit%2526uid%253D1">[+]</a>';
+</script>
+<div class="floattop">
+    <div class="itemtitle">
+        <h3>提现用户 - <?php echo $page['uname'] ?></h3>
+        <ul class="tab1">
+            <li class="current"><a href="<?php echo $withdraw_url ?>edit&wid=<?php echo $page['wid'] ?>"><span>提现信息</span></a></li>
+            <li><a href="admin.php?action=members&operation=edit&uid=<?php echo $page['uid'] ?>"><span>用户信息</span></a></li>
+        </ul>
+    </div>
+</div>
+<div class="floattopempty"></div>
+
+<form method="post" autocomplete="off" action="<?php echo $withdraw_url ?>edit" id="withdrawform" enctype="multipart/form-data">
+    <input type="hidden" name="formhash" value="<?php echo FORMHASH ?>">
+    <input type="hidden" name="wid" value="<?php echo $page['wid'] ?>">
+    <input type="hidden" name="anchor" value="<?php echo $anchor ?>">
+    <table class="tb tb2 ">
+        <tbody>
+            <tr>
+                <td colspan="2" class="td27" s="1">用户名：</td>
+            </tr>
+            <tr class="noborder" >
+                <td class="vtop rowform"><?php echo $page['uname'] ?></td>
+            </tr>
+
+            <tr><td colspan="2" class="td27" s="1">提现金额：</td></tr>
+            <tr class="noborder">
+                <td class="vtop rowform">
+                    <input name="cash[credit]" value="<?php echo $page['credit'] ?>" class="txt">
+                </td>
+                <td>手续费<span><?php echo $page['ratiofee'] ?></span></td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="td27" s="1">收款户名： <?php echo $page['account_name'] ?></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">账号类型：</td>
+            </tr>
+            <tr class="noborder" >
+                <td class="vtop rowform">
+                    <select name="cash[account_type]">
+                        <?php foreach ($withdraw_type as $key => $val): ?>
+                            <option <?php if ($key==$page['account_type']): ?>selected<?php endif ?> value="<?php echo $key ?>"><?php echo $val ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="td27" s="1">收款账号：</td></tr>
+            <tr class="noborder">
+                <td class="vtop rowform">
+                    <input name="cash[account]" value="<?php echo $page['account'] ?>" class="txt">
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+
+            <tr title="提示："><td colspan="2" class="td27" s="1">备注：</td></tr>
+            <tr class="noborder">
+                <td class="vtop rowform">
+                    <span><?php echo $page['bio'] ?></span>
+                </td>
+            </tr>
+
+            <tr><td colspan="2" class="td27" s="1">状态： <span><?php echo $destarr[$page['status']] ?></span></td></tr>
+
+            <tr>
+                <td colspan="15">
+                    <div class="fixsel">
+                        <input type="submit" class="btn" id="submit_editsubmit" name="editsubmit" title="按 Enter 键可随时提交您的修改" value="提交">
+                    </div>
+                </td>
+            </tr>
+            <script type="text/JavaScript">_attachEvent(document.documentElement, 'keydown', function (e) { entersubmit(e, 'editsubmit'); });</script>
+        </tbody>
+    </table>
+</form>
+

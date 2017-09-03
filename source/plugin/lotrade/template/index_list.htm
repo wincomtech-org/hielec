@@ -1,0 +1,257 @@
+
+ <!--{template _public/header}-->
+
+ <!--{template _public/nav_main2}-->
+
+	<section style="margin-top:15px;">
+		<div id='leftSide' class="left_cont lf">
+				<div class="tree_category">
+					<div class="t1">二手交易商品分类</div>
+
+					<!--{loop $cates $k $p}-->
+					<div class="TreeWrap">
+						<div class="MenuBox" id="Menu_{$k}">
+						    <div class="titBox">
+						    <h3 class="Fst">
+						    	<a href="javascript:showMenu({$k});">{$p[name]}</a>
+						    </h3>
+						    </div>
+						    <div class="txtBox">
+							    <ul>
+								<!--{loop $p[child] $c}-->
+								<li><a href="{$formcheck['url']}&type4={$c[cid]}" {if $c[cid]==$type4}style="color:#ff7e00;"{/if}>{$c[name]}</a></li>
+								<!--{/loop}-->
+						 		</ul>
+						    </div>
+						</div>
+					</div>
+					<!--{/loop}-->
+
+				</div>
+				<script type="text/javascript">
+					 function ExChgClsName(Obj,NameA,NameB){
+						 var Obj=document.getElementById(Obj)?document.getElementById(Obj):Obj;
+						 Obj.className=Obj.className==NameA?NameB:NameA;
+						 }
+						 function showMenu(iNo){
+						 ExChgClsName("Menu_"+iNo,"MenuBox","MenuBox2");
+					 }
+				</script>
+				<div class="product_recommend">
+					<p>相关推荐</p>
+					<ul>
+						<!--{loop $recommend $nav}-->
+						<li>
+							<a href="{LO_CURURL}&pluginop=page&loid={$nav[id]}">
+								<img src="{IMG_TPL}{$nav[pic]}" alt="产品">
+								<span>{$nav[name]}</span>
+								<span>兑换<em>{$nav[shop_price]}</em></span>
+							</a>
+						</li>
+						<!--{/loop}-->
+					</ul>
+				</div>
+			</div>
+		<div class="rt" id='rightSide'>
+			<div class="lf">
+				<div id="ad">
+					{$adv_customs[1]}
+				</div>
+				<ul id="tj">
+					<li class="type">
+						<ul>
+							<li class="lf one">交易类型 ：</li>
+							<!--{loop $trade_type1 $nav}-->
+								<li class="lf">
+									<a {if $type1==$nav[id]}class="current"{/if} href="{$formcheck['url']}&type1={$nav[id]}">{$nav[name]}</a>
+								</li>
+							<!--{/loop}-->
+						</ul>
+					</li>
+					<li class="type">
+						<ul>
+							<li class="lf one">所在地区 ：</li>
+							
+							<div class="f_diqu">
+								<ul>
+									<div class="fy_diqu">
+
+									<!--{loop $district $nav}-->
+										<li class="float">
+											<a {if $type2==$nav[id]}class="current"{/if} href="{$formcheck['url']}&type2={$nav[id]}">{$nav[name]}</a>
+										</li>
+									<!--{/loop}-->
+									
+									</div>
+								</ul>
+								<div class="f_more fy_gengduo">更多</div>
+							</div>
+						</ul>
+					</li>
+					<li class="type">
+						<ul>
+							<li class="lf one">交易状态 ：</li>
+							<!--{loop $trade_type3 $nav}-->
+								<li class="lf">
+									<a {if $type3==$nav[id]}class="current"{/if} href="{$formcheck['url']}&type3={$nav[id]}">{$nav[name]}</a>
+								</li>
+							<!--{/loop}-->
+						</ul>
+					</li>
+				</ul>
+				<div id="search">
+					<span class="lf">当前搜索 ：</span>
+					<div class="sear lf">
+						<form action="{LO_CURURL}" method="post">
+							<input class="text" type="text" name="search" value="{$keyword}" />
+							<input class="submit rt" type="submit"/>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="rt">
+				<div class="sel">
+					<a href="home.php?mod=trade&do=list">
+						<img class="lf" src="{LO_PUB_IMG}esjy_03.jpg">
+						<span class="lf">出售资源</span>
+					</a>
+				</div>
+				<div class="denglu">
+
+				<div class="r_bq">
+				<!--{if $_G[uid]}-->
+				<div class="form_login" style="width:226px;padding:10px 20px;height:250px;margin-top:10px;">
+					<div class="lf"><a href="home.php?mod=space&uid=$_G[uid]"><!--{avatar($_G[uid],small)}--></a></div>
+					<p class="lf" style="margin-left:10px;font-size:14px;">欢迎回来，<a href="home.php?mod=space&uid={$_G[uid]}&do=profile" target="_blank" title="访问我的空间">{$_G[member][username]}</a>！<a class="close" href="member.php?mod=logging&action=logout&formhash={FORMHASH}">{lang logout}</a></p><div class="clear"></div>
+					<div class="lg1"><a href="home.php?mod=spacecp&ac=credit&showcredit=1">余额：<!--{if $curcredits}-->{$curcredits} {$creditname}<!--{/if}--></a></div>
+					<div class="lg2"><a href="home.php?mod=spacecp&ac=usergroup">{lang usergroup}: {$_G[group][grouptitle]}<!--{if $_G[member]['freeze']}--><span>({lang freeze})</span><!--{/if}--></a></div>
+					<div class="lg3">上次登录：{$lastvisit}</div>
+				</div>
+				<!--{else}-->
+				<form action="member.php?mod=logging&action=login&loginsubmit=yes&infloat=yes&lssubmit=yes" method="post" name="form_login" class="form_login" style="width:226px;padding:10px 20px;height:250px;margin-top:10px;">
+					<p>登录</p>
+					<!-- <select name="fastloginfield">
+						<option value="username">{lang username}</option>
+						{if getglobal('setting/uidlogin')}
+						<option value="uid">{lang uid}</option>
+						{/if}
+						<option value="email">{lang email}</option>
+					</select> -->
+					<div>
+						<input type="text" class="username" name="username" value="用户名/Email" onfocus="$('.username').css('color','#616c7b');if(this.value=='用户名/Email'){this.value='';}" onblur="if(this.value==''){$('.username').css('color','#b2b2b2');this.value='用户名/Email';}">
+					</div>
+					<div>
+						<input type="text" class="password" name="password" placeholder="密码">
+					</div>
+					<div class="l_row">
+						<label><input type="checkbox" name="cookietime" value="2592000" >自动登录</label>
+						<a href="member.php?mod=logging&action=login&viewlostpw=1" class="rt">找回密码</a>
+					</div>
+					<div class="clear">
+						<input type="submit" class="fl login" name="login" value="登录">
+						<input type="button" class="rt register" id="Is_register" name="register" value="注册">
+					</div>
+					<input type="hidden" name="quickforward" value="yes">
+					<input type="hidden" name="handlekey" value="ls">
+				</form>
+				<!--{/if}-->
+			</div>
+
+
+
+
+
+
+				</div>		
+
+
+
+			</div>
+
+
+
+			<div class="clear"></div>
+			<div id='list'>
+				<h3>{$trade_type4_title}</h3>
+				<ul>
+				<!--{if $list}-->
+				<!--{loop $list $k $nav}-->					
+				<!--{if in_array($k,array(1,0,3,4))}-->
+					<li class="lf">
+				<!--{/if}-->
+				<!--{if in_array($k,array(2,5))}-->
+					<li class="lf end">
+				<!--{/if}-->
+						<dl>
+							<dt>
+								<a href="{LO_CURURL}&pluginop=page&loid={$nav[id]}">
+									<img src="{IMG_TPL}{$nav[pic]}" width="276" height="183" />
+								</a>
+							</dt>
+							<dd class="pp"><span><!--{eval echo cutstr($nav['name'],25,'……');}--></span></dd>
+							<dd class="addr">
+							{eval echo cutstr($nav[brief],28,'……');}
+							<span class="pro">{$nav[area]}</span></dd>
+							<dd class="price"><span class="xj">{$nav[shop_price]}</span><span class="yj">原价:{$nav[market_price]}</span> <span class="cz rt">超值</span></dd>
+						</dl>
+					</li>					
+					<!--{/loop}-->
+					<!--{else}-->
+                    	<li><span>{$lang['no_resource']}</span></li>
+                	<!--{/if}-->
+
+				</ul>
+			</div>
+			<div class="clear"></div>
+			{$multipage}
+		</div>
+		<div id='adv' class="fy_trader_adv">
+			<div id="a_l" class="lf">
+				{$adv_customs[2]}
+			</div>
+			<div id="a_c" class="fy_trade lf">
+				<h3>最新发布</h3>
+                <ul>
+				<!--{loop $arrTuijian $nav}-->
+				
+                	<li>
+                		<span><b>{$nav[username]}</b>发布了：</span>
+						<a href="{LO_CURURL}&pluginop=page&loid={$nav[id]}">
+						<!--{eval echo cutstr($nav['name'],20,'……');}--></a>
+                     </li>
+				
+				<!--{/loop}-->
+                </ul>
+			</div>	
+			<div id="a_r" class="fy_trade lf">
+				<h3>最新购买信息</h3>
+                 <ul>
+				<!--{loop $arrHot $nav}-->
+               
+					<li>
+                    	<span><b>{$nav[username]}</b>购买了：</span>
+						<a href="{LO_CURURL}&pluginop=page&loid={$nav[id]}">
+						<!--{eval echo cutstr($nav['name'],20,'……');}--></a>
+                    </li>
+					
+				
+				<!--{/loop}-->
+                </ul>
+			</div>
+		</div>
+	</section>
+	
+
+	<script>
+		$(document).delegate('.fy_gengduo','click',function(){
+			$(this).siblings().children().removeClass('fy_diqu');
+			$(this).html('收起').addClass('fy_shouqi').removeClass('fy_gengduo');
+		})
+		$(document).delegate('.fy_shouqi','click',function(){
+			$(this).siblings().children().addClass('fy_diqu');
+			$(this).addClass('fy_gengduo').html('更多').removeClass('fy_shouqi');
+		})
+	</script>
+
+<!-- 通用底部 -->
+{template common/footer}

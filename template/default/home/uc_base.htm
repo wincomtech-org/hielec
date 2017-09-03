@@ -1,0 +1,302 @@
+
+<!--{template common/header}-->
+
+<link href="{LO_PUB_ORG}shearphoto/ShearPhoto.css" rel="stylesheet" type="text/css" media="all">
+<!--CSS文件，有点废话-->
+<script type="text/javascript" src="{LO_PUB_ORG}shearphoto/ShearPhoto.js"></script>
+<!--ShearPhoto的核心文件 截取，拖拽，HTML5切图，数据交互等都是由这个文件处理，全部由明哥先生汗水交织而成-->
+<script type="text/javascript" src="{LO_PUB_ORG}shearphoto/handle.js"></script>
+<!--设置和处理对象方法的JS文件，要修改设置，请进入这个文件-->
+
+<div class="person_home">
+    <!-- 个人中心左侧导航 -->
+    <!--{template home/home_left}-->
+    <div class="person_homer rt">
+        <!--{template home/home_righton}-->
+        <div class="phr_content">
+            <!-- <div class="phr_bordermess">写点什么……</div> -->
+            <div class="phr_dynamic">
+                <ul class="phr_dynamic_ul phr_tab" id="phr_ul">
+                    <li>好友动态</li>
+                    <li>与我相关</li>
+                    <li class="phr_active">所有动态</li>
+                </ul>
+                <div class="phr_dynamic_content phr_tab_content">
+                    <div class="phr_dynameic1 phr_dc" style="display:none;">
+                        <h3>好友动态</h3>
+                        <ul class="phr_dynameic_all">
+                            <li>
+                                <dl class="phr_dynamicAll_dl">
+                                    <dt class="phr_dynamicAll_dt lf">
+                                        <img src="{LO_PUB_IMG}user_c.png" alt=""/>
+                                    </dt>
+                                    <dd class="phr_dynamicAll_dd lf">
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="phr_dynamicAll_dl">
+                                    <dt class="phr_dynamicAll_dt lf">
+                                        <img src="{LO_PUB_IMG}user_c.png" alt=""/>
+                                    </dt>
+                                    <dd class="phr_dynamicAll_dd lf">
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="phr_dynamicAll_dl">
+                                    <dt class="phr_dynamicAll_dt lf">
+                                        <img src="{LO_PUB_IMG}user_c.png" alt=""/>
+                                    </dt>
+                                    <dd class="phr_dynamicAll_dd lf">
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="phr_dynamicAll_dl">
+                                    <dt class="phr_dynamicAll_dt lf">
+                                        <img src="{LO_PUB_IMG}user_c.png" alt=""/>
+                                    </dt>
+                                    <dd class="phr_dynamicAll_dd lf">
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="phr_dynamicAll_dl">
+                                    <dt class="phr_dynamicAll_dt lf">
+                                        <img src="{LO_PUB_IMG}user_c.png" alt=""/>
+                                    </dt>
+                                    <dd class="phr_dynamicAll_dd lf">
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="phr_dynameic2 phr_dc" style="display:none;">
+                        <h3>与我相关</h3>
+                        <ul class="phr_dynameic_all">
+                            <li>
+                                <dl class="phr_dynamicAll_dl">
+                                    <dt class="phr_dynamicAll_dt lf">
+                                        <img src="./{LO_PUB_IMG}user_c.png" alt=""/>
+                                    </dt>
+                                    <dd class="phr_dynamicAll_dd lf">
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="phr_dynamicAll_dl">
+                                    <dt class="phr_dynamicAll_dt lf">
+                                        <img src="{LO_PUB_IMG}user_c.png" alt=""/>
+                                    </dt>
+                                    <dd class="phr_dynamicAll_dd lf">
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="phr_dynamicAll_dl">
+                                    <dt class="phr_dynamicAll_dt lf">
+                                        <img src="{LO_PUB_IMG}user_c.png" alt=""/>
+                                    </dt>
+                                    <dd class="phr_dynamicAll_dd lf">
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="phr_dynamicAll_dl">
+                                    <dt class="phr_dynamicAll_dt lf">
+                                        <img src="{LO_PUB_IMG}user_c.png" alt=""/>
+                                    </dt>
+                                    <dd class="phr_dynamicAll_dd lf">
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="phr_dynamicAll_dl">
+                                    <dt class="phr_dynamicAll_dt lf">
+                                        <img src="{LO_PUB_IMG}user_c.png" alt=""/>
+                                    </dt>
+                                    <dd class="phr_dynamicAll_dd lf">
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="phr_dynameic3 phr_dc">
+                        <h3>今天</h3>
+                        <ul class="phr_dynameic_all">
+                            <li>
+                                <dl class="phr_dynamicAll_dl">
+                                    <dt class="phr_dynamicAll_dt lf">
+                                        <img src="{LO_PUB_IMG}user_c.png" alt=""/>
+                                    </dt>
+                                    <dd class="phr_dynamicAll_dd lf">
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="phr_dynamicAll_dl">
+                                    <dt class="phr_dynamicAll_dt lf">
+                                        <img src="{LO_PUB_IMG}user_c.png" alt=""/>
+                                    </dt>
+                                    <dd class="phr_dynamicAll_dd lf">
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="phr_dynamicAll_dl">
+                                    <dt class="phr_dynamicAll_dt lf">
+                                        <img src="{LO_PUB_IMG}user_c.png" alt=""/>
+                                    </dt>
+                                    <dd class="phr_dynamicAll_dd lf">
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="phr_dynamicAll_dl">
+                                    <dt class="phr_dynamicAll_dt lf">
+                                        <img src="{LO_PUB_IMG}user_c.png" alt=""/>
+                                    </dt>
+                                    <dd class="phr_dynamicAll_dd lf">
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li>
+                                <dl class="phr_dynamicAll_dl">
+                                    <dt class="phr_dynamicAll_dt lf">
+                                        <img src="{LO_PUB_IMG}user_c.png" alt=""/>
+                                    </dt>
+                                    <dd class="phr_dynamicAll_dd lf">
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                        <div>
+                                            <p class="lf"><a href="">用户1</a>回复了<a href="#">用户2</a>的话题</p>
+                                            <p class="rt"><span class="ph ph_7"></span><b>2秒前</b></p>
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

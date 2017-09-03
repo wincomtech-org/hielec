@@ -1,0 +1,30 @@
+<div>
+	<table>
+		<thead>
+			<tr>
+				<!--{loop $tab['th'] $v}-->
+				<th align="center">{$v}</th>
+				<!--{/loop}-->
+			</tr>
+		</thead>
+		<tbody>
+			<!--{if $list}-->
+			<!--{loop $list $v}-->
+			<tr>
+				<!--{loop $tab['td'] $td}-->
+				<th align="center">{$v[$td]}</th>
+				<!--{/loop}-->
+				<td align="center">
+					<!--{loop $tab['operator'] $o}-->
+					<a href="{$o[0]}{$v[$lokey]}">{$o[1]}</a>
+					<!--{/loop}-->
+				</td>
+			</tr>
+			<!--{/loop}-->
+			<!--{else}-->
+			<tr><td>没有数据</td></tr>
+			<!--{/if}-->
+		</tbody>
+	</table>
+</div>
+{$multipage}

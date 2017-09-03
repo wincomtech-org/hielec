@@ -1,0 +1,53 @@
+
+<!--{template _public/header}-->
+
+<!--{template _public/nav_main}-->
+
+	<div class="contain_bg">
+		<div class="xfad" id="l_xfad">
+			<a onclick="document.getElementById('l_xfad').style.display='none'" href="javascript:void(0);">关闭</a>
+			{$adv_customs[1]}
+		</div>
+		<div class="xfad" id="r_xfad">
+			<a onclick="document.getElementById('r_xfad').style.display='none'" href="javascript:void(0);">关闭</a>
+			{$adv_customs[2]}
+		</div>
+		<div class="contain">
+			<!--{template _public/search_style_1}-->
+			
+			<div class="datasheet_ad">
+				{$adv_customs[3]}
+			</div>
+			<div class="nav_contain">
+			    <p><span class="tc">热门搜索</span></p>
+				<ul>
+					{loop $hot_searchs $hot}
+					<li><a href="{LO_CURURL}&pluginop=page&loid={$hot[id]}">{$hot[name]}</a></li>
+					{/loop}
+				</ul>
+				<p><span class="tc">热门下载</span></p>
+				<ul>
+					{loop $hot_downs $hot}
+					<li><a href="{LO_CURURL}&pluginop=page&loid={$hot[id]}">{$hot[name]}</a></li>
+					{/loop}
+				</ul>
+			</div>
+			<div class="datasheet_index">
+				<dl class="clear">
+					<dt>厂商索引：</dt>
+					{loop $firm_indexs $k $v}
+					<dd>{if $k!=0}-{/if}<a href="{LO_CURURL}&pluginop=firm&index=$v">$v</a></dd>
+					{/loop}
+				</dl>
+				<dl class="clear">
+					<dt>器件索引：</dt>
+					{loop $sheet_indexs $k $v}
+					<dd>{if $k!=0}-{/if}<a href="{LO_CURURL}&pluginop=search&index=$v">$v</a></dd>
+					{/loop}
+				</dl>
+			</div>
+		</div>
+	</div>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

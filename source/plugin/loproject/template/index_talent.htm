@@ -1,0 +1,95 @@
+
+<!--{template loproject:layout/header}-->
+<link rel="stylesheet" href="{LO_PUB_CSS}market.css">
+<!-- <script src="{LO_PUB_JS}jquery.cityselect.js"></script> -->
+
+<section>
+    <div class="lf" id="left">
+        <div id="tjcx">
+            <ul id='tj'>
+                <li>
+                    <span class="head lf">擅长领域：</span>
+                    <ul>
+                        <li class="lf"><a class="{if is_null($aa) || $aa==-1}on{/if}" href="{$jumpurl}&aa=-1">全部</a></li>
+                        <!--{loop $industrys $v}-->
+                        <li class="lf"><a class="{if stripos($v[name],$aa)!==false}on{/if}" href="{$jumpurl}&aa={$v[name]}">{$v[name]}</a></li>
+                        <!--{/loop}-->
+                    </ul>
+                </li>
+                <li>
+                    <span class="head lf">身份类型：</span>
+                    <ul>
+                        <li class="lf"><a class="{if !$bb}on{/if}" href="{$jumpurl}&bb=">全部</a></li>
+                        <!--{loop $arrProUserType $k $v}-->
+                        <li class="lf"><a class="{if $bb==$k}on{/if}" href="{$jumpurl}&bb={$k}">{$v}</a></li>
+                        <!--{/loop}-->
+                    </ul>
+                </li>
+                <li>
+                    <span class="head lf">区域选择：</span>
+                    <div id="city">
+                        <ul>
+                            <li class="lf">
+                                <select class="prov" onchange="window.location=this.value;">
+                                    <option {if !$ff}selected{/if} value="{$jumpurl}&ff=">全部</option>
+                                    <!--{loop $district_prov $v}-->
+                                    <option {if $ff==$v[id]}selected{/if} value="{$jumpurl}&ff={$v[id]}">{$v[name]}</option>
+                                    <!--{/loop}-->
+                                </select>
+                            </li>
+                            <!-- <li class="lf">
+                                <select class="prov"></select>
+                            </li>
+                            <li class="lf">
+                                <select class="city" ></select>
+                            </li> -->
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+            <!--{template loproject:layout/search_form}-->
+        </div>
+
+        <div class="clear"></div>
+
+        <div id="list">
+            <ul>
+                <!--{loop $list $v}-->
+                <li style="background-image:url({LO_PUB_IMG}market_06.jpg);">
+                    <div class="xmxx lf">
+                        <p class="ti"><a href="{$mainurl}&pluginop=tds&loid={$v[uid]}">{$v[username]}</a></p>
+                        <p>
+                            <span class="">地址：{$v[reside_address]}</span>
+                            <span class="xm">身份：<span class="on">{$v[user_type]}</span></span>
+                        </p>
+                        <p >
+                            <span class="ly">擅长领域：<i class="on">{$v[field4]}</i></span>
+                        </p>
+                    </div>
+                    <div class="rt" >
+                        <div class="details">
+                            <p class="money">￥<span>{$v[amount]}</span></p>
+                            <p>近3个月成交{$v[total]}笔</p>
+                            <i class="icon"></i>
+                        </div>
+                        <p class="xbz"><a href="{$mainurl}&pluginop=talent&c=comeon&loid={$v[uid]}">邀请竞标</a></p>
+                    </div>
+                </li>
+                <!--{/loop}-->
+            </ul>
+            {$multipage}
+        </div>
+    </div>
+    <div class="rt" id="right">
+        <!--{template loproject:layout/right_column}-->
+    </div>
+    <div class="clear"></div>
+    <div id="fy">
+    </div>
+</section>
+<script>
+    // $("#city").citySelect({prov:"安徽", city:"合肥"});
+</script>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

@@ -1,0 +1,28 @@
+        <div class="zl">
+            <p>总项目数量：<span class="on">{$pros[sum]}</span></p>
+            <p>今日新增项目：<span class="on">{$pros[sum_today]}</span></p>
+        </div>
+        <a href="{$extra[url]}"><span class="fb">{$extra[name]}</span></a>
+        <p class="newest">新成交项目</p>
+        <ul id="r_list">
+            <!--{if $newProTrade}-->
+            <!--{loop $newProTrade $v}-->
+            <li>
+                <p class="lf"><!--{avatar($v[uid],'small')}--></p>
+                <div class="rt">
+                    <p>
+                        <a href="home.php?mod=space&uid={$v[uid]}"><span class="name">{$v[username]}</span></a>
+                        <span>&nbsp;&nbsp;&nbsp;项目领域:<i class="on">{$v[name]}</i></span>
+                        <span class="rt">{$v[pub_time]}</span>
+                    </p>
+                    <p>
+                        <a href="{$mainurl}&pluginop=pds&loid={$v[tid]}">{$v[task_title]}</a>
+                        <span class="on">{$v[task_cash]}元 </span>
+                    </p>
+                </div>  
+            </li>
+            <!--{/loop}-->
+            <!--{else}-->
+            <li>{$lang['no_resource']}</li>
+            <!--{/if}-->
+        </ul>

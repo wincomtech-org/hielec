@@ -1,0 +1,37 @@
+
+<!--{template loproject:layout/admin_header}-->
+
+<form name="commonform" method="post" autocomplete="off" action="admin.php?action=article&operation=list" id="commonform">
+    <input name="formhash" value="{FORMHASH}" type="hidden">
+    <table class="tb tb2 " style="min-width:900px;*width:900px;">
+        <tbody>
+            <tr><th colspan="15" class="partition">{$lang[thead]}列表页</th></tr>
+            <tr class="header">
+                <!--{loop $tab['th'] $th}-->
+                <th>{$th}</th>
+                <!--{/loop}-->
+            </tr>
+            <!--{if $list}-->
+            <!--{loop $list $v}-->
+            <tr class="hover">
+                <!-- <td class="td25"><input class="checkbox" name="ids[]" value="2" type="checkbox"></td> -->
+                <!--{loop $tab['td'] $td}-->
+                <td><!--{if $v[$td]}-->{$v[$td]}<!--{else}-->{$lang[no_resource]}<!--{/if}--></td>
+                <!--{/loop}-->
+                <!--{if $tab['operator']}-->
+                <td>
+                    <!--{loop $tab['operator'] $o}-->
+                    <a href="{$o[0]}{$v[$lokey]}">{$o[1]}</a>
+                    <!--{/loop}-->
+                </td>
+                <!--{/if}-->
+            </tr>
+            <!--{/loop}-->
+            <!--{else}-->
+            <tr><td>{$lang[no_resource]}</td></tr>
+            <!--{/if}-->
+        </tbody>
+    </table>
+</form>
+
+{$multipage}

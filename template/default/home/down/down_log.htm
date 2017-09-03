@@ -1,0 +1,40 @@
+
+<!--{template common/header}-->
+<div class="person_home">
+    <!-- 个人中心左侧导航 -->
+    <!--{template home/home_left}-->
+    <div class="person_homer rt">
+        <!--{template home/home_righton}-->
+        <div class="phr_content">
+            <!-- <div class="phr_bordermess">写点什么……</div> -->
+            <div class="phr_MyReward">
+                <ul class=" phr_tab">
+                    <li  class="phr_active">下载记录</li>
+                </ul>
+                <div class="phr_tab_content">
+                    <div class="phr_dc" style="display:block;">
+                        <div class="phr_download_records">                         
+                            <ul class="phr_downRecords">
+                                <!--{if $list}-->
+                                <!--{loop $list $nav}-->
+                                <li>
+                                    <p>我下载了<a href="plugin.php?id=lodown:down&pluginop=page&loid={$nav[gid]}">{$nav[name]}</a>，所用积分<span class="jifen">{$nav[cos]}</span></p>
+                                    <span class="date">{date($nav[addtime])}</span>
+                                </li>
+                                <!--{/loop}-->
+                                <!--{else}-->
+                                <li>暂无信息</li>
+                                <!--{/if}-->
+                            </ul>
+                        </div>
+                        {$multipage}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {$multipage}
+    </div>
+</div>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

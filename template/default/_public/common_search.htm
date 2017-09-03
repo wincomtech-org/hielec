@@ -1,0 +1,119 @@
+
+<!--{template _public/header}-->
+
+<!--{template _public/nav_main}-->
+<style type="text/css">
+.download_l{
+    width: 100%;
+}
+.Partial_FL_cl tbody td:hover{background-color: orange;}
+</style>
+<div class="download">
+    <!--{template _public/search_style_1}-->
+    <div class="download_l lf">
+        <div class="Partial_file_list">
+            <h1>搜索列表</h1>
+            <div class="Partial_file_list_content">
+                <div class="Partial_FL_cl" >
+                    {$multipage}
+                    <table cellspacing="0" cellpadding="0" border="0">
+                    <thead>
+                        <tr>
+                            <!--{loop $tab['th'] $v}-->
+                            <th >{$v}</th>
+                            <!--{/loop}-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--{if $arrSearch}-->
+                            <!--{loop $arrSearch $v}-->
+                            <tr>
+                                <!--{loop $tab['td'] $td}-->
+                                <td >{if $v[$td]}{$v[$td]}{else}缺省……{/if}</td>
+                                <!--{/loop}-->
+                                <td >
+                                    <!--{loop $tab['operator'] $o}-->
+                                    <a href="{$o[0]}{$v[$lokey]}">{$o[1]}</a>
+                                    <!--{/loop}-->
+                                </td>
+                            </tr>
+                            <!--{/loop}-->
+                        <!--{else}-->
+                            <tr><td>{$lang['no_resource']}</td></tr>
+                        <!--{/if}-->
+                    </tbody>
+                    </table>
+                    {$multipage}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="download_r rt">
+        <div class="adv">广告图1</div>
+        <div class="datas">广告图2</div>
+        <div class="hot_down">
+            <h3>相关推荐</h3>
+            <ul>
+                {loop $arrTuijian $v}
+                <li><a href="{LO_CURURL}&pluginop=page&loid={$v[id]}">{eval echo cutstr($v['name'],30,'');}</a></li>
+                {/loop}
+            </ul>
+        </div>
+        <div class="new_up">
+            <h3>最新发布</h3>
+            <ul>
+                {loop $arrNews $v}
+                <li><a href="{LO_CURURL}&pluginop=page&loid={$v[id]}">{eval echo cutstr($v['name'],30,'');}</a></li>
+                {/loop}
+            </ul>
+        </div>
+    </div> -->
+</div>
+<script type="text/javascript" src="{LO_PUB_JS}tagcanvas.min.js"></script>
+<script type="text/javascript">
+    /*$('#collect_res').click(function() {
+        var loid = $('#is_loid').attr('loid'),
+            price = $('#is_price').html(),
+            vars = $('#is_downs').html();
+        // alert(price);
+        $.post('{LO_CURURL}', {pluginop:'ajax',sign:'col',loid:loid,price:price,vars:vars}, function(data) {
+            // data 是返回的数据
+            if (data.status=='success') {
+                alert(data.msg)
+            } else {
+                alert(data.msg)
+            }
+        },"json");
+    });
+
+    function download(loid,price,downs,pdfhref) {
+        $.post('{LO_CURURL}', {pluginop:'ajax',sign:'down',loid:loid,price:price,vars:downs,href:pdfhref}, function(data) {
+            if (data.status=='success') {
+                alert(data.msg)
+            } else if (data.status=='charge') {
+                alert(data.msg)
+                // $(ht).html('<div>提醒界面：'+data.msg+'</div>');
+                var openUrl = '{LO_URL}home.php?mod=spacecp&ac=credit&op=buy';//弹出窗口的url
+                var name = '充值界面';
+                var iWidth = 800; //弹出窗口的宽度;
+                var iHeight  = 600; //弹出窗口的高度;
+                var iTop = (window.screen.availHeight-30-iHeight)/2; //获得窗口的垂直位置;
+                var iLeft = (window.screen.availWidth-10-iWidth)/2; //获得窗口的水平位置;
+                var features = 'height='+iHeight+',width='+iWidth+',top='+iTop+',left='+iLeft;
+                if (confirm('前往充值？')) {
+                    window.open(openUrl,name,features);
+                }
+            } else if (data.status=='href') {
+                window.location.href=data.sign;
+            } else {
+                alert(data.msg)
+            }
+            console.log(data)
+            // console.log(data.msg)
+        },"json");
+    }*/
+</script>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

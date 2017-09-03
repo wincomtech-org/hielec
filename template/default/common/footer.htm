@@ -1,0 +1,162 @@
+
+<!--{if empty($topic) || ($topic[usefooter])}-->
+    <style type="text/css">
+    /*通用底部样式*/
+    .footer{min-width: 1200px; overflow: hidden; background:#EEE; padding:8px 0; color:#2e2d2d; }
+    .footer p{margin:0 auto; text-align:center; }
+    .footer p span{font-size:15px; line-height:30px; }
+    .footer_erwei{padding:8px 0; }
+    .footer p.footer_erwei span{display: inline-block; vertical-align: top; height:63px; line-height: 63px; font-size:13px; color:#3a3939; }
+    <!--{if $_G['basescript'] == 'forum'}-->.footer{width:100%;min-width: 0px;}<!--{/if}-->
+    </style>
+    <!-- 通用底部 -->
+    <div class="footer clear">
+        <p class="footer_erwei">
+            <span><img src="{LO_PUB_IMG}erweima.png" alt="二维码" width="63" height="63"></span>
+            <span style="margin:0 10px;">扫描论坛二维码</span>
+            <span>关注论坛内容</span>
+        </p>
+        <p>
+            <span>公司地址：安徽省合肥市政务区绿地蓝海大厦B座605室</span>
+            <span style="margin-left:60px;">联系电话：0571-7983657</span>
+            <br>
+            <span>备案号：<!--{if $_G['setting']['icp']}--><a href="http://www.miibeian.gov.cn/" target="_blank"></a>{$_G['setting']['icp']}<!--{/if}--></span>
+            <span style="margin:0 22px;"><a href="{$_G['setting']['siteurl']}" target="_blank"></a>{$_G['setting']['bbname']}</span>
+            <span><a href="{$_G['setting']['siteurl']}" target="_blank"></a>{$_G['setting']['sitename']}版本号{$_G['setting']['version']} &copy;2017-2027 版权所有</span>
+        </p>
+        <p>
+            <!--{if $_G['setting']['statcode']}--><span class="pipe">| $_G['setting']['statcode']</span><!--{/if}-->
+        </p>
+        <!--{eval updatesession();}-->
+        <!--{if $_G['uid'] && $_G['group']['allowinvisible']}-->
+            <script type="text/javascript">
+            var invisiblestatus = '<!--{if $_G['session']['invisible']}-->{lang login_invisible_mode}<!--{else}-->{lang login_normal_mode}<!--{/if}-->';
+            var loginstatusobj = $('loginstatusid');
+            if(loginstatusobj != undefined && loginstatusobj != null) loginstatusobj.innerHTML = invisiblestatus;
+            </script>
+        <!--{/if}-->
+        <!-- 底部导航 D:\WWW\_SVN\hielec\template\default\search\footer.htm -->
+    </div>
+<!--{/if}-->
+<!--{if $_G['basescript'] == 'forum'}-->
+<!-- 或者放文件 subtemplate common/footer_forum -->
+    </div><!-- 右栏END id="right" -->
+    <script type="text/javascript">
+        // 条件是 $_G['basescript']=='forum' && ($mod && $mod!='index')，这里不做判断，因为 forum_right 是特有的
+        if(jq("#forum_right").length>0) {
+            // alert('对象存在');
+            if(jq("#forum_right").hasClass("forum_right")){
+                // alert("包含class forum_right");
+                // alert(jq(".forum_right"));
+                var fourmright = jq(".forum_right").width();
+                var h=jq(window).height();
+                jq("#hh").width(fourmright+182);
+                jq(".fr_h").width(fourmright);
+                jq("#left").height(h-50);
+                jq(window).resize(function(){
+                    var fourmright=jq(".forum_right").width();
+                    var h=jq(window).height();
+                    jq("#hh").width(fourmright+182);
+                    jq(".fr_h").width(fourmright);
+                    jq("#left").height(h-50);
+                });
+            }
+        }
+        // 左侧菜单伸缩
+        function ExChgClsName(Obj,NameA,NameB){
+            var Obj=document.getElementById(Obj)?document.getElementById(Obj):Obj;
+            Obj.className=Obj.className==NameA?NameB:NameA;
+        }
+        function showMenuleft(iNo){
+            ExChgClsName("Menu_"+iNo,"MenuBox","MenuBox2");
+        }
+    </script>
+<!--{/if}-->
+</div><!-- 主体END id="wp" -->
+
+
+
+<!--{if !$_G['setting']['bbclosed'] && !$_G['member']['freeze'] && !$_G['member']['groupexpiry']}-->
+    <!--{if $_G[uid] && !isset($_G['cookie']['checkpm'])}-->
+    <script type="text/javascript" src="home.php?mod=spacecp&ac=pm&op=checknewpm&rand=$_G[timestamp]"></script>
+    <!--{/if}-->
+
+    <!--{if $_G[uid] && helper_access::check_module('follow') && !isset($_G['cookie']['checkfollow'])}-->
+    <script type="text/javascript" src="home.php?mod=spacecp&ac=follow&op=checkfeed&rand={$_G[timestamp]}"></script>
+    <!--{/if}-->
+
+    <!--{if !isset($_G['cookie']['sendmail'])}-->
+    <script type="text/javascript" src="home.php?mod=misc&ac=sendmail&rand={$_G[timestamp]}"></script>
+    <!--{/if}-->
+
+    <!--{if $_G[uid] && $_G['member']['allowadmincp'] == 1 && !isset($_G['cookie']['checkpatch'])}-->
+    <script type="text/javascript" src="misc.php?mod=patch&action=checkpatch&rand={$_G[timestamp]}"></script>
+    <!--{/if}-->
+<!--{/if}-->
+
+<!--{if $_GET['diy'] == 'yes'}-->
+    <!--{if check_diy_perm($topic) && (empty($do) || $do != 'index')}-->
+        <script type="text/javascript" src="{$_G[setting][jspath]}common_diy.js?{VERHASH}"></script>
+        <script type="text/javascript" src="{$_G[setting][jspath]}portal_diy{if !check_diy_perm($topic, 'layout')}_data{/if}.js?{VERHASH}"></script>
+    <!--{/if}-->
+    <!--{if $space['self'] && CURMODULE == 'space' && $do == 'index'}-->
+        <script type="text/javascript" src="{$_G[setting][jspath]}common_diy.js?{VERHASH}"></script>
+        <script type="text/javascript" src="{$_G[setting][jspath]}space_diy.js?{VERHASH}"></script> 
+    <!--{/if}-->
+<!--{/if}-->
+
+<!--{if $_G['uid'] && $_G['member']['allowadmincp'] == 1 && $_G['setting']['showpatchnotice'] == 1}-->
+    <script type="text/javascript">patchNotice();</script>
+<!--{/if}-->
+<!--{if $_G['uid'] && $_G['member']['allowadmincp'] == 1 && empty($_G['cookie']['pluginnotice'])}-->
+    <div class="focus plugin" id="plugin_notice"></div>
+    <script type="text/javascript">pluginNotice();</script>
+<!--{/if}-->
+
+<!--{if !$_G['setting']['bbclosed'] && !$_G['member']['freeze'] && !$_G['member']['groupexpiry'] && $_G['setting']['disableipnotice'] != 1 && $_G['uid'] && !empty($_G['cookie']['lip'])}-->
+    <div class="focus plugin" id="ip_notice"></div>
+    <script type="text/javascript">ipNotice();</script>
+<!--{/if}-->
+
+<!--{if $_G['member']['newprompt'] && (empty($_G['cookie']['promptstate_'.$_G[uid]]) || $_G['cookie']['promptstate_'.$_G[uid]] != $_G['member']['newprompt']) && $_GET['do'] != 'notice'}-->
+    <script type="text/javascript">noticeTitle();</script>
+<!--{/if}-->
+
+<!--{if ($_G[member][newpm] || $_G[member][newprompt]) && empty($_G['cookie']['ignore_notice'])}-->
+    <script type="text/javascript" src="{$_G[setting][jspath]}html5notification.js?{VERHASH}"></script>
+    <script type="text/javascript">
+    var h5n = new Html5notification();
+    if(h5n.issupport()) {
+        <!--{if $_G[member][newpm] && $_GET[do] != 'pm'}-->
+        h5n.shownotification('pm', '$_G[siteurl]home.php?mod=space&do=pm', '<!--{avatar($_G[uid],small,true)}-->', '{lang newpm_subject}', '{lang newpm_notice_info}');
+        <!--{/if}-->
+        <!--{if $_G[member][newprompt] && $_GET[do] != 'notice'}-->
+                <!--{loop $_G['member']['category_num'] $key $val}-->
+                    <!--{eval $noticetitle = lang('template', 'notice_'.$key);}-->
+                    h5n.shownotification('notice_$key', '$_G[siteurl]home.php?mod=space&do=notice&view=$key', '<!--{avatar($_G[uid],small,true)}-->', '$noticetitle ($val)', '{lang newnotice_notice_info}');
+                <!--{/loop}-->
+        <!--{/if}-->
+    }
+    </script>
+<!--{/if}-->
+
+<!--{eval userappprompt();}-->
+
+
+<!--{if isset($_G['makehtml'])}-->
+    <script type="text/javascript" src="{$_G[setting][jspath]}html2dynamic.js?{VERHASH}"></script>
+    <script type="text/javascript">
+        var html_lostmodify = {TIMESTAMP};
+        htmlGetUserStatus();
+        <!--{if isset($_G['htmlcheckupdate'])}-->
+        htmlCheckUpdate();
+        <!--{/if}-->
+    </script>
+<!--{/if}-->
+
+<!--{template _public/admin_common_foot}-->
+
+<!--{eval output();}-->
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+.head_cont{
+	background: #eff2f5;
+	padding:25px 0;
+	border-bottom: 2px solid #e4e9ee;
+}
+.login_nav{
+	width:1000px;
+	margin:0 auto;
+	height:40px;
+}
+.login_nav .nav{
+	width:690px;
+	text-align:right;
+	line-height:40px;
+}
+.login_nav .nav a{
+	padding-left:35px;
+	font-size:16px;
+	color:#506072;
+}
+a:hover{
+	text-decoration: underline;
+}
+.main_bg{
+	background: #fff;
+	padding:45px 0 20px;
+}
+.main_cont{
+	width:1000px;
+	height:500px;
+	overflow: hidden;
+	margin:0 auto;
+	background: url(../image/login_shu.jpg) no-repeat 520px 20px;
+}
+.login_ad{
+	width:460px;
+	height:255px;
+	margin-top:35px;
+	border:1px solid #dcdcdc;
+}
+.form_login{
+	width:405px;
+	overflow: hidden;
+}
+.form_login a{
+	color:#336699;
+	font-size:13px;
+}
+.username,.password{	
+	height:40px;
+	border-bottom: 1px solid #3498db;
+	color:#546374;
+	margin-top:25px;
+}
+.username{
+	background: url(../image/login_user.jpg) no-repeat left center;
+}
+.password{	
+	background: url(../image/login_passw.jpg) no-repeat left center;
+}
+.username input,.password input{
+	width:87%;
+	height:40px;
+	font-size:16px;
+	line-height: 40px;
+	padding:0 2.5%;
+	margin-left:30px;
+}
+.captcha{
+	width:90%;
+	margin-top:25px;
+	height:37px;
+}
+.captcha input{
+	border:1px solid #e5e5e5;
+	width:130px;
+	height:35px;
+	float:left;
+	font-size:14px;
+	line-height: 33px;
+	letter-spacing: 5px;
+	text-transform: uppercase;
+}
+.captcha img{
+	width:100px;
+	height:35px;
+	border:1px solid #e5e5e5;
+	margin-left:20px;
+}
+.captcha a{
+	font-size:14px;
+	line-height: 37px;
+}
+.remember{
+	height:17px;
+	margin:20px 0;
+	color:#5d6d7e;
+	font-size:13px;
+	clear:both;
+	overflow: hidden;
+}
+.remember label{
+	height:20px;
+}
+.remember input{
+	width:13px;
+	height:13px;
+}
+.remember label,.remember input{
+	vertical-align: bottom;
+}
+.login_submit{
+	margin:20px 0;
+}
+.login_submit input{
+	background: #3399db;
+	border-radius:2px;
+	color:#fff;
+	cursor:pointer;
+	font-size:18px;
+	line-height:48px;
+	font-weight: bold;
+	width:405px;
+	height:48px;
+	letter-spacing: 3px;
+}
+.bott_bg{	
+	background: url(../image/login_bg.jpg) repeat-x #eff2f5;
+	height:60px;
+	padding-bottom: 20px;
+	vertical-align: top;
+}

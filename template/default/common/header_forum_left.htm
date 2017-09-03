@@ -1,0 +1,29 @@
+
+    <!-- 论坛左侧导航 -->
+    <div id="left">
+        <div class="forum_left">
+            <div class="t1"><img src="{LO_PUB_IMG}forumnav.jpg" /></div>
+            <div class="TreeWrap">
+                <!--{loop $catlistall $key $cat}--><!-- 所有类型 (group:分类 @分区) -->
+                <div class="MenuBox" id="Menu_$key">
+                    <div class="titBox">
+                        <h3 class="Fst"><a href="javascript:showMenuleft($key);" title="{$cat[name]}">{$cat[name]}</a></h3>
+                    </div>
+                    <div class="txtBox">
+                        <ul>
+                            <!--{loop $cat[child] $child}--><!-- 所有类型 (forum:普通论坛 @板块) -->
+                            <!--{if $cat['forumcolumns']}-->
+                            <!--{else}-->
+                            <li>
+                                <a href="{$child[url]}" {if $child[redirect]}target="_blank"{/if} {$child[cur]} title="{$child[name]}">{$child[name]}</a>
+                                <!--{if $child[todayposts] && !$child['redirect']}--><em class="xw0 xi1" title="{lang forum_todayposts}"> ({$child[todayposts]})</em><!--{/if}-->
+                            </li>
+                            <!--{/if}-->
+                            <!--{/loop}-->
+                        </ul>
+                    </div>
+                </div>
+                <!--{/loop}-->
+            </div>
+        </div>
+    </div>

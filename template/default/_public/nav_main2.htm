@@ -1,0 +1,30 @@
+<div class="header">
+    <div class="h_cont">
+        欢迎访问<!--{$navtitle}-->
+        <!--{if $_G['uid']}-->
+        <a href="member.php?mod=logging&action=logout&formhash={FORMHASH}">{lang logout}</a>
+        <strong class="vwmy{if $_G['setting']['connect']['allow'] && $_G[member][conisbind]} qq{/if}"><a href="home.php?mod=space&uid=$_G[uid]" target="_blank" title="{lang visit_my_space}">{$_G[member][username]}</a></strong>
+        <!--{else}-->
+        <a href="member.php?mod=register">注册</a>
+        <a href="member.php?mod=logging&action=login" class="a_bor">登录</a>
+        <!--{/if}-->
+    </div>
+</div>
+
+<div class="container">
+    <!--{$adv_customs[1]}-->
+    <div class="logo_ad">
+        <!--{if !isset($_G['setting']['navlogos'][$mnid])}--><a class="logo_home_a" href="{if $_G['setting']['domain']['app']['default']}http://{$_G['setting']['domain']['app']['default']}/{else}./{/if}" title="$_G['setting']['bbname']">{$_G['style']['boardlogo']}</a><!--{else}-->$_G['setting']['navlogos'][$mnid]<!--{/if}-->
+        <!--{$adv_customs[2]}-->
+        <!--{$adv_customs[3]}-->
+    </div>
+    <!-- 首页主导航 -->
+    <div class="menu">
+        <ul>
+            <!--{loop $_G['setting']['navs'] $nav}-->
+                <!--{if $nav['available'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1))}-->
+                <li class="nav {if $mnid==$nav[navid]}current{/if}" {$nav[nav]}></li>
+                <!--{/if}-->
+            <!--{/loop}-->
+        </ul>
+    </div>

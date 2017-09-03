@@ -1,0 +1,221 @@
+
+<!--{template loproject:layout/header}-->
+<link rel="stylesheet" href="{LO_PUB_CSS}talents.css">
+<link rel="stylesheet" href="{LO_TPL}css/project.css">
+
+<div class="biddingIn">
+    <!--左侧 内容-->
+    <div class="biddingIn_l lf">
+        <ul class="biddingIn_l_t">
+            <li {if $task_status1}class="active"{/if}>发布项目<br/>{$page['pub_time']}</li>
+            <li {if $task_status2}class="active"{/if}>选择承包方<br/>{if $page[bid_time]}{$page[bid_time]}{else}未选定……{/if}</li>
+            <li {if $task_status3}class="active"{/if}>项目工作中<br/>{if $page[work_time]}{$page[work_time]}{else}未开始……{/if}</li>
+            <li {if $task_status4}class="active"{/if}>项目完成<br/>{if $page[finish_time]}{$page[finish_time]}{else}待定……{/if}</li>
+        </ul>
+        <div class="biddingIn_l_tit">
+            <div class="biddingIn_l_title">
+                <h3 class="lf">{$page[task_title]}</h3>
+                <div class="rt">
+                    <span class="blue">{$arrProTaskStatus[$page[task_status]]}</span>
+                    <a {if $is_col}id="is_col"{/if} href="{$jumpurl}&c=col&loid={$page[tid]}">收藏</a>
+                </div>
+            </div>
+            <ul class="biddingIn_l_tit_con lf">
+                <li>发布时间：{$page['pub_time']}</li>
+                <li>开始日期：{$page['start_time']}</li>
+                <li>截止日期：{$page['end_time']}</li>
+                <li>项目周期：{$page['cycle_time']}</li>
+                <li>已有竞标：{$bids[nums]}人</li>
+                <li>项目标签：{$page['task_tags']}</li>
+                <li>预算金额：{$page['budget']}</li>
+                <li>现居地址：{$sUserInfo['reside_address']}</li>
+            </ul>
+        </div>
+
+
+
+        <!--{if $task_status1}-->
+        <div class="bidding_state">
+            <div class="bidding_state_l lf">目前处于<span class="blue">{$arrProTaskStatus[$page[task_status]]}</span>状态</div>
+            <div class="bidding_state_m lf">离竞标结束<br/><span class="gray">{$page['bid_endtime']}</span></div>
+            <div class="bidding_state_r rt">
+            <!--{if $sUserInfo[uid]==$gUid}-->
+                <a href="home.php?mod=project&do=publish&ac=page&tid={$page[tid]}">我要修改</a>
+            <!--{else}-->
+                <!--{if $gBidUid}-->
+                <span>竞标结束</span>
+                <!--{else}-->
+                <a {if $is_bid}id="is_bid"{/if} href="{$jumpurl}&c=bid&loid={$page[tid]}">我要竞标</a>
+                <!--{/if}-->
+            <!--{/if}-->
+            </div>
+        </div>
+        <!--{elseif $task_status2}-->
+        <div class="woring_state">
+            <div class="woring_state_l lf">目前处于<span class="blue">计划中</span>状态</div>
+            <div class="woring_state_m rf">
+            <!--{if $page[is_trust]}-->
+                <span>已托管</span>
+            <!--{else}-->
+                <!--{if $sUserInfo[uid]==$gUid}-->
+                    <a class="blue" href="{$jumpurl}&c=clr&loid={$page[tid]}">去托管</a>
+                <!--{else}-->
+                    <span>尚未托管</span>
+                <!--{/if}-->
+            <!--{/if}-->
+            </div>
+        </div>
+        <!--{elseif $task_status3}-->
+        <div class="bidding_state">
+            <div class="bidding_state_l lf">目前处于<span class="blue">{$arrProTaskStatus[$page[task_status]]}</span>状态</div>
+            <div class="bidding_state_m lf">截止倒计时<br/><span class="gray">{$page[end_times]}</span></div>
+            <div class="bidding_state_r rt">本项目已托管赏金<br/><span class="">{$page[task_cash]}</span>元</div>
+        </div>
+        <!--{elseif $task_status4}-->
+        <div class="worked_state">
+            <h3 class="blue">项目已完成</h3>
+        </div>
+        <!--{/if}-->
+
+
+
+        <!--{if !$task_status5}-->
+            <!--{if $gBid || $page[uid]==$gUid}-->
+            <div class="bidding_fabao_Phone">
+                <h3>发包方联系方式</h3>
+                <p>{$page[contact]}</p>
+            </div>
+            <!--{else}-->
+            <div class="bidding_fabao_phone">发包方联系方式，投标后可查看</div>
+            <!--{/if}-->
+        <!--{/if}-->
+        <div class="project_depict">
+            <h3>项目内容描述</h3>
+            <div>{$page[task_desc]}</div>
+            <!--{if $page[task_file]}--><p>附件：<a style="color:rgba(14,111,186,.9);" href="{$page[attach_url]}">{$page[task_file]}</a></p><!--{/if}-->
+            <p>人气：<span>{$page[view_num]}</span></p>
+        </div>
+
+        <!--竞标者 -->
+        <div class="bidding_copmlete">
+            <h3>竞标者</h3>
+            <!--{if $biders}-->
+            <!--{loop $biders $ber}-->
+            <div class="bidding_complete_content {if $ber[bid_status]==1}active{/if}">
+                <ul class="bidding_CC_l lf">
+                    <li><!--{avatar($ber[uid],small)}--></li>
+                    <li><a class="blue" href="home.php?mod=space&do=index&uid={$ber[uid]}">{$ber[username]}</a></li>
+                    <li><img src="{LO_PUB_IMG}phone.png" class="phone"></li>
+                    <li><span class="gray">{$ber[reside_address]}</span></li>
+                    <!--{if $gUid==$page[uid] && $task_status6 && !$gBidUid}-->
+                    <li><a id="select_bid" href="{$jumpurl}&c=bingo&bid={$ber[bid_id]}&loid={$ber[tid]}">设为中标</a></li>
+                    <!--{/if}-->
+                </ul>
+                <ul class="bidding_CC_r rt">
+                    <!--{if $ber[ext_status]==1}-->
+                    <li><a id="select_bid" href="{$jumpurl}&c=bidcheck&bid={$ber[bid_id]}&loid={$ber[tid]}">确认完成</a></li>
+                    <!--{elseif $ber[ext_status]==5}-->
+                    <li><span id="select_bid">对方已放弃</span></li>
+                    <!--{/if}-->
+                    <li class="blue">{$arrProUserType[$ber[user_type]]} </li>
+                    <li class="gray"> | 竞标日期：<!--{eval echo dgmdate($ber[bid_time],'d')}--></li>
+                    <!-- <li>|<a href="{$jumpurl}&c=col&loid={$ber[tid]}" class="gray">收藏人？</a></li> -->
+                </ul>
+            </div>
+            <!--{/loop}-->
+            <!--{else}-->
+            <div class="bidding_complete_content">{$lang[no_resource]}</div>
+            <!--{/if}-->
+        </div>
+
+        <!---给发包方留言-->
+        <div class="bidding_fabao_liuyan">
+            <form action="{$jumpurl}&c=leave_m" method="post">
+                <h3>给发包方评价</h3>
+                <div class="bidding_fabao_liuyan_content">
+                    <textarea id="leave_content" name="content" placeholder="请发表内容" autofocus maxlength="300"></textarea>
+                    <span>内容不能为空或者大于300字</span>
+                </div>
+                <div class="bidding_fabao_liuyan_btn">
+                    <input type="hidden" name="formhash" value="{FORMHASH}">
+                    <input type="hidden" name="loid" value="{$page[tid]}">
+                    <input type="hidden" name="gWinBid" value="{$gWinBid}">
+                    <!--{if $gUserAuth[verify5]}-->
+                    <input type="submit" value="发表" class="rt">
+                    <!--{else}-->
+                    <!--{if $sUserInfo[uid]!=$gUid}-->
+                    <p class="rt">
+                        手机认证后方可发表哦 
+                        <a href="home.php?mod=spacecp&ac=profile&op=verify&vid=5">>>去认证</a>
+                    </p>
+                    <!--{/if}-->
+                    <!--{/if}-->
+                </div>
+            </form>
+        </div>
+        <div class="bidding_fabaoLiuyan">
+            <h4>全部评价</h4>
+            <!--{if $leave_msgs}-->
+            <ul class="bidding_fabaoLiuyan_content">
+                <!--{loop $leave_msgs $msg}-->
+                <li>
+                    <a class="lf" href="home.php?mod=space&do=index&uid={$msg[uid]}"><!--{avatar($msg[uid],small)}--></a>
+                    <div>
+                        <p><a class="gray" href="home.php?mod=space&do=index&uid={$msg[uid]}">{$msg[uname]}</a></p>
+                        <div>{$msg[content]}</div>
+                        <p class="gray"><!--{eval echo dgmdate($msg[addtime])}--></p>
+                    </div>
+                </li>
+                <!--{/loop}-->
+            </ul>
+            <!--{else}-->
+            <p>{$lang[no_resource]}</p>
+            <!--{/if}-->
+        </div>
+    </div>
+
+    <div class="biddingIn_r">
+        <div class="bidding_r_fabao">
+            <h3>发包方</h3>
+            <div class="bidding_r_fabao_content">
+                <ul>
+                    <li class="bidding_r_fabao_contentT">
+                        <!--{avatar($sUserInfo[uid],small)}-->
+                        <div class="lf">
+                            <p><a href="home.php?mod=space&do=index&uid={$sUserInfo[uid]}">{$sUserInfo[username]}</a></p>
+                            <p class="gray">上次登录时间：<span>{$sUserInfo[lastvisit]}</span></p>
+                            <p><a href="{$jumpurl}&c=black&loid={$page[tid]}" class="gray" {if $is_black}id="is_black"{/if}>[举报]</a></p>
+                        </div>
+                    </li>
+                    <li><span class="gray">会员身份：</span>{$arrProUserType[$sUserInfo[user_type]]}</li>
+                    <li><span class="gray">注册时间：</span>{$sUserInfo[regdate]}</li>
+                    <li><span class="gray">发包数量：</span>{$sUserInfo[publishnum]}个</li>
+                    <li><span class="gray">中标次数：</span>{$sUserInfo[bidbingonum]}次</li>
+                    <li class="liuyan"><a href="{$jumpurl}&loid={$loid}#leave_content">给发包方留言</a></li>
+                </ul>
+            </div>
+        </div>
+        <!---竞争最激烈的项目-->
+        <div class="bidding_complete_project">
+            <h3 class="blue">竞争最激烈的项目<span class="gray">TOP10</span></h3>
+            <!--{if $task_hots}-->
+            <ul class="bidding_complete_project_content">
+                <!--{loop $task_hots $k $hot}-->
+                <li>
+                    <p class="lf">
+                        <span class="cicleBlue"><!--{eval echo $k+1}--></span>
+                        <a href="{$jumpurl}&loid={$hot[tid]}"><!--{eval echo cutstr($hot[task_title],15,'…')}--></a>
+                    </p>
+                    <p class="gray rt">已有<span class="blue">{$hot[bid_num]}</span>位竞标</p>
+                </li>
+                <!--{/loop}-->
+            </ul>
+            <!--{else}-->
+            <p>{$lang[no_resource]}</p>
+            <!--{/if}-->
+        </div>
+    </div>
+</div>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

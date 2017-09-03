@@ -1,0 +1,44 @@
+<div class="phr_dc">
+    <div class="myPubItem" style="padding-left:0px;">
+        <div class="new_project" style="margin-top:0">
+            <table border="1" cellspacing="0" >
+                <thead>
+                    <tr>
+                        <td>项目名称</td>
+                        <td>项目类型</td>
+                        <td>应用领域</td>
+                        <td>项目预算</td>
+                        <td>托管资金</td>
+                        <td>发布日期</td>
+                        <td>是否托管</td>
+                        <td>项目状态</td>
+                        <td>操作</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {loop $list $v}
+                    <tr>
+                        <td><a href="plugin.php?pl=project&pluginop=pds&loid={$v[tid]}">{$v[task_title]}</a></td>
+                        <td>{$arrProTaskType[$v[task_type]]}</td>
+                        <td>{if $v[name]}{$v[name]}{else}其他{/if}</td>
+                        <td>{$v[budget]}</td>
+                        <td>{$v[task_cash]}</td>
+                        <td>{$v[pub_time]}</td>
+                        <td>{$arrProTrustStatus[$v[is_trust]]}</td>
+                        <td>{$arrProTaskStatus[$v[task_status]]}</td>
+                        <td>
+                            <!--{if in_array($v[task_status],array(0,1,2,21,22,3,31,4,42))}-->
+                            <a href="{$jumpurl}&ac=page&tid={$v[tid]}">修改</a>
+                            <button type="button" data-table="project_task" class="mpi_remove" onclick="delRow(this,'{$v[tid]}')">删除</button>
+                            <!--{else}-->
+                            <button type="button" data-table="project_task" class="mpi_remove" onclick="delRow(this,'{$v[tid]}')">删除</button>
+                            <!--{/if}-->
+                        </td>
+                    </tr>
+                    {/loop}
+                </tbody>
+            </table>
+            {$multipage}
+        </div>
+    </div>
+</div>

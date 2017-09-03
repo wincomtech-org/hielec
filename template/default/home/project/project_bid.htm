@@ -1,0 +1,63 @@
+
+<!--{template common/header}-->
+<div class="person_home">
+    <!-- 个人中心左侧导航 -->
+    <!--{template home/home_left}-->
+    <div class="person_homer rt">
+        <!--{template home/home_righton}-->
+        <div class="phr_content">
+            <div class="phr_bordermess"></div>
+            <div class="phr_MyReward">
+                <ul class=" phr_tab">
+                    <li class="phr_active">我竞标的项目</li>
+                </ul>
+                <div class="phr_tab_content">
+                    <div class="phr_dc">
+                        <div class="myPubItem">
+                            <div class="new_project" style="margin-top:0">
+                                <table border="1" cellspacing="0" ce>
+                                    <thead>
+                                        <tr>
+                                            <td>项目编号</td>
+                                            <td>项目名称</td>
+                                            <td>应用领域</td>
+                                            <td>项目状态</td>
+                                            <td>竞标状态</td>
+                                            <td>工作状态</td>
+                                            <td>竞标日期</td>
+                                            <td>操作</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {loop $list $v}
+                                        <tr>
+                                            <td>{$v[tid]}</td>
+                                            <td><a style="color:rgb(13,114,186)" href="plugin.php?pl=project&pluginop=pds&loid={$v[tid]}">{$v[task_title]}</a></td>
+                                            <td>{$v[name]}</td>
+                                            <td>{$arrProTaskStatus[$v[task_status]]}</td>
+                                            <td>{$arrBidStatus[$v[bid_status]]}</td>
+                                            <td>{$arrBidExtStatus[$v[ext_status]]}</td>
+                                            <td>{$v[bid_time]}</td>
+                                            <td>
+                                                <!--{if !$v[ext_status] && $v[bid_status]==1 && $v[task_status]==41}-->
+                                                <a href="{$jumpurl}&ac=done&loid={$v[bid_id]}"><span class="mpi_complete">完成工作</span></a>
+                                                <a href="{$jumpurl}&ac=over&loid={$v[bid_id]}"><span class="mpi_edit">放弃</span></a>
+                                                <!--{/if}-->
+                                            </td>
+                                        </tr>
+                                        {/loop}
+                                    </tbody>
+                                </table>
+                                {$multipage}
+                            </div>
+                            <h2><a href="plugin.php?pl=project">我要竞标</a></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>下载页面</title>
+    <link rel="stylesheet" href="{LO_PUB_CSS}talents.css">
+</head>
+<body>
+    <div class="download">
+        <div class="nav_find">
+            当前位置：首页/{$path_info['type']}/{$path_info['name']}/{$file_info['pdf']}
+        </div>
+        <div class="download_l lf">
+            <div class="download_lt">
+                <p><a href="{LO_CURURL}&zid={$id}" class="lf">{$file_info['pdf']}</a><a class="rt gray">推荐星级:<span></span></a></p>
+                <ul>
+                    <li class="d_icon1"><span class="gray">{date($file_info['addtime'])}</span></li>
+                    <li class="d_icon2">大小:<span class="gray">{$file_info['size']}k</span></li>
+                    <li class="d_icon3">上传用户：<span class="gray">{$author_info['username']}</span></li>
+                    <li class="d_icon4">浏览次数：<span class="gray">{$file_info['views']}</span></li>
+                    <li class="d_icon5">下载积分：<span class="gray">{$file_info['price']}</span></li>
+                    <li class="d_icon6">下载次数：<span class="gray">{$file_info['buys']}</span></li>
+                    <li class="d_icon7">标签：<span class="gray">{$file_info['tags']}</span></li>
+                </ul>
+            </div>
+            <div class="downShare">
+                <div class="downShare_l lf">
+                    <span>分享到</span>
+                    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+                    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"24"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+                </div>
+
+                <a href="{$collection}" class="rt" name="collection">收藏该资料</a>
+            </div>
+           <div class="data_description">
+               <h1>资料说明</h1>
+               <p>{$file_info['brief']}</p>
+           </div>
+            <div class="Partial_file_list">
+                <h1>部分文件列表</h1>
+                <div class="Partial_file_list_content">
+                    <div class="Partial_FL_cl" >
+                        <table cellspacing="0" cellpadding="0" border="0">
+                            <thead>
+                                <tr>
+                                    <th width="60%">文件名</th>
+                                    <th width="40%">大小</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td width="60%">iphone充电线</td>
+                                    <td width="40%">78k</td>
+                                </tr>
+                                <tr>
+                                    <td width="60%">iphone充电线</td>
+                                    <td width="40%">78k</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="Partial_FL_cr">
+                        <a href="" class="file_down lf">进入下载页面<br/>Enter Download</a>
+                        <a href="" class="sell_points lf">买卖下载积分<br/>Selling download points</a>
+                    </div>
+                </div>
+            </div>
+            <div class="recommended_download">
+                <h1>推荐下载</h1>
+                <ul class="recommended_down_title lf">
+                   <li><a href="">标题11111111111111111111111</a></li> 
+                   <li><a href="">标题11111111111111111111111</a></li> 
+                   <li><a href="">标题11111111111111111111111</a></li> 
+                   <li><a href="">标题11111111111111111111111</a></li> 
+                   <li><a href="">标题11111111111111111111111</a></li> 
+                   <li><a href="">标题11111111111111111111111</a></li> 
+                </ul>
+                <div class="recommended_down_img rt">
+                    <a href=""></a>
+                </div>
+            </div>
+            <div class="user_share">
+                <h1>该用户分享的资料</h1>
+                <ul>
+                    {loop $share_infoes $share}
+                    <li><a href="{LO_CURURL}" class="gray">{$share['pdf']}</a></li>
+                    {/loop}
+                </ul>
+            </div>
+            <div class="datas_download_user">
+                <h1>该资料最近下载的用户</h1>
+                <ul>
+                    {loop $users $user}
+                    <li class="recent_user1"><span><img src="{$user['pic']}"></span><a href="">{$user['username']}</a></li>
+                    {/loop}
+                </ul>
+            </div>
+            <div class="all_comments">
+                <h1>全部评论<span class="gray">共有<b class="red">{$nums}</b>条评论</span><a href="" class="gray rt">more+</a></h1>
+                {loop $comments_info $comment}
+                <ul class="all_comments_content">
+                   <li  class="all_comments_content_l lf"><img src=""></li>
+                   <li  class="all_comments_content_m lf">
+                       <h5><a href="" class="blue">{$comment['username']}</a></h5>
+                       <p>{$comment['comment']}</p>
+                   </li>
+                   <li  class="all_comments_content_r rt gray">{date($comment['date'])}</li>
+                </ul>
+                {/loop}
+            </div>
+        </div>
+        <div class="download_r rt">
+            <div class="adv"></div>
+            <div class="datas"></div>
+            <div class="hot_down">
+                <h3>热门下载</h3>
+                <ul>
+                    <li><a href="">电子电路大全（合订本）-1093</a></li>
+                    <li><a href="">电子电路大全（合订本）-1093</a></li>
+                    <li><a href="">电子电路大全（合订本）-1093</a></li>
+                    <li><a href="">电子电路大全（合订本）-1093</a></li>
+                    <li><a href="">电子电路大全（合订本）-1093</a></li>
+                    <li><a href="">电子电路大全（合订本）-1093</a></li>
+                    <li><a href="">电子电路大全（合订本）-1093</a></li>
+                    <li><a href="">电子电路大全（合订本）-1093</a></li>
+                    <li><a href="">电子电路大全（合订本）-1093</a></li>
+                    <li><a href="">电子电路大全（合订本）-1093</a></li>
+
+                </ul>
+            </div>
+            <div class="new_up">
+                <h3>最新上传</h3>
+                <ul>
+                    <li><a href="">电子电路大全（合订本）-1093</a></li>
+                    <li><a href="">电子电路大全（合订本）-1093</a></li>
+                    <li><a href="">电子电路大全（合订本）-1093</a></li>
+                    <li><a href="">电子电路大全（合订本）-1093</a></li>
+                    <li><a href="">电子电路大全（合订本）-1093</a></li>
+                    <li><a href="">电子电路大全（合订本）-1093</a></li>
+                    <li><a href="">电子电路大全（合订本）-1093</a></li>
+                </ul>
+            </div>
+            <div class="hot_tab">
+                <h3>热门标签</h3>
+                <div class="b_10_3">
+
+                    <canvas width="300" height="300" id="myCanvas"></canvas>
+
+                    <div id="tags">
+                        <a href="#">标签1</a>
+                        <a href="#">标签2</a><a href="#">标签3</a><a href="#">标签4</a><a href="#">标签5</a>
+                        <a href="#">标签15</a><a href="#">标签18</a><a href="#">标签17</a><a href="#">标签6</a><a href="#">互联网</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="{LO_PUB_JS}jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="{LO_PUB_JS}tagcanvas.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            try {
+                var i, et = document.getElementById('tags').childNodes;
+                for (i in et) {
+                    et[i].nodeName == 'A' && et[i].addEventListener('click', function (e) {
+                        e.preventDefault();
+                    });
+                }
+
+                TagCanvas.Start('myCanvas', 'tags', {
+                    textColour: 'rgba(13,111,186)',
+                    outlineColour: '#fff',
+                    reverse: true,
+                    depth: 0.8,
+                    dragControl: true,
+                    decel:0.95,
+                    maxSpeed: 0.05,
+                    initial: [-0.2, 0]
+                });
+            } catch (e) {
+                // something went wrong, hide the canvas container
+                //document.getElementById('myCanvasContainer').style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+
+<!--{template common/header}-->
+
+<link href="{LO_PUB_ORG}shearphoto/ShearPhoto.css" rel="stylesheet" type="text/css" media="all">
+<!--CSS文件，有点废话-->
+<script type="text/javascript" src="{LO_PUB_ORG}shearphoto/ShearPhoto.js"></script>
+<!--ShearPhoto的核心文件 截取，拖拽，HTML5切图，数据交互等都是由这个文件处理，全部由明哥先生汗水交织而成-->
+<!--<script type="text/javascript" src="../shearphoto_common/js/webcam_ShearPhoto.js"></script>-->
+<!--在线拍照那个FLASH的接口，非技术性文件-->
+<!--<script type="text/javascript" src="../shearphoto_common/js/alloyimage.js"></script>-->
+<!--图片特效处理,他只负责特效，其他功能与这个文件完全无关，这个JS从腾讯AI文件  如你不要特效的话，顺带删除这个文件，在hendle.js设置关闭特效-->
+<script type="text/javascript" src="{LO_PUB_ORG}shearphoto/handle.js"></script>
+<!--设置和处理对象方法的JS文件，要修改设置，请进入这个文件-->
+
+<div class="person_home">
+    <!-- 个人中心左侧导航 -->
+    <!--{template home/home_left}-->
+    <div class="person_homer rt">
+        <!--{template home/home_righton}-->
+        <div class="phr_content">
+            <!-- <div class="phr_bordermess">写点什么……</div> -->
+            <div class="phr_MyReward">
+                <ul class=" phr_tab">
+                    <li  class="phr_active">我的自拍</li>
+                </ul>
+                <div class="phr_tab_content">
+                    <div class="phr_dc" style="display:block;">
+                        <div id="shearphoto_main" class="my_self">
+                            <!--primary范围开始-->
+                            <div class="primary">
+                                <!--main范围开始-->
+                                <div id="main">
+                                    <div class="point">
+                                    </div>
+                                    <!--选择加载图片方式开始-->
+                                    <div id="SelectBox">
+                                        <form id="ShearPhotoForm" enctype="multipart/form-data" method="post" target="POSTiframe">
+                                            <input name="shearphoto" type="hidden" value="我要传参数" autocomplete="off">
+                                            <!--示例传参数到服务端，后端文件UPLOAD.php用$_POST['shearphoto']接收,注意：HTML5切图时，这个参数是不会传的-->
+                                            <a href="javascript:;" id="selectImage">
+                                                <input type="file" name="UpFile" autocomplete="off" />
+                                            </a>
+                                        </form>
+
+                                    </div>
+                                    <!--选择加载图片方式结束-->
+                                    <div id="relat">
+                                        <div id="black">
+                                        </div>
+                                        <div id="movebox">
+                                            <div id="smallbox">
+                                                <img src="../shearphoto_common/images/default.gif" class="MoveImg" />
+                                                <!--截框上的小图-->
+                                            </div>
+                                            <!--动态边框开始-->
+                                            <i id="borderTop"></i>
+
+                                            <i id="borderLeft"></i>
+
+                                            <i id="borderRight"></i>
+
+                                            <i id="borderBottom"></i>
+                                            <!--动态边框结束-->
+                                            <i id="BottomRight"></i>
+                                            <i id="TopRight"></i>
+                                            <i id="Bottomleft"></i>
+                                            <i id="Topleft"></i>
+                                            <i id="Topmiddle"></i>
+                                            <i id="leftmiddle"></i>
+                                            <i id="Rightmiddle"></i>
+                                            <i id="Bottommiddle"></i>
+                                        </div>
+                                        <img src="../shearphoto_common/images/default.gif" class="BigImg" />
+                                        <!--MAIN上的大图-->
+                                    </div>
+                                </div>
+                                <!--main范围结束-->
+                                <div style="clear: both"></div>
+                                <!--工具条开始-->
+                                <div id="Shearbar">
+                                    <a id="LeftRotate" href="javascript:;">
+                                        <em>
+                                        </em> 向左旋转
+                                    </a>
+                                    <em class="hint L">
+                                    </em>
+                                    <div class="ZoomDist" id="ZoomDist">
+                                        <div id="Zoomcentre">
+                                        </div>
+                                        <div id="ZoomBar">
+                                        </div>
+                        <span class="progress">
+                        </span>
+                                    </div>
+                                    <em class="hint R">
+                                    </em>
+                                    <a id="RightRotate" href="javascript:;">
+                                        向右旋转
+                                        <em>
+                                        </em>
+                                    </a>
+                                    <form action="">
+                                    <p style="" class="zpInfo">自我介绍：<input type="text" name='memo' id="zp_info" placeholder="说两句话介绍一下自己吧(5~25字以内)" onkeydown="maxlength(this.form.memo,this.form.remLen,25)" onkeyup="maxlength(this.form.memo,this.form.remLen,25)" />
+                                        <b class="zp_info1">
+                                            共可输入25字，还剩<input class="editbox1" readOnly maxLength="3" size="3" value="25" name="remLen">
+                                        </b>
+                                        <b class="zp_info">&nbsp;*** 请自我介绍一下吧！***</b>
+                                        <b class="zp_info2">&nbsp;*** 你的字数小于5，请补充一下吧 ***</b>
+                                    </p>
+                                    <p class="Psava">
+                                        <a id="againIMG" href="javascript:;">重新选择</a>
+                                        <a id="saveShear" href="javascript:;">保存</a>
+                                    </p>
+                                    </form>
+                                </div>
+                                <!--工具条结束-->
+                            </div>
+                            <!--primary范围结束-->
+                            <div style="clear: both"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

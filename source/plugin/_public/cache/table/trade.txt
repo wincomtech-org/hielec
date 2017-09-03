@@ -1,0 +1,1 @@
+a:1:{i:0;a:4:{s:4:"name";s:13:"小米5s 64GB";s:12:"market_price";s:4:"0.00";s:10:"shop_price";s:7:"1999.00";s:6:"weight";s:1:"0";}}

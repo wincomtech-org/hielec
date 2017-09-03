@@ -1,0 +1,161 @@
+
+<!--{template _public/header}-->
+<!--{template _public/nav_main}-->
+<link rel="stylesheet" href="{LO_PUB_CSS}talents.css">
+
+<div class="download">
+    <div class="nav_find">
+        {$ur_here}
+    </div>
+    <div class="download_l lf">
+        <div class="download_lt">
+            <p style="background:#FFFFFF;"><a href="" class="lf">{$page[name]}</a></p>
+            <ul>
+                <li class="d_icon1">添加时间：<span class="gray">{date($page[addtime])}</span></li>
+                <!-- <li class="d_icon2">大小:<span class="gray">196k</span></li> -->
+                <li class="d_icon4">浏览次数：<span class="gray">{$page[views]}</span></li>
+                <li class="d_icon7">标签：<span class="gray">{$page[tags]}</span></li>
+            </ul>
+        </div>
+        <div class="downShare">
+            <div class="downShare_l lf">
+                <span>分享到</span>
+                <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+                <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"24"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+            </div>
+            <a href="{LO_CURURL}&pluginop=join&loid={$page[id]}" class="rt" style="margin-left: 40px;">申请参加活动</a>
+            <a href="javascript:;" onclick="col({$page[id]})" class="rt">收藏该活动</a>
+        </div>
+        <div class="Partial_file_list">
+            <h1>活动主题图</h1>
+            <img src="{IMG_TPL}{$page[pic]}" />
+            <h1>活动详情</h1>
+            <div class="Partial_file_list_content">
+                {$page[details]}
+            </div>
+        </div>
+        <div class="recommended_download">
+            <h1>更多活动</h1>
+            <ul class="recommended_down_title lf">
+                <!--{loop $arrMore $nav}-->
+                <li><a href="{LO_CURURL}&pluginop=page&loid={$nav[id]}">{$nav[name]}</a></li>
+                <!--{/loop}-->
+            </ul>
+            <div class="recommended_down_img rt">
+                <a href="">{$adv_customs[1]}</a>
+            </div>
+        </div>
+        <!-- <div class="datas_download_user">
+            <h1>参与人员</h1>
+            <ul>
+                <li class="recent_user1"><span><img src="{LO_PUB_IMG}user2.png"></span><a href="">用户名</a></li>
+                <li class="recent_user1"><span><img src="{LO_PUB_IMG}user2.png"></span><a href="">用户名</a></li>
+                <li class="recent_user1"><span><img src="{LO_PUB_IMG}user2.png"></span><a href="">用户名</a></li>
+                <li class="recent_user1"><span><img src="{LO_PUB_IMG}user2.png"></span><a href="">用户名</a></li>
+                <li class="recent_user1"><span><img src="{LO_PUB_IMG}user2.png"></span><a href="">用户名</a></li>
+                <li class="recent_user1"><span><img src="{LO_PUB_IMG}user2.png"></span><a href="">用户名</a></li>
+                <li class="recent_user1"><span><img src="{LO_PUB_IMG}user2.png"></span><a href="">用户名</a></li>
+                <li class="recent_user1"><span><img src="{LO_PUB_IMG}user2.png"></span><a href="">用户名</a></li>
+            </ul>
+        </div> -->
+        <!-- <div class="all_comments">
+            <h1>全部评论<span class="gray">共有<b class="red">7</b>条评论</span><a href="" class="gray rt">more+</a></h1>
+            <ul class="all_comments_content">
+                <li  class="all_comments_content_l lf"><img src="../image/user2.png"></li>
+                <li  class="all_comments_content_m lf">
+                    <h5><a href="" class="blue">用户名</a></h5>
+                    <p>评价内容</p>
+                </li>
+                <li  class="all_comments_content_r rt gray">2017-03-08<br/>00:49:19</li>
+            </ul>
+            <ul class="all_comments_content">
+                <li  class="all_comments_content_l lf"><img src="../image/user2.png"></li>
+                <li  class="all_comments_content_m lf">
+                    <h5><a href="" class="blue">用户名</a></h5>
+                    <p>评价内容</p>
+                </li>
+                <li  class="all_comments_content_r rt gray">2017-03-08<br/>00:49:19</li>
+            </ul>
+            <ul class="all_comments_content">
+                <li  class="all_comments_content_l lf"><img src="../image/user2.png"></li>
+                <li  class="all_comments_content_m lf">
+                    <h5><a href="" class="blue">用户名</a></h5>
+                    <p>评价内容</p>
+                </li>
+                <li  class="all_comments_content_r rt gray">2017-03-08<br/>00:49:19</li>
+            </ul>
+            <ul class="all_comments_content">
+                <li  class="all_comments_content_l lf"><img src="../image/user2.png"></li>
+                <li  class="all_comments_content_m lf">
+                    <h5><a href="" class="blue">用户名</a></h5>
+                    <p>评价内容</p>
+                </li>
+                <li  class="all_comments_content_r rt gray">2017-03-08<br/>00:49:19</li>
+            </ul>
+        </div> -->
+    </div>
+    <div class="download_r rt">
+        <div class="adv">{$adv_customs[2]}</div>
+        <div class="datas">{$adv_customs[3]}</div>
+        <div class="hot_down">
+            <h3>热门活动</h3>
+            <ul>
+                <!--{loop $arrHotDown $nav}-->
+                <li><a href="{LO_CURURL}&pluginop=page&loid={$nav[id]}">{$nav[name]}</a></li>
+                <!--{/loop}-->
+            </ul>
+        </div>
+        <div class="new_up">
+            <h3>最新活动</h3>
+            <ul>
+                <!--{loop $arrTuijian $nav}-->
+                <li><a href="{LO_CURURL}&pluginop=page&loid={$nav[id]}">{$nav[name]}</a></li>
+                <!--{/loop}-->
+            </ul>
+        </div>
+        <!-- <div class="hot_tab">
+            <h3>站长推荐</h3>
+            <div class="b_10_3">
+                <canvas width="300" height="300" id="myCanvas"></canvas>
+                <div id="tags">
+                    <a href="#">标签1</a>
+                    <a href="#">标签2</a><a href="#">标签3</a><a href="#">标签4</a><a href="#">标签5</a>
+                    <a href="#">标签15</a><a href="#">标签18</a><a href="#">标签17</a><a href="#">标签6</a><a href="#">互联网</a>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+<script type="text/javascript" src="{LO_PUB_JS}jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="{LO_PUB_JS}tagcanvas.min.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        try {
+            var i, et = document.getElementById('tags').childNodes;
+            for (i in et) {
+                et[i].nodeName == 'A' && et[i].addEventListener('click', function (e) {
+                    e.preventDefault();
+                });
+            }
+            TagCanvas.Start('myCanvas', 'tags', {
+                textColour: 'rgba(13,111,186)',
+                outlineColour: '#fff',
+                reverse: true,
+                depth: 0.8,
+                dragControl: true,
+                decel:0.95,
+                maxSpeed: 0.05,
+                initial: [-0.2, 0]
+            });
+        } catch (e) {
+            // something went wrong, hide the canvas container
+            //document.getElementById('myCanvasContainer').style.display = 'none';
+        }
+    };
+    function col(did){
+        $.post('{LO_CURURL}', {pluginop:'ajax',sign:'col',did:did},function(data) {alert(data); },"html");
+    }
+</script>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

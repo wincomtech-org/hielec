@@ -1,0 +1,211 @@
+
+<!--{template _public/header}-->
+
+<!--{template _public/nav_main}-->
+
+<link rel="stylesheet" href="{LO_PUB_CSS}talents.css">
+<div class="download">
+    <div class="nav_find">
+    {$ur_here}
+    </div>
+    <div class="download_l lf">
+        <div class="download_lt">
+            <p><a style="cursor:pointer;" loid="{$page[id]}" id="is_loid" class="lf">{$page[name]}</a><!-- <a class="rt gray">推荐星级:<span></span></a> --></p>
+            <ul>
+                <li class="d_icon1"><span class="gray">{$page[addtime]}</span></li>
+                <li class="d_icon2">附件大小:<span class="gray">$page[pdfsize]</span></li>
+                <li class="d_icon3">上传用户：<span class="gray">{$page[username]}</span></li>
+                <li class="d_icon4">收藏次数：<span class="gray">{$page[cols]}</span></li>
+                <li class="d_icon5">下载积分：<span class="gray" id="is_price">{$page[price]}</span></li>
+                <li class="d_icon6">下载次数：<span class="gray" id="is_downs">{$page[downs]}</span></li>
+                <li class="d_icon7">标签：<span class="gray"><!--{if $page[tags]}-->{$page[tags]}<!--{else}-->{$lang['no_resource']}<!--{/if}--></span></li>
+            </ul>
+        </div>
+        <div class="downShare">
+            <div class="downShare_l lf">
+            <!--{template _public/bdshare}-->
+            </div>
+            <!-- <a href="javascript:void(0)" onclick="on(this)" class="rt">收藏该资料</a> -->
+            <a href="javascript:void(0)" id="collect_res" class="rt">收藏该资料</a>
+        </div>
+        <div class="data_description">
+            <h1>资料说明</h1>
+            <div>
+            <!--{if $page[details]}-->{$page[details]}<!--{else}-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$lang['no_resource']}<!--{/if}-->
+            </div>
+        </div>
+        <div class="Partial_file_list">
+            <h1>文件列表</h1>
+            <div class="Partial_file_list_content">
+                <div class="Partial_FL_cl" >
+                    <table cellspacing="0" cellpadding="0" border="0">
+                    <thead>
+                        <tr>
+                        <th width="60%">文件名</th>
+                        <th width="40%">大小</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--{if $page[pdfsize]!='0B'}-->
+                        <tr>
+                            <td width="60%">{$page[attach]}</td>
+                            <td width="40%">{$page['pdfsize']}</td>
+                        </tr>
+                        <!--{else}-->
+                        <tr>
+                            <td>{$lang['no_resource']}</td>
+                            <td></td>
+                        </tr>
+                        <!--{/if}-->
+                    </tbody>
+                    </table>
+                </div>
+                <!--{if $page[pdfsize]!='0B'}-->
+                <div class="Partial_FL_cr">
+                    <a href="javascript:javascript:download({$loid},{$page[price]},{$page[downs]},'{$page[attachhref]}');" class="file_down lf"><!-- 触发 download()事件 -->下载入口一<br/>Download First</a>
+                    <a href="javascript:javascript:download({$loid},{$page[price]},{$page[downs]},'{$page[attachhref]}');" class="sell_points lf">下载入口二<br>Download Second<!-- 买卖下载积分<br/>Selling download points --></a>
+                </div>
+                <!--{/if}-->
+            </div>
+        </div>
+        <div class="recommended_download">
+            <h1>推荐下载</h1>
+            <ul class="recommended_down_title lf">
+                <!--{if $arrTuijian}-->
+                    <!--{loop $arrTuijian $v}-->
+                    <li>
+                        <a href="{LO_CURURL}&pluginop=page&loid={$v[id]}">
+                            <!--{eval echo cutstr($v['name'],30,'');}-->
+                        </a>
+                    </li>
+                    <!--{/loop}-->
+                <!--{else}-->
+                    <li><span>{$lang['no_resource']}</span></li>
+                <!--{/if}-->
+            </ul>
+            <div class="recommended_down_img rt">
+                {$adv_customs[1]}
+            </div>
+        </div>
+        <!-- <div class="user_share">
+        <h1>该用户分享的资料</h1>
+        <ul>
+        <li><a href="" class="gray">123456456.pdf</a></li>
+        <li><a href="" class="gray">123456456.pdf</a></li>
+        <li><a href="" class="gray">123456456.pdf</a></li>
+        <li><a href="" class="gray">123456456.pdf</a></li>
+        </ul>
+        </div> -->
+        <div class="datas_download_user">
+            <h1>该资料最近下载的用户</h1>
+            <ul>
+                <!--{if $arrRecent}-->
+                    <!--{loop $arrRecent $v}-->
+                    <li class="recent_user1"><span><!--{avatar($v[uid],small)}--></span>
+                    <a href="home.php?mod=space&uid=$v[uid]"><!--{eval echo cutstr($v['username'],30,'');}--></a></li>
+                    <!--{/loop}-->
+                <!--{else}-->                    
+                    <li class="recent_user1">{$lang['no_resource']}</li>                        
+                <!--{/if}-->
+            </ul>
+        </div>
+    </div>
+
+    <div class="download_r rt">
+        <div class="f_down_rt">
+            <p class="f_shangchuan"><a href="home.php?mod=down&do=up">上传资源</a></p>
+            <p class="f_duihuan"><a href="home.php?mod=down&do=cols">积分兑换</a></p>
+                    
+        </div>
+        <div class="datas">{$adv_customs[3]}</div>
+        <div class="hot_down">
+            <h3>热门下载</h3>
+            <ul>
+                <!--{loop $arrHotDown $v}-->
+                    <li><a href="{LO_CURURL}&pluginop=page&loid={$v[id]}">
+                    <!--{eval echo cutstr($v['name'],30,'');}--></a></li>
+                <!--{/loop}-->
+            </ul>
+        </div>
+        <div class="new_up">
+            <h3>最新上传</h3>
+            <ul>
+                <!--{loop $arrNewUp $v}-->
+                <li><a href="{LO_CURURL}&pluginop=page&loid={$v[id]}"><!--{eval echo cutstr($v['name'],30,'');}--></a></li>
+                <!--{/loop}-->
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="{LO_PUB_JS}tagcanvas.min.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        try {
+            var i, et = document.getElementById('tags').childNodes;
+            for (i in et) {
+                et[i].nodeName == 'A' && et[i].addEventListener('click', function (e) {
+                    e.preventDefault();
+                });
+            }
+            TagCanvas.Start('myCanvas', 'tags', {
+                textColour: 'rgba(13,111,186)',
+                outlineColour: '#fff',
+                reverse: true,
+                depth: 0.8,
+                dragControl: true,
+                decel:0.95,
+                maxSpeed: 0.05,
+                initial: [-0.2, 0]
+            });
+        } catch (e) {
+            document.getElementById('hot_tab').style.display = 'none';
+        }
+    };
+
+    $('#collect_res').click(function() {
+        var loid = $('#is_loid').attr('loid'),
+            price = $('#is_price').html(),
+            vars = $('#is_downs').html();
+        // alert(price);
+        $.post('{LO_CURURL}', {pluginop:'ajax',sign:'col',loid:loid,price:price,vars:vars}, 
+        function(data) {
+            // data 是返回的数据
+            if (data.status=='success') {
+                alert(data.msg)
+            } else {
+                alert(data.msg)
+            }
+        },"json");
+    });
+
+    function download(loid,price,downs,pdfhref) {
+        $.post('{LO_CURURL}', {pluginop:'ajax',sign:'down',loid:loid,price:price,vars:downs,href:pdfhref}, function(data) {
+            if (data.status=='success') {
+                alert(data.msg)
+            } else if (data.status=='charge') {
+                alert(data.msg)
+                // $(ht).html('<div>提醒界面：'+data.msg+'</div>');
+                var openUrl = '{LO_URL}home.php?mod=spacecp&ac=credit&op=buy';//弹出窗口的url
+                var name = '充值界面';
+                var iWidth = 800; //弹出窗口的宽度;
+                var iHeight  = 600; //弹出窗口的高度;
+                var iTop = (window.screen.availHeight-30-iHeight)/2; //获得窗口的垂直位置;
+                var iLeft = (window.screen.availWidth-10-iWidth)/2; //获得窗口的水平位置;
+                var features = 'height='+iHeight+',width='+iWidth+',top='+iTop+',left='+iLeft;
+                if (confirm('前往充值？')) {
+                    window.open(openUrl,name,features);
+                }
+            } else if (data.status=='href') {
+                window.location.href=data.sign;
+            } else {
+                alert(data.msg)
+            }
+            console.log(data)
+            // console.log(data.msg)
+        },"json");
+    }
+</script>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

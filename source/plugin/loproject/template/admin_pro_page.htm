@@ -1,0 +1,116 @@
+
+<!--{template loproject:layout/admin_header}-->
+<!--eval include template(THISPLUG.':layout/admin_header');-->
+<h3>{if $loid}修改{else}新增{/if}项目</h3>
+
+<form id="demoform" class="lothar_form" action="{$form[action]}" method="post" enctype="multipart/form-data">
+    <div class="lothar_div">
+        <label>
+            <p class="lo_form_p">名称: </p>
+            <input class="lo_input" type="text" name="task_title" value="{$page[task_title]}" required placeholder="请输入项目标题" {$Validform[task_title]} />
+        </label>
+    </div>
+
+    <div class="lothar_div">
+        <p class="lo_form_p"><span class="red">*</span>任务类型：</p>
+        <!--{loop $arrProTaskType $k $v}-->
+        <label>
+            <input {if $page[task_type]==$k}checked{elseif !$page[task_type]&&$k==1}checked{/if} type="radio" name="task_type" value="{$k}" /> {$v}
+        </label>
+        <!--{/loop}-->
+        <!-- <a href="{$form[url_category]}&a=1">编辑分类</a> -->
+    </div>
+    <div class="clear"></div>
+
+    <div class="lothar_div">
+        <p class="lo_form_p"><span class="red">*</span>应用领域：</p>
+        <select name="indus_id">
+            <!--{loop $industrys $item}-->
+            <option {if $item[cid]==$page[indus_id]}selected{/if} value="{$item[cid]}">{$item[name]}</option>
+            <!--{/loop}-->
+        </select>
+        <a href="{$form[url_category]}&a=2">编辑分类</a>
+    </div>
+    <div class="clear"></div>
+
+    <div class="lothar_div">
+        <label>
+            <p class="lo_form_p">标签: </p>
+            <input class="lo_input" type="text" name="task_tags" value="{$page[task_tags]}" placeholder="如有多个用英文分号（；）隔开">
+        </label>
+    </div>
+
+    <div class="lothar_div">
+        <label>
+            <p class="lo_form_p">详情: </p>
+            <textarea cols="80" rows="8" name="task_desc" placehoolder="请输入内容">{$page[task_desc]}</textarea>
+        </label>
+    </div>
+
+    <div class="lothar_div">
+        <p class="lo_form_p"><span class="red">*</span>明确预算：</p>
+        <input class="lo_input" type="number" name="budget" value="{$page[budget]}" placeholder="数字型">
+    </div>
+
+    
+    <div class="lothar_div">
+        <p class="lo_form_p">任务赏金：</p>
+        <!--{if $page[is_trust]==1}-->
+        <span>{$page[task_cash]}</span>
+        <!--{else}-->
+        <input class="lo_input" type="number" name="task_cash" value="{$page[task_cash]}" placeholder="数字型，可不填">
+        <!--{/if}-->
+    </div>
+
+    <div class="lothar_div">
+        <p class="lo_form_p"><span class="red">*</span>开始时间：</p>
+        <input class="lo_input" type="text" name="start_time" value="{$page[start_time]}" id="start_time">
+    </div>
+    <div class="lothar_div">
+        <p class="lo_form_p"><span class="red">*</span>截止时间：</p>
+        <input class="lo_input" type="text" name="end_time" value="{$page[end_time]}" id="end_time">
+    </div>
+
+    <div class="lothar_div">
+        <p class="lo_form_p"><span class="red">*</span>发布区域：</p>
+        <select name="province">
+            <!--{loop $district_prov $item}-->
+            <option {if $item[id]==$page[province]}selected{/if} value="{$item[id]}">{$item[name]}</option>
+            <!--{/loop}-->
+        </select>
+    </div>
+    <div class="clear"></div>
+
+    <div class="lothar_div">
+        <p class="lo_form_p">联系方式：</p>
+        <textarea cols="80" name="contact" placehoolder="手机，邮箱，QQ等，多个请用英文';'隔开">{$page[contact]}</textarea>
+    </div>
+
+    <div class="lothar_div">
+        <p class="lo_form_p">上传附件：</p>
+        <input type="file" name="task_file">
+        <!--{if $page[task_file]}--><a href="{$page[attach_url]}">{$page[task_file]}</a><!--{/if}-->
+    </div>
+
+    <div class="lothar_div">
+        <p class="lo_form_p"><span class="red">*</span>任务状态：</p>
+        <span>{$arrProTaskStatus[$page[task_status]]}</span>
+        <!--loop $arrProTaskStatus $k $v-->
+        <!-- <label>
+            <input {if $page[task_status]==$k}checked{elseif !$page[task_status]&&$k==1}checked{/if} type="radio" name="task_status" value="{$k}" /> {$v}
+        </label> -->
+        <!--/loop-->
+        <!-- <a href="{$form[url_category]}&a=1">编辑分类</a> -->
+    </div>
+    <div class="clear"></div>
+
+    <div class="lothar_div">
+        <input type="hidden" name="formhash" value="{FORMHASH}" />
+        <input type="hidden" name="c" value="op">
+        <input type="hidden" name="{$lokey}" value="{$page[tid]}">
+        <input type="hidden" name="uid" value="{$page[uid]}">
+        <input type="hidden" name="username" value="{$page[username]}">
+        <input type="hidden" name="task_oldfile" value="{$page[task_file]}">
+        <button class="lo_common_submit" type="submit" name="publishsubmit" value="true"><strong>{$form[button]}</strong></button>
+    </div>
+</form>

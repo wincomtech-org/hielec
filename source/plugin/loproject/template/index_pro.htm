@@ -1,0 +1,160 @@
+
+<!--{template loproject:layout/header}-->
+<link rel="stylesheet" href="{LO_PUB_CSS}project.css">
+
+<section>
+    <div class="lf" id="left">
+        <div id="tjcx" class="f_down_l">
+            <ul id='tj' class="f_down_t">
+                <li class="have_m f_down_t1">
+                    <span class="head lf">应用领域：</span>
+                    <ul class="f_down_tc f_down_tc1">
+                        <div class="f_down_tc1h">
+                            <li class="lf"><a class="{if is_null($aa) || $aa==-1}on{/if}" href="{$jumpurl}&aa=-1">全部</a></li>
+                            <!--{loop $industrys $v}-->
+                            <li class="lf"><a class="{if $aa==$v[cid]}on{/if}" href="{$jumpurl}&aa={$v[cid]}">{$v[name]}</a></li>
+                            <!--{/loop}-->
+                        </div>
+                    </ul>
+                    <div class="luntan_more">更多<i class="fy_downjt"></i></div>
+                </li>
+                <li class="have_m f_down_t1">
+                    <span class="head lf">任务状态：</span>
+                    <ul class="f_down_tc f_down_tc1">
+                        <div class="f_down_tc1h">
+                            <li class="lf"><a class="{if is_null($bb) || $bb==-1}on{/if}" href="{$jumpurl}&bb=-1">全部</a></li>
+                            <!--{loop $arrProTaskStatus $k $v}-->
+                            <li class="lf"><a class="{if $bb===$k}on{/if}" href="{$jumpurl}&bb={$k}">{$v}</a></li>
+                            <!--{/loop}-->
+                        </div>
+                    </ul>
+                    <div class="luntan_more">更多<i class="fy_downjt"></i></div>
+                </li>
+                <li class="have_m f_down_t1">
+                    <span class="head lf">托管状态：</span>
+                    <ul class="f_down_tc f_down_tc1">
+                        <div class="f_down_tc1h">
+                            <li class="lf"><a class="{if is_null($cc) || $cc==-1}on{/if}" href="{$jumpurl}&cc=-1">全部</a></li>
+                            <!--{loop $arrProTrustStatus $k $v}-->
+                            <li class="lf"><a class="{if $cc===$k}on{/if}" href="{$jumpurl}&cc={$k}">{$v}</a></li>
+                            <!--{/loop}-->
+                        </div>
+                    </ul>
+                    <div class="luntan_more">更多<i class="fy_downjt"></i></div>
+                </li>
+                <li class="have_m f_down_t1">
+                    <span class="head lf">任务类型：</span>
+                    <ul class="f_down_tc f_down_tc1">
+                        <div class="f_down_tc1h">
+                            <li class="lf"><a class="{if !$dd}on{/if}" href="{$jumpurl}&dd=">全部</a></li>
+                            <!--{loop $arrProTaskType $k $v}-->
+                            <li class="lf"><a class="{if $dd==$k}on{/if}" href="{$jumpurl}&dd={$k}">{$v}</a></li>
+                            <!--{/loop}-->
+                        </div>
+                    </ul>
+                    <div class="luntan_more">更多<i class="fy_downjt"></i></div>
+                </li>
+                <li class="have_m f_down_t1">
+                    <span class="head lf">发布时间：</span>
+                    <ul class="f_down_tc f_down_tc1">
+                        <div class="f_down_tc1h">
+                            <li class="lf"><a class="{if !$ee}on{/if}" href="{$jumpurl}&ee=">全部</a></li>
+                            <!--{loop $arrPublishTime $k $v}-->
+                            <li class="lf"><a class="{if $ee==$k}on{/if}" href="{$jumpurl}&ee={$k}">{$v}</a></li>
+                            <!--{/loop}-->
+                        </div>
+                    </ul>
+                    <div class="luntan_more">更多<i class="fy_downjt"></i></div>
+                </li>
+                <li class="have_m f_down_t1">
+                    <span class="head lf">发布区域：</span>
+                    <ul class="f_down_tc f_down_tc1">
+                        <div class="f_down_tc1h">
+                            <li class="lf"><a class="{if !$ff}on{/if}" href="{$jumpurl}&ff=">全部</a></li>
+                            <!--{loop $district_prov $v}-->
+                            <li class="lf"><a class="{if $ff==$v[id]}on{/if}" href="{$jumpurl}&ff={$v[id]}">{$v[name]}</a></li>
+                            <!--{/loop}-->
+                        </div>
+                    </ul>
+                    <div class="luntan_more">更多<i class="fy_downjt"></i></div>
+                </li>
+                <li class="have_m f_down_t1">
+                    <span class="head lf">任务赏金：</span>
+                    <ul class="f_down_tc f_down_tc1">
+                        <div class="f_down_tc1h">
+                            <li class="lf"><a class="{if !$gg}on{/if}" href="{$jumpurl}&gg=">全部</a></li>
+                            <!--{loop $arrProTaskCash $k $v}-->
+                                <!--{if $k==1}-->
+                                <li class="lf"><a class="{if $gg==$k}on{/if}" href="{$jumpurl}&gg={$k}">{$v}元以内</a></li>
+                                <!--{elseif $k>1 && $k<=5}-->
+                                <li class="lf"><a class="{if $gg==$k}on{/if}" href="{$jumpurl}&gg={$k}">{$v}元</a></li>
+                                <!--{else}-->
+                                <li class="lf"><a class="{if $gg==$k}on{/if}" href="{$jumpurl}&gg={$k}">{$v}元以上</a></li>
+                                <!--{/if}-->
+                            <!--{/loop}-->
+                        </div>
+                    </ul>
+                    <div class="luntan_more">更多<i class="fy_downjt"></i></div>
+                </li>
+            </ul>
+            <!--{template loproject:layout/search_form}-->
+        </div>
+
+        <div class="clear"></div>
+
+        <div id="list">
+            <ul>
+                <!--{if $list}-->
+                <!--{loop $list $v}-->
+                <li>
+                    <div class="xmxx lf">
+                        <p>
+                            <!--{if $v[task_cash]==0.00 && $v[budget]}-->
+                            明确预算：<span class="price">{$v[budget]}</span>
+                            <!--{else}-->
+                            任务赏金：<span class="price">{$v[task_cash]}</span>
+                            <!--{/if}-->
+                            <span class="xm"><a style="color:#321;" href="{$mainurl}&pluginop=pds&loid={$v[tid]}"><b>{$v[task_title]}</b></a></span>
+                            <span class="zt">{$arrProTrustStatus[$v[is_trust]]}</span>
+                        </p>
+                        <p>
+                            <span class="ly">应用领域：{if $v[name]}{$v[name]}{else}未知{/if}</span>
+                            <span class="rm">发包方：{$v[username]}</span>
+                            <span class="rm">发包时间：{$v[pub_time]}</span>
+                        </p>
+                    </div>
+                    <div class="rt">
+                        {$v[bid_num]}<span class="num">人参与 | 招标</span>
+                        <span class="xbz">{$arrProTaskStatus[$v[task_status]]}</span>
+                    </div>
+                </li>
+                <!--{/loop}-->
+                <!--{else}-->
+                <li>{$lang['no_resource']}</li>
+                <!--{/if}-->
+            </ul>
+            {$multipage}
+        </div>
+    </div>
+    
+    <div class="rt" id="right">
+        <!--{template loproject:layout/right_column}-->
+    </div>
+
+    <div class="clear"></div>
+    <div id="fy"></div>
+</section>
+
+<script type="text/javascript">
+   $(document).delegate('.luntan_more','click',function(){
+            $(this).siblings().children().removeClass('f_down_tc1h');
+            $(this).html('收起<i class="fy_downjt1"></i>').addClass('luntan_shouqi').removeClass('luntan_more');
+        })
+        $(document).delegate('.luntan_shouqi','click',function(){
+            $(this).siblings('.f_down_tc').children().addClass('f_down_tc1h');
+            $(this).addClass('luntan_more').html('更多<i class="fy_downjt"></i>').removeClass('luntan_shouqi');
+        })
+</script>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

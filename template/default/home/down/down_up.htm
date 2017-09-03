@@ -1,0 +1,176 @@
+
+<!--{template common/header}-->
+
+<div class="person_home">
+    <!-- 个人中心左侧导航 -->
+    <!--{template home/home_left}-->
+
+    <div class="person_homer rt">
+        <!--{template home/home_righton}-->
+
+        <div class="phr_content">
+            <!-- <div class="phr_bordermess">写点什么……</div> -->
+            <div class="phr_MyReward">
+                <ul class=" phr_tab">
+                    <li  class="phr_active">资料上传</li>
+                    <li  >上传记录</li>
+                </ul>
+                <div class="phr_tab_content">
+                    <div class="phr_dc" {if $page}style="display:none;"{/if}>
+                        <form action="home.php?mod=down&do=up_post" method="post" enctype="multipart/form-data" class="data_upload" id="demoform">
+                            <ul>
+                                <li>
+                                    <p class="lf">名称：</p>
+                                    <div class="lf">
+                                        <input type="text" name="name" placeholder="请输入名称" class="Date_tags" {$Validform['name']} />
+                                        <span class="sb" style="display:none;"><b style="color:red">*</b>请填写</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p class="lf">标签：</p>
+                                    <div class="lf"><input type="text" name="tags" placeholder="请输入标签内容"  class="Date_tags" {$Validform['tags']}/></div>
+                                </li>
+                                <li>
+                                    <p class="lf">所需积分：</p>
+                                    <div class="lf"><input type="number" name="price" placeholder="请输入所需积分" class="Date_jifen" {$Validform['price']}/></div>
+                                </li>
+                                <li>
+                                    <p class="lf">资源属性:</p> 
+                                    <select name="resource_property">
+                                        <!--{loop $resource_properties $v}-->
+                                        <option  value="{$v[cid]}">{$v[name]}</option>
+                                        <!--{/loop}-->
+                                    </select>
+                                </li>
+                                <li>
+                                    <p class="lf">模块:</p> 
+                                    <select name="module">
+                                        <!--{loop $modules $v}-->
+                                        <option value="{$v[cid]}">{$v[name]}</option>
+                                        <!--{/loop}-->
+                                    </select>
+                                </li>
+                                <li>
+                                    <p class="lf">软件:</p> 
+                                    <select name="software">
+                                        <!--{loop $softwares $v}-->
+                                        <option value="{$v[cid]}">{$v[name]}</option>
+                                        <!--{/loop}-->
+                                    </select>
+                                </li>
+                                <li>
+                                    <p class="lf">编程语言:</p>
+                                    <select name="program_language">
+                                        <!--{loop $program_languages $v}-->
+                                        <option value="{$v[cid]}">{$v[name]}</option>
+                                        <!--{/loop}-->
+                                    </select>
+                                </li>
+                                <li>
+                                    <p class="lf">热点技术:</p> 
+                                    <select name="hot_skill">
+                                        <!--{loop $hot_skills $v}-->
+                                        <option value="{$v[cid]}">{$v[name]}</option>
+                                        <!--{/loop}-->
+                                    </select>
+                                </li>
+                                <li>
+                                    <p class="lf">应用: </p>
+                                    <select name="use">
+                                        <!--{loop $uses $v}-->
+                                        <option value="{$v[cid]}">{$v[name]}</option>
+                                        <!--{/loop}-->
+                                    </select>
+                                </li>
+                                <li>
+                                    <p class="lf">电子基础:</p> 
+                                    <select name="eletron_basis">
+                                        <!--{loop $eletron_basises $v}-->
+                                        <option value="{$v[cid]}">{$v[name]}</option>
+                                        <!--{/loop}-->
+                                    </select>
+                                </li>
+                                <li>
+                                    <p class="lf">简述：</p>
+                                    <textarea name="brief" {$Validform['brief']}></textarea>
+                                </li>
+                                <li>
+                                    <p class="lf">详情：</p>
+                                    <textarea name="details" {$Validform['details']}></textarea>
+                                </li>
+                                <li>
+                                    <p class="lf">相关链接：</p>
+                                    <div class="lf"><input type="text" name="url" placeholder="请输入相关链接" class="Date_tags" {$Validform['url']}/><span class="sb" style="display:none;"></div>
+                                </li>
+                                <li>
+                                    <p class="lf">图片</p>
+                                    <div class="lf input_div">
+                                        <input type="file" class="input_click" name="pic" onchange="document.getElementById('input_btn').value=this.value"/>
+                                        <div class="input_style">
+                                            <span style="margin-left:0px;font-size:12px;color:#666">选择文件</span>
+                                            <input type="text" class="input_btn" id="input_btn"/>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p class="lf">附件</p>
+                                    <div class="lf input_div">
+                                        <input type="file" class="input_click" name="attach" onchange="document.getElementById('input_btn1').value=this.value"/>
+                                        <div class="input_style">
+                                            <span style="margin-left:0px;font-size:12px;color:#666">选择文件</span>
+                                            <input type="text" class="input_btn" id="input_btn1"/>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li><button type="submit">提交</button></li>
+                            </ul>
+                        </form>
+                    </div>
+
+                    <style>th{text-align: center;} </style>
+                    <div class="phr_dc" {if !$page}style="display:none;"{/if}>
+                        <table class="" width="100%" align="center"> 
+                            <thead class="">
+                                <tr>  
+                                    <th class="">名称</th>
+                                    <th class="">下载积分</th>
+                                    <th class="">收藏次数</th>
+                                    <th class="">下载次数</th>
+                                    <th class="">是否显示</th>
+                                    <th class="">状态</th>
+                                    <th class="">操作</th>
+                                </tr>   
+                            </thead>
+                            <!--{loop $my_downs $v}-->
+                            <tbody class="">
+                                <tr >  
+                                    <td class="">{$v[name]}</td>
+                                    <td class="">{$v[price]}</td>
+                                    <td class="">{$v[cols]}</td>
+                                    <td class="">{$v[downs]}</td>
+                                    <td class="">{$v[is_show]}</td>
+                                    <td class=""><span class="audit">{$v[status]}</span></td>
+                                    <td class="">
+                                        <a href="home.php?mod=down&do=up_post&id={$v[id]}">编辑</a>
+                                        <a href="home.php?mod=down&do=del&id={$v[id]}" class="uploads_btn_remove">删除</a>
+                                    </td>
+                                </tr> 
+                            </tbody>
+                            <!--{/loop}-->
+                        </table> 
+                        <!--{$multipage}-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script >
+    $(document).delegate('.uploads_btn_remove','click',function(){
+        $(this).parent().parent().parent().remove();
+    })
+</script>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

@@ -1,0 +1,71 @@
+
+<!--{template common/header}-->
+<div class="person_home">
+    <!--{template home/home_left}-->
+    <div class="person_homer rt">
+        <!--{template home/home_righton}-->
+        <div class="phr_content">
+            <div class="phr_bordermess"></div>
+            <div class="phr_MyReward">
+                <ul class="phr_tab">
+                    <li {if $ac=='list'}class="phr_active"{/if}><a href="{$jumpurl}">待评价项目</a></li>
+                    <li {if $ac=='comp'}class="phr_active"{/if}><a href="{$jumpurl}&ac=comp">已评价项目</a></li>
+                </ul>
+                <div class="phr_tab_content">
+                    <!--{if $ac=='list'}-->
+                    <div class="phr_dc">
+                        <ul class="talents_d talents_pro_case">
+                            <!--{loop $list_wait $v}-->
+                            <li>
+                                <div class="talents_pro_case_pic lf">
+                                    <a href="home.php?mod=space&uid={$v[uid]}"><!--{avatar($v[uid],big)}--></a>
+                                </div>
+                                <div class="project_case_content lf">
+                                    <h4>
+                                        <a href="plugin.php?pl=project&pluginop=pds&loid={$v[tid]}" class="orange">{$v[task_title]}</a>
+                                        <span class="states">{$arrProTaskStatus[$v[task_status]]}</span>
+                                    </h4>
+                                    <div class="project_case_txt">{$v[task_desc]}</div>
+                                    <p class="gray">
+                                        项目类型：<a>{$v[name]}</a><br>
+                                        完成时间：<span class="bState">{$v[finish_time]}</span>
+                                        <button type="text" class="rt" onclick="pingjia(this,{$v[tid]})">评价</button>
+                                    </p>
+                                </div>
+                            </li>
+                            <!--{/loop}-->
+                        </ul>
+                    </div>
+                    {$multipage}
+                    <!--{elseif $ac=='comp'}-->
+                    <div class="phr_dc">
+                        <ul class="talents_d talents_pro_case">
+                            <!--{loop $list $v}-->
+                            <li>
+                                <div class="talents_pro_case_pic lf">
+                                    <a href="home.php?mod=space&uid={$v[uid]}"><!--{avatar($v[uid],big)}--></a>
+                                </div>
+                                <div class="project_case_content lf">
+                                    <h4>
+                                        <a href="plugin.php?pl=project&pluginop=pds&loid={$v[tid]}" class="orange">{$v[task_title]}</a>
+                                        <span class="states">{$arrProTaskStatus[$v[task_status]]}</span>
+                                    </h4>
+                                    <div class="project_case_txt">{$v[task_desc]}</div>
+                                    <p class="gray">
+                                        项目类型：<a>{$v[name]}</a><br>
+                                        完成时间：<span class="bState">{$v[finish_time]}</span>
+                                        <div class="items_eval">{$v[content]}</div>
+                                    </p>
+                                </div>
+                            </li>
+                            <!--{/loop}-->
+                        </ul>
+                    </div>
+                    {$multipage}
+                    <!--{/if}-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--{template common/footer}-->

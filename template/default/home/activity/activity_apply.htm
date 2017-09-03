@@ -1,0 +1,190 @@
+
+<!--{template common/header}-->
+
+<div class="person_home">
+    <!-- 个人中心左侧导航 -->
+    <!--{template home/home_left}-->
+
+    <div class="person_homer rt">
+       <!--{template home/home_righton}-->
+        
+        <div class="phr_content">
+            <!-- <div class="phr_bordermess">写点什么……</div> -->
+            <div class="phr_MyReward">
+                <ul class=" phr_tab">
+                    <li  class="phr_active">活动报名</li>
+                </ul>
+                <div class="phr_tab_content">
+                    <div class="phr_dc" style="display:block;">
+                        <form action="home.php?mod=activity&do=apply_post" method="post" enctype="multipart/form-data" class="data_upload" id="demoform">
+                            <ul>
+
+                                <li>
+                                   <p class="lf">活动名称：</p>
+                                    <div class="lf">
+                                    <input type="text" name="activityname" placeholder="请填写相应的活动名" onBlur="" value="{$list[name]}">
+                                    <span class="sb" style="display:none;"><b style="color:red">*</b>请填写</span></div>
+                                    <input type="hidden" name="activityid" value="{$list[id]}">
+                                </li>
+
+                                <li>
+                                   <p class="lf">姓名：</p>
+                                    <div class="lf">
+                                    <input type="text" name="username" id="name" placeholder="请填写真实姓名" onBlur="name1()">
+                                    <span class="sb" style="display:none;"><b style="color:red">*</b>请填写</span></div>
+                                </li>
+
+                               
+                                <li>
+                                   <p class="lf">学校或者工作单位：</p>
+                                    <div class="lf"> <input type="text" name="unit" id="adr" placeholder="请填写学校或者工作单位" onBlur="adr1()"><span class="sb" style="display:none;"><b style="color:red">*</b>请填写</span></div>
+                                </li>
+                                
+
+                                <li>
+                                   <p class="lf">邮箱：</p>
+                                    <div class="lf"><input type="email" placeholder="" id="email" name="email" onblur="email1()"/><span class="sb" style="display:none;"><b style="color:red">*</b>请填写</span></div>
+                                </li>
+
+                                 <li>
+                                   <p class="lf">手机：</p>
+                                    <div class="lf"><input type="text"  id="phone" name="phone" onblur="phone1()" /><span class="sb" style="display:none;"><b style="color:red">*</b>请填写</span></div>
+                                </li>
+
+                                 <li>
+                                   <p class="lf">参与活动原因：</p>
+                                    <div class="lf">
+                                    <textarea rows="10" cols="30" type="text" name="reason" placeholder="请填写参加活动的原因" id="rea" onBlur="rea1()"></textarea>
+                                    </div>
+                                </li>
+
+                                 <li>
+                                   <p class="lf">留言：</p>
+                                    <div class="lf">
+                                    <textarea type="text" name="message" rows="5" cols="30" placeholder="请填写对活动的相关建议" id="rea" onBlur="rea1()"></textarea>
+                                    </div>
+                                </li>
+
+                               
+
+
+                                <li><button type="submit">提交</button></li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+     
+
+
+    </div>
+</div>
+<script type="text/javascript" src="{LO_PUB_JS}jquery-1.12.1.min.js"></script>  
+<script>
+function name1(){
+var cval = $("#name").val();    
+if(cval!=""){ //如果非空 显示正确
+$(".om1").hide();
+    return true;
+}
+else{
+$(".om1").show();//显示必填
+return false;
+}
+    };
+    
+function adr1(){
+var cval = $("#adr").val(); 
+if(cval!=""){ //如果非空 显示正确
+$(".om2").hide();
+    return true;
+}
+else{
+$(".om2").show();//显示必填
+return false;
+}
+    };
+    
+function rea1(){
+var cval = $("#rea").val(); 
+if(cval!=""){ //如果非空 显示正确
+$(".om3").hide();
+    return true;
+}
+else{
+$(".om3").show();//显示必填
+return false;
+}
+    };
+function phone1(){
+var cval = $("#phone").val();       
+var telReg = cval.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+//如果手机号码不能通过验证
+if(cval!=""){ //如果非空 显示正确
+$(".om6").hide();
+    $(".om7").hide();
+    
+    if(telReg == null){
+    
+    $(".om6").hide();//显示必填
+    $(".om7").show();
+    return false;
+    }
+    else  {
+    
+    $(".om6").hide();//显示必填
+    $(".om7").hide();
+    return true;
+    }
+    
+}
+else{
+$(".om6").show();//显示必填
+    $(".om7").hide();
+return false;
+}
+};
+
+
+
+function email1(){
+    
+var cval =$("#email").val();
+var cl =cval.match(  /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/);
+if(cval!=""){
+    $(".om4").hide();
+    $(".om5").hide();
+    if(cl== null){
+        
+        $(".om4").hide();
+    $(".om5").show();
+    return false;
+        }else{
+   $(".om4").hide();
+    $(".om5").hide();
+        return true;    
+            }
+    }
+    
+    else{
+        $(".om4").show();
+        $(".om5").hide();
+        return false;
+        }
+    
+};
+function send(){
+        return (name1()&&adr1()&&rea1()&&email1()&&phone1()) ;
+        
+        
+}
+
+
+</script>
+
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

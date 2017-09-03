@@ -1,0 +1,265 @@
+
+<!--{template _public/header}-->
+<!--{template _public/nav_main}-->
+
+<div class="download">
+    <!--{template _public/search_style_1}-->
+    <div class="nav_find">{$ur_here}</div>
+    <div class="download_l lf">
+        <div class="download_lt">
+            <!--{if $page['pic']}-->
+            <style type="text/css">
+                .download_lt p {
+                    background-image: none;
+                    padding-left: 0px;
+                }
+            </style>
+            <!--{/if}-->
+            <p><a style="cursor:pointer;" loid="{$page[id]}" id="is_loid" class="lf"><!--{if $page['pic']}--><img src="http:{$page[pic]}" width="38" height="38"> <!--{/if}-->{$page[name]}</a><!-- <a class="rt gray">推荐星级:<span></span></a> --></p>
+            <ul>
+                <li class="d_icon1"><span class="gray"><!--{eval echo dgmdate($page[addtime])}--></span></li>
+                <li class="d_icon2">所属类别：<span class="gray"><!--{eval echo cutstr($page[cat_name],25,'……');}--></span></li>
+                <li class="d_icon3">制造商：<span class="gray"><!--{eval echo cutstr($page[mfg_name],25,'……');}--></span></li>
+                <li class="d_icon4">收藏次数：<span class="gray">{$page[cols]}</span></li>
+                <li class="d_icon5">下载积分：<span class="gray" id="is_price"><!--{eval echo dnumber($page[price],2)}--></span></li>
+                <li class="d_icon6">下载次数：<span class="gray" id="is_downs">{$page[downs]}</span></li>
+                <li class="d_icon7">标签：<span class="gray"><!--{if $page[tags]}-->{$page[tags]}<!--{else}-->{$lang['no_resource']}<!--{/if}--></span></li>
+            </ul>
+        </div>
+        <div class="downShare">
+            <div class="downShare_l lf">
+            <!--{template _public/bdshare}-->
+            </div>
+            <a href="javascript:void(0)" id="collect_res" class="rt">收藏该资料</a>
+        </div>
+        <div class="data_description">
+            <h1>资料说明</h1>
+            <div>
+                <p>
+                    简介：<!--{if $page[intro]}-->{$page[intro]}<!--{else}-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$lang['no_resource']}<!--{/if}-->
+                    <br>
+                    <!--{if $page[desc]}-->详情：{$page['desc']}<!--{/if}-->
+                </p>
+            </div>
+        </div>
+        <div class="Partial_file_list">
+            <h1>文件列表</h1>
+            <div class="Partial_file_list_content">
+                <div class="Partial_FL_cl" >
+                    <table cellspacing="0" cellpadding="0" border="0">
+                    <thead>
+                        <tr>
+                        <th width="60%">文件名</th>
+                        <th width="40%">大小</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--{if $page[pdf] && $page[pdfsize]!='0B'}-->
+                        <tr>
+                            <td width="60%">{$page[pdf]}</td>
+                            <td width="40%">{$page['pdfsize']}</td>
+                        </tr>
+                        <!--{else}-->
+                        <tr>
+                            <td>{$lang['no_resource']}</td>
+                            <td></td>
+                        </tr>
+                        <!--{/if}-->
+                    </tbody>
+                    </table>
+                </div>
+                <!--{if $page[pdf] && $page[pdfsize]!='0B'}-->
+                <div class="Partial_FL_cr">
+                    <a href="javascript:download({$loid},{$page[price]},{$page[downs]},'{$page[pdfhref]}');javascript:void(0);" class="file_down lf"><!-- 触发 download()事件 -->下载入口一<br/>Download First</a>
+                    <a href="javascript:download({$loid},{$page[price]},{$page[downs]},'{$page[pdfhref]}');javascript:void(0);" class="sell_points lf">下载入口二<br>Download Second<!-- 买卖下载积分<br/>Selling download points --></a>
+                </div>
+                <!--{/if}-->
+            </div>
+        </div>
+        <div class="recommended_download">
+            <h1>推荐下载</h1>
+            <ul class="recommended_down_title lf">
+                <!--{if $arrTuijian}-->
+                <!--{loop $arrTuijian $v}-->
+                <li><a href="{LO_CURURL}&pluginop=page&loid={$v[id]}"><!--{eval echo cutstr($v['name'],30,'');}--></a></li>
+                <!--{/loop}-->
+                <!--{else}-->
+                <li><span>{$lang['no_resource']}</span></li>
+                <!--{/if}-->
+            </ul>
+            <div class="recommended_down_img rt">
+                <a href="#">广告图1</a>
+            </div>
+        </div>
+        <!-- <div class="user_share">
+        <h1>该用户分享的资料</h1>
+        <ul>
+        <li><a href="" class="gray">123456456.pdf</a></li>
+        <li><a href="" class="gray">123456456.pdf</a></li>
+        <li><a href="" class="gray">123456456.pdf</a></li>
+        <li><a href="" class="gray">123456456.pdf</a></li>
+        </ul>
+        </div> -->
+        <div class="datas_download_user">
+            <h1>该资料最近下载的用户</h1>
+            <ul>
+                <!--{loop $arrRecent $v}-->
+                <li class="recent_user1"><span><!--{avatar($v[uid],small)}--></span><a href="home.php?mod=space&uid=$v[uid]"><!--{eval echo cutstr($v['username'],30,'');}--></a></li>
+                <!--{/loop}-->
+            </ul>
+        </div>
+        <!-- <div class="all_comments">
+        <h1>全部评论<span class="gray">共有<b class="red">7</b>条评论</span><a href="" class="gray rt">more+</a></h1>
+        <ul class="all_comments_content">
+        <li  class="all_comments_content_l lf"><img src="{LO_PUB_IMG}user2.png"></li>
+        <li  class="all_comments_content_m lf">
+        <h5><a href="" class="blue">用户名</a></h5>
+        <p>评价内容</p>
+        </li>
+        <li  class="all_comments_content_r rt gray">2017-03-08<br/>00:49:19</li>
+        </ul>
+
+        <ul class="all_comments_content">
+        <li  class="all_comments_content_l lf"><img src="{LO_PUB_IMG}user2.png"></li>
+        <li  class="all_comments_content_m lf">
+        <h5><a href="" class="blue">用户名</a></h5>
+        <p>评价内容</p>
+        </li>
+        <li  class="all_comments_content_r rt gray">2017-03-08<br/>00:49:19</li>
+        </ul>
+
+        <ul class="all_comments_content">
+        <li  class="all_comments_content_l lf"><img src="{LO_PUB_IMG}user2.png"></li>
+        <li  class="all_comments_content_m lf">
+        <h5><a href="" class="blue">用户名</a></h5>
+        <p>评价内容</p>
+        </li>
+        <li  class="all_comments_content_r rt gray">2017-03-08<br/>00:49:19</li>
+        </ul>
+
+        <ul class="all_comments_content">
+        <li  class="all_comments_content_l lf"><img src="{LO_PUB_IMG}user2.png"></li>
+        <li  class="all_comments_content_m lf">
+        <h5><a href="" class="blue">用户名</a></h5>
+        <p>评价内容</p>
+        </li>
+        <li  class="all_comments_content_r rt gray">2017-03-08<br/>00:49:19</li>
+        </ul>
+        </div> -->
+    </div>
+
+    <div class="download_r rt">
+        <div class="adv">广告图2</div>
+        <div class="datas">广告图3</div>
+        <div class="hot_down">
+            <h3>热门下载</h3>
+            <ul>
+                <!--{loop $arrHotDown $v}-->
+                <!--{if $v['name']}-->
+                <li><a href="{LO_CURURL}&pluginop=page&loid={$v[id]}"><!--{eval echo cutstr($v['name'],30,'');}--></a></li>
+                <!--{/if}-->
+                <!--{/loop}-->
+            </ul>
+        </div>
+        <div class="new_up">
+            <h3>最新上传</h3>
+            <ul>
+                <!--{loop $arrNewUp $v}-->
+                <li><a href="{LO_CURURL}&pluginop=page&loid={$v[id]}"><!--{eval echo cutstr($v['name'],30,'');}--></a></li>
+                <!--{/loop}-->
+            </ul>
+        </div>
+        <!-- <div class="hot_tab" id="hot_tab">
+            <h3>热门标签</h3>
+            <div class="b_10_3">
+                <canvas width="300" height="300" id="myCanvas"></canvas>
+                <div id="tags">
+                    <a href="#">标签1</a>
+                    <a href="#">标签2</a><a href="#">标签3</a><a href="#">标签4</a><a href="#">标签5</a>
+                    <a href="#">标签15</a><a href="#">标签18</a><a href="#">标签17</a><a href="#">标签6</a><a href="#">互联网</a>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+
+<script type="text/javascript" src="{LO_PUB_JS}tagcanvas.min.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        try {
+            var i, et = document.getElementById('tags').childNodes;
+            for (i in et) {
+                et[i].nodeName == 'A' && et[i].addEventListener('click', function (e) {
+                    e.preventDefault();
+                });
+            }
+            TagCanvas.Start('myCanvas', 'tags', {
+                textColour: 'rgba(13,111,186)',
+                outlineColour: '#fff',
+                reverse: true,
+                depth: 0.8,
+                dragControl: true,
+                decel:0.95,
+                maxSpeed: 0.05,
+                initial: [-0.2, 0]
+            });
+        } catch (e) {
+            document.getElementById('hot_tab').style.display = 'none';
+        }
+    };
+    $(function() {
+        $('#collect_res').click(function() {
+            var loid = $('#is_loid').attr('loid'),
+                price = $('#is_price').html(),
+                vars = $('#is_downs').html();
+            $('#collect_res').css('pointer-events', 'none');
+            // $('#collect_res').hide();
+            // $('#collect_res').remove();
+            $.post('{LO_CURURL}', {pluginop:'ajax',sign:'col',loid:loid,price:price,vars:vars}, function(data) {
+                if (data.status=='success') {
+                    alert(data.msg)
+                } else {
+                    alert(data.msg)
+                }
+                $('#collect_res').css('pointer-events', 'all');
+                // $('#collect_res').show();
+                // $('#collect_res').attr('disabled',false);
+            },"json");
+        });
+    });
+
+    function download(loid,price,downs,pdfhref) {
+        if (price>0) {
+            if(confirm('该文件需花费'+price+'积分，已支付过的请忽略')){
+                $.post('{LO_CURURL}', {pluginop:'ajax',sign:'down',loid:loid,price:price,vars:downs,href:pdfhref}, function(data) {
+                    if (data.status=='success') {
+                        alert(data.msg)
+                    } else if (data.status=='charge') {
+                        alert(data.msg)
+                        // $(ht).html('<div>提醒界面：'+data.msg+'</div>');
+                        var openUrl = '{LO_URL}home.php?mod=spacecp&ac=credit&op=buy';//弹出窗口的url
+                        var name = '充值界面';
+                        var iWidth = 800; //弹出窗口的宽度;
+                        var iHeight  = 600; //弹出窗口的高度;
+                        var iTop = (window.screen.availHeight-30-iHeight)/2; //获得窗口的垂直位置;
+                        var iLeft = (window.screen.availWidth-10-iWidth)/2; //获得窗口的水平位置;
+                        var features = 'height='+iHeight+',width='+iWidth+',top='+iTop+',left='+iLeft;
+                        if (confirm('前往充值？')) {
+                            window.open(openUrl,name,features);
+                        }
+                    } else if (data.url) {
+                        window.location.href=data.url;
+                    } else {
+                        alert(data.msg)
+                    }
+                    // console.log(data)
+                },"json");
+            }
+        } else {
+            window.location.href=pdfhref;
+        }
+    }
+</script>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

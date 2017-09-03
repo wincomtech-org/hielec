@@ -1,0 +1,24 @@
+
+<div class="phr_dc">
+    <ul class="phr_project" >
+        {loop $list $v}
+        <li class="phrProject">
+            <div class="phrProject_t">
+                <span class="trade">{$v[name]}</span>
+                <a href="plugin.php?pl=project&pluginop=pds&loid={$v[tid]}">{$v[task_title]}</a>
+                <span class="ph {if $v[task_status]==8}ph_10{elseif $v[task_status]==2}ph_11{elseif $v[expire_s]}ph_12{elseif $v[task_status]==9}ph_13{/if}"></span>
+                <a href="{$jumpurl}&ac=del&loid={$v[id]}"><button class="rt phr_project_remove">删除</button></a>
+            </div>
+            <ul class="phrProject_c">
+                <li class="lf"><a href="home.php?mod=space&uid={$v[uid]}" class="user">{$v[username]}</a></li>
+                <li class="lf"><span class="ph ph_9"></span>{$v[province]}</li>
+                <li class="lf">{$v[pub_time]}发布</li>
+                <li class="lf">项目预算<span class="money">￥{$v[budget]}</span></li>
+                <li class="rt">剩余{$v[time_remaining]}</li>
+                <!-- <li class="rt">剩余<span class="time">23</span>时<span class="time">30</span>分<span class="time">30</span>秒</li> -->
+                <li class="rt">已有<span class="renshu">{$v[bid_num]}</span>位竞标</li>
+            </ul>
+        </li>
+        {/loop}
+    </ul>
+</div>

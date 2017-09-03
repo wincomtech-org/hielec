@@ -1,0 +1,55 @@
+
+<!--{template common/header}-->
+<div class="person_home">
+    <!-- 个人中心左侧导航 -->
+    <!--{template home/home_left}-->
+    <div class="person_homer rt">
+        <!--{template home/home_righton}-->
+        <div class="phr_content">
+            <!-- <div class="phr_bordermess">写点什么……</div> -->
+            <div class="phr_MyReward">
+                <ul class=" phr_tab">
+                    <li  class="phr_active">参与的活动</li>
+                </ul>
+                <div class="phr_tab_content">
+                    <div class="phr_dc" style="display:block;">
+                        <div class="phr_Parti_active">
+                            <table class="phr_Parti_act" cellspading="0" cellpadding="10">
+                                <thead>
+                                    <tr>
+                                        <th>活动主题</th>
+                                        <th>状态</th>
+                                        <th>起止时间</th>
+                                        <th>所获荣誉</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--{if $list}-->
+                                    <!--{loop $list $nav}-->
+                                    <tr>
+                                        <td><a href="plugin.php?id=loactivity:activity&pluginop=page&loid={$nav[gid]}">{$nav[name]}</a></td>
+                                        <td>{$arrStatus[$nav[status]]}</td>
+                                        <td>{date($name[addtime])}至{$nav[endtime]}</td>
+                                        <td>谢谢参与</td>
+                                        <td>
+                                            <button type="submit" style="cursor: pointer;" onclick="window.location.href='home.php?mod=activity&do=del&id={$nav[id]}&url=cols&tab=activity_apply'" class="phr_PA_remove">删除</button>
+                                        </td>
+                                    </tr>
+                                    <!--{/loop}-->
+                                    <!--{else}-->
+                                    <tr><td colspan="5">暂无信息</td></tr>
+                                    <!--{/if}-->
+                                </tbody>
+                            </table>
+                        </div>
+                        {$multipage}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

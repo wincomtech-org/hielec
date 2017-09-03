@@ -1,0 +1,91 @@
+
+<div>{if $loid}修改{else}新增{/if}{$head_title}</div><br>
+
+<form action="{$formcheck['url']}" method="post" enctype="multipart/form-data">
+	<!--{loop $fields_info $f}-->
+	<div>
+		<label>
+		<!--{if $f[type]=='tinyint' || $f[type]=='smallint' || $f[type]=='mediumint' || $f[type]=='int'}-->
+			<!--{if $f[field]=='is_show'}-->
+			<label><input type="radio" name="{$f[field]}" value="0" {if $page[$f[field]]===0}checked{/if} /> 隐藏</label>
+			<label><input type="radio" name="{$f[field]}" value="1" {if $page[$f[field]]!==0}checked{/if} /> 显示</label>
+			<!--{elseif $f[field]=='pid'}-->
+			<select name="pid">
+				<option {if $page[pid]==''}selected{/if} value="0">-->顶级<--</option>
+				<!--{loop $cates $p}-->
+				<option {if $page[pid]==$p[cid]}selected{/if} value="{$p[cid]}">{$p[name]}</option>
+					<!--{loop $p[child] $c}-->
+					<option {if $page[pid]==$c[cid]}selected{/if} value="{$c[cid]}"><!--{eval echo str_repeat('&nbsp;',4).$c[name]}--></option>
+						<!--{loop $c[child] $t}-->
+						<option {if $page[pid]==$t[cid]}selected{/if} value="{$t[cid]}"><!--{eval echo str_repeat('&nbsp;',8).$t[name]}--></option>
+						<!--{/loop}-->
+					<!--{/loop}-->
+				<!--{/loop}-->
+			</select>
+			<!--{else}-->
+			<input type="number" name="{$f['field']}" value="<!--{if $page[$f[field]]}-->{$page[$f[field]]}<!--{else}-->0<!--{/if}-->" maxlength="11" required />
+			<!--{/if}-->
+			<span> {$f['comment']}</span>
+		<!--{elseif $f[type]=='varchar' || $f[type]=='char' }-->
+			<!--{if $f[field]=='brief'}-->
+				<textarea cols="40" rows="4" name="{$f[field]}">{$page[$f[field]]}</textarea>
+			<!--{elseif $f[field]=='pic' || $f[field]=='pdf' || $f[field]=='attach'}-->
+				<input type="file" name="$f[field]" />
+				<!--{if $page[$f[field]]}--><a href="{$page[$f[field].'href']}">{$page[$f[field]]}</a><!--{/if}-->
+			<!--{else}-->
+				<input type="text" name="{$f[field]}" value="{$page[$f[field]]}" />
+			<!--{/if}-->
+			<span> {$f['comment']}</span>
+		<!--{elseif $f[type]=='text'}-->
+			<!-- UEditor -->
+			<textarea cols="40" rows="4" name="{$f[field]}">{$page[$f[field]]}</textarea>
+			<span> {$f['comment']}</span>
+		<!--{/if}-->
+		</label>
+	</div>
+	<!--{/loop}-->
+
+<!-- 	
+	<div>
+		<label>积分: <input type="number" name="price" value="0" tabindex="1" /></label>
+	</div>
+	<div>
+		<label>分类: 
+			<select name="cid">
+				<option selected value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+			</select>
+		</label>
+		<a href="#"> 编辑分类</a>
+	</div>
+	<div>
+		<label>图片: <input type="file" name="pic" /></label>
+		<a href="#">图片名</a>
+	</div>
+	<div>
+		<h4>单选: </h4>
+		<label>开 <input type="radio" name="radio" tabindex="6" value="1" /></label>
+		<label>关 <input type="radio" name="radio" tabindex="7" value="2" /></label>
+	</div>
+
+	<div>
+		<label>多选1: <input type="checkbox" name="checkbox" /></label>
+		<label>多选2: <input type="checkbox" name="checkbox[]" /></label>
+	</div>
+	<div>
+		<input type="hidden" name="formhash" value="FORMHASH" />
+		<input type="hidden" name="loid" value="">
+		<input type="submit" value="提交" />
+	</div>
+	 -->
+
+	<div>
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<input type="hidden" name="loid" value="{$loid}">
+		<input type="hidden" name="id_filter" value="{$lokey}">
+		<input type="hidden" name="table" value="{$table}">
+		<input type="hidden" name="sign" value="{$_REQUEST['sign']}">
+		<input type="submit" value="提交" />
+	</div>
+</form>

@@ -1,0 +1,52 @@
+
+<!--{template common/header}-->
+<div class="person_home">
+    <!-- 个人中心左侧导航 -->
+    <!--{template home/home_left}-->
+    <div class="person_homer rt">
+        <!--{template home/home_righton}-->
+        <div class="phr_content">
+            <!-- <div class="phr_bordermess">写点什么……</div> -->
+            <div class="phr_MyReward">
+                <ul class=" phr_tab">
+                    <li class="phr_active">收藏列表</li>
+                </ul>
+                <div class="phr_tab_content">
+                    <div class="phr_dc" style="display:block;">
+                        <div class="phr_Parti_active">
+                            <table class="phr_Parti_shoucang" cellspading="0" cellpadding="10">
+                                <thead>
+                                    <tr>
+                                        <th>资料名称</th>
+                                        <th>状态</th>
+                                        <th>下载次数</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--{if $list}-->
+                                    <!--{loop $list $nav}-->
+                                    <tr>
+                                        <td><a href="plugin.php?id=lodown:down&pluginop=page&loid={$nav[gid]}">{$nav[name]}</a></td>
+                                        <td>{$arrStatus[$nav[status]]}</td>
+                                        <td>{$nav[downs]}</td>
+                                        <td>
+                                            <button style="cursor: pointer;" onclick="window.location.href='home.php?mod=down&do=del&id={$nav[id]}&url=cols&tab=down_log'" class="phr_PS_remove">删除</button>
+                                        </td>
+                                    </tr>
+                                    <!--{/loop}-->
+                                    <!--{else}-->
+                                    <tr><td colspan="4">暂无信息</td></tr>
+                                    <!--{/if}-->
+                                </tbody>
+                            </table>
+                        </div>
+                        {$multipage}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 通用底部 -->
+<!--{template common/footer}-->

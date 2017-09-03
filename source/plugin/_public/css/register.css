@@ -1,0 +1,107 @@
+body{
+	background: url(../image/reg_bg.jpg) repeat-x top #eff2f5;
+}
+.reg_contain{
+	width:1000px;
+	margin:0 auto;
+}
+.reg_top{
+	padding-top:40px;
+	height:78px;
+}
+.reg_main{
+	background: #fff;
+	border:10px solid #eaecef;
+	padding:28px 28px 40px;
+	margin-bottom: 15px;
+}
+.reg_title{
+	border-bottom: 1px solid #eff2f5;
+	font-size:26px;
+	font-weight: bold;
+	padding:20px 0 25px;
+	color:#2c3e50;
+}
+.form_reg{
+	margin-top:20px;
+}
+.infor_reg{
+	padding:10px;
+}
+.infor_bor{
+	width:840px;
+	color:#546374;
+	margin:0 auto;
+	border-bottom:1px dotted #cdcdcd;
+	font-size:14px;
+}
+.infor_bor th,.infor_bor td{
+	padding:10px 2px;
+	line-height: 24px;
+}
+.infor_bor th{
+	width:10em;
+	padding-right: 5px;
+	text-align:right;
+}
+input{
+	border:1px solid #e0e0e0;
+	cursor: pointer;
+}
+input.w_px{
+	width:220px;
+	height:17px;
+	line-height: 17px;
+	padding:2px 4px;
+}
+.rq{
+	color:red;
+}
+label{
+	cursor:pointer;
+}
+em,i{
+	font-style: normal;
+	font-size:12px;
+}
+.tipcol i{
+	color:#fa9800;
+	/*display: none;*/
+}
+.tipcol em{
+	color:#666;
+}
+a:hover{
+	text-decoration: underline;
+}
+#getcaptcha{
+	width:220px;
+	height:32px;
+	background: #e5e5e5;
+	vertical-align: middle;
+	border:1px solid #999;
+	font-size:14px;
+	padding:0 15px;
+	border-radius: 7px;
+	margin-left:5px;
+}
+#regsubmit{
+	background:#3096d8;
+	color:#fff;
+	vertical-align: middle;
+	height:32px;
+	width:80px;
+	text-align:center;
+	border-radius:7px;
+	font-size:14px;
+}
+.infor_bor a{
+	color:#369;
+	line-height:30px;
+}
+.infor_bor a.capt_vm{
+	display: inline-block;
+	height:40px;
+	line-height:40px;
+	vertical-align: middle;	
+}

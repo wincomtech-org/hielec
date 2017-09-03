@@ -1,0 +1,48 @@
+<!--{template _public/common_head}-->
+<div>{if $loid}修改{else}新增{/if}{$head_title}</div><br>
+
+<form action="{$formcheck['url']}" method="post" enctype="multipart/form-data">
+	<div>
+		<label>名称: <input type="text" name="name" value="{$page[name]}" required tabindex="1" /></label>
+	</div>
+	<div>
+		<label>索引: <input type="text" name="index" value="{$page[index]}" tabindex="2" /></label>
+	</div>
+	<div>
+		<label>标签: <textarea cols="40" rows="3" name="tags">{$page[tags]}</textarea></label>
+	</div>
+	<div>
+		<label>积分: <input type="number" name="price" value="{$page[price]}" tabindex="3" /></label>
+	</div>
+	<div>分类: 
+		<!--{loop $cates $v}-->
+		<label><input type="checkbox" name="cid[]" value="{$v[cid]}" {eval echo $page[cid]?(in_array($v[cid],json_decode($page[cid]))?'checked':''):'';} />{$v[name]}</label>
+		<!--{/loop}-->
+	</div>
+	<div>
+		<label>简述: <textarea cols="40" rows="5" name="brief">{$page[brief]}</textarea></label>
+	</div>
+	<div>
+		<label>详情: <textarea cols="40" rows="8" name="details">{$page[details]}</textarea></label>
+	</div>
+	<div>
+		<label>相关链接: <input type="text" name="url" value="{$page[url]}" /></label>
+	</div>
+	<div>
+		<label>图片: <input type="file" name="pic" tabindex="4" /></label>
+		<!--{if $page[pic]}--><a href="{$page[pichref]}">{$page[pic]}</a><!--{/if}-->
+	</div>
+	<div>
+		<label>附件: <input type="file" name="attach" tabindex="5" /></label>
+		<!--{if $page[attach]}--><a href="{$page[attachhref]}">{$page[attach]}</a><!--{/if}-->
+	</div>
+
+	<div>
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<input type="hidden" name="loid" value="{$loid}">
+		<input type="hidden" name="id_filter" value="{$lokey}">
+		<input type="hidden" name="table" value="{$table}">
+		<input type="hidden" name="sign" value="{$_REQUEST['sign']}">
+		<input type="submit" value="提交" />
+	</div>
+</form>

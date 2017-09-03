@@ -1,0 +1,55 @@
+    <meta name="application-name" content="{$_G['setting']['bbname']}" />
+    <meta name="msapplication-tooltip" content="{$_G['setting']['bbname']}" />
+    <!--{if $_G['setting']['portalstatus']}--><meta name="msapplication-task" content="name={$_G['setting']['navs'][1]['navname']};action-uri={echo !empty($_G['setting']['domain']['app']['portal']) ? 'http://'.$_G['setting']['domain']['app']['portal'] : $_G[siteurl].'portal.php'};icon-uri={$_G[siteurl]}{IMGDIR}/portal.ico" /><!--{/if}-->
+    <meta name="msapplication-task" content="name=$_G['setting']['navs'][2]['navname'];action-uri={echo !empty($_G['setting']['domain']['app']['forum']) ? 'http://'.$_G['setting']['domain']['app']['forum'] : $_G[siteurl].'forum.php'};icon-uri={$_G[siteurl]}{IMGDIR}/bbs.ico" />
+    <!--{if $_G['setting']['groupstatus']}--><meta name="msapplication-task" content="name=$_G['setting']['navs'][3]['navname'];action-uri={echo !empty($_G['setting']['domain']['app']['group']) ? 'http://'.$_G['setting']['domain']['app']['group'] : $_G[siteurl].'group.php'};icon-uri={$_G[siteurl]}{IMGDIR}/group.ico" /><!--{/if}-->
+    <!--{if helper_access::check_module('feed')}--><meta name="msapplication-task" content="name=$_G['setting']['navs'][4]['navname'];action-uri={echo !empty($_G['setting']['domain']['app']['home']) ? 'http://'.$_G['setting']['domain']['app']['home'] : $_G[siteurl].'home.php'};icon-uri={$_G[siteurl]}{IMGDIR}/home.ico" /><!--{/if}-->
+    <!--{if $_G['basescript']=='forum' && $_G['setting']['archiver']}-->
+        <link rel="archives" title="$_G[setting][bbname]" href="{$_G[siteurl]}archiver/" />
+    <!--{/if}-->
+    <!--{if !empty($rsshead)}-->{$rsshead}<!--{/if}-->
+    <!--{if widthauto()}-->
+        <link rel="stylesheet" id="css_widthauto" type="text/css" href="{$_G[setting][csspath]}{STYLEID}_widthauto.css?{VERHASH}" />
+        <script type="text/javascript">HTMLNODE.className += ' widthauto'</script>
+    <!--{/if}-->
+    <!--{if in_array($_G['basescript'],array('forum','group'))}-->
+        <script type="text/javascript" src="{$_G[setting][jspath]}forum.js?{VERHASH}"></script>
+    <!--{elseif in_array($_G['basescript'],array('home','userapp'))}-->
+        <script type="text/javascript" src="{$_G[setting][jspath]}home.js?{VERHASH}"></script>
+    <!--{elseif $_G['basescript']=='portal'}-->
+        <script type="text/javascript" src="{$_G[setting][jspath]}portal.js?{VERHASH}"></script>
+    <!--{/if}-->
+    <!--{if $_G['basescript']!='portal' && $_GET['diy']=='yes' && check_diy_perm($topic)}-->
+        <script type="text/javascript" src="{$_G[setting][jspath]}portal.js?{VERHASH}"></script>
+    <!--{/if}-->
+    <!--{if $_GET['diy']=='yes' && check_diy_perm($topic)}-->
+        <link rel="stylesheet" type="text/css" id="diy_common" href="{$_G['setting']['csspath']}{STYLEID}_css_diy.css?{VERHASH}" />
+    <!--{/if}-->
+
+    <!-- 以下是自己加的 -->
+    <!--{if $_G['basescript']=='forum'}-->
+        <link rel="stylesheet" type="text/css" href="{LO_PUB_CSS}common.css">
+    <!--{/if}-->
+    <!--{if $_G['basescript']=='home'}-->
+        <!--{if $mod=='space'}-->
+        <link rel="stylesheet" type="text/css" href="/template/default/_public/cache/style_1_home_space.css">
+        <!--{/if}-->
+    <!--{/if}-->
+    <!--{if in_array($_G['basescript'],array('forum'))}-->
+        <!--{if $mod=='forumdisplay'}-->
+            <link rel="stylesheet" type="text/css" href="/template/default/_public/cache/style_1_forum_forumdisplay.css">
+        <!--{elseif $mod=='viewthread'}-->
+            <link rel="stylesheet" type="text/css" href="/template/default/_public/cache/style_1_forum_viewthread.css">
+        <!--{elseif $mod=='post'}-->
+            <link rel="stylesheet" type="text/css" href="/template/default/_public/cache/style_1_forum_post.css">
+        <!--{/if}-->
+        <!-- 下面的 jquery-1.12.1.min.js 会导致系统自带的富文本编辑器上小按钮失效 -->
+        <script type="text/javascript" src="{LO_PUB_JS}jquery-1.12.1.min.js"></script>
+        <script type="text/javascript">
+            var jq = jQuery.noConflict();// noConflict() 方法会释放会 $ 标识符的控制，这样其他脚本就可以使用它了。
+        </script>
+    <!--{/if}-->
+    <!-- 省得麻烦，就写在这里共用了 如果遇到与系统冲突的请用 jq符 替换 $符-->
+    <link type="text/css" rel="stylesheet" href="{LO_PUB_ORG}validform/validform.css">
+    <script type="text/javascript" src="{LO_PUB_ORG}validform/Validform_v5.3.2_min.js"></script>
+</head>

@@ -1,0 +1,68 @@
+
+<!--{template _public/admin_common_head}-->
+<div>{if $loid}修改{else}新增{/if}{$head_title}</div><br>
+
+<form class="lothar_form" action="{$formcheck['url']}" method="post" enctype="multipart/form-data" id="demoform">
+	<div class="lothar_div">
+		<label>型号:<span></span> <input type="text" name="name" value="{$page[name]}" tabindex="1" {$Validform['name']} /></label>
+	</div>
+	<div class="lothar_div">
+		<label>索引:<span></span> <input type="text" name="index" value="{$page[index]}" {$Validform['index']} /></label>
+	</div>
+	<div class="lothar_div">
+		<label><span>标签:</span> <textarea cols="40" rows="3" name="tags" {$Validform['tags']} >{$page[tags]}</textarea></label>
+	</div>
+	<div class="lothar_div">
+		<label><span>积分:</span> <input  name="price" value="{$page[price]}" tabindex="2" {$Validform['price']} /></label>
+	</div>
+	<div class="lothar_div"><span>分类:</span> 
+		<!--{loop $cates $v}-->
+		<label><input type="checkbox" name="cid[]" value="{$v[cid]}" {eval if($page[cid])echo in_array($v[cid],json_decode($page[cid]))?'checked':'';} />{$v[name]}</label>
+		<!--{/loop}-->
+		<a href="{$formcheck['url_category']}"> 编辑分类</a>
+	</div>
+	<div class="lothar_div"><span>厂商:</span> 
+		<!--{loop $firms $v}-->
+		<label><input type="checkbox" name="fid[]" value="{$v[cid]}" {eval echo $page[fid]?(in_array($v[cid],(array)json_decode($page[fid]))?'checked':''):'';} />{$v[name]}</label>
+		<!--{/loop}-->
+		<a href="{$formcheck['url_firm']}"> 编辑厂商</a>
+	</div>
+	<div class="lothar_div">
+		<label><span>简述:</span> <textarea cols="40" rows="8" name="brief" {$Validform['brief']} >{$page[brief]}</textarea></label>
+	</div>
+	<div class="lothar_div">
+		<label><span>详情:</span> <textarea cols="40" rows="8" name="details" {$Validform['details']} >{$page[details]}</textarea></label>
+	</div>
+	<div class="lothar_div">
+		<label><span>相关链接:</span> <input type="text" name="url" value="{$page[url]}" tabindex="3" {$Validform['url']} /></label>
+	</div>
+	<div class="lothar_div">
+		<label><span>图片:</span> <input type="file" name="pic" tabindex="4" {$Validform['pic']} /></label>
+		<!--{if $page[pic]}--><a href="{$page[pichref]}">{$page[pic]}</a><!--{/if}-->
+	</div>
+	<div class="lothar_div">
+		<label><span>PDF:</span> <input type="file" name="pdf" tabindex="5" /></label>
+		<!--{if $page[pdf]}--><a href="{$page[pdfhref]}">{$page[pdf]}</a><!--{/if}-->
+	</div>
+	<div class="lothar_div">
+		
+		<label><span>显示:</span><input type="radio" name="is_show" value="1" {if $page[is_show]!==0}checked{/if} /> 是</label>
+		<label><input type="radio" name="is_show" value="0" {if $page[is_show]===0}checked{/if} /> 否</label>
+	</div>
+
+	<!-- <div>
+		<h4>单选: </h4>
+		<label>开 <input type="radio" name="radio" tabindex="6" value="1" /></label>
+		<label>关 <input type="radio" name="radio" tabindex="7" value="2" /></label>
+	</div>
+	<div>
+		<label>多选: <input type="checkbox" name="checkbox" /></label>
+	</div> -->
+
+	<div class="lothar_div">
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<input type="hidden" name="loid" value="{$loid}">
+		<input type="submit" value="提交" />
+	</div>
+</form>
+<!--{template _public/admin_common_foot}-->

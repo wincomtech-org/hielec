@@ -1,0 +1,96 @@
+
+<!--{template _public/header}-->
+<!--{template _public/nav_main}-->
+<section>
+	<div id="left_nav" class="lf">
+		<h3 >活动分类</h3>
+		<ul>
+			<li>
+				<p>赛事报名</p>
+				<img src="{LO_PUB_IMG}active_10.jpg" />
+			</li>
+			<li>
+				<p>积分兑换</p>
+				<img src="{LO_PUB_IMG}active_03.jpg" />
+			</li>
+		</ul>
+	</div>
+	<div id="right_nav" class="rt">
+		<p class="title">赛事报名</p>
+		<table border="1" style="border-collapse: collapse;">
+			<thead>
+				<tr>
+					<th>$tab['th'][0]</th>
+					<th><span class="blue">{$tab['th'][1]}</span></th>
+					<th>$tab['th'][2]</th>
+					<th>$tab['th'][3]</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--{loop $list $k $nav}-->
+				<tr>
+					<td>{$nav[$tab['td'][0]]}</td>
+					<td><a href="{LO_CURURL}&pluginop=page&loid={$nav[id]}" class="blue"><!--{eval echo cutstr($nav[$tab['td'][1]],30,'……');}--></a></td>
+					<td>{date($nav[addtime])}至{$nav[endtime]}</td>
+					<td>
+						{$nav[$tab['td'][3]]}
+					</td>
+				</tr>
+				<!--{/loop}-->
+			</tbody>
+		</table>
+		<p class="title">积分兑换</p>
+		<ul id="list">
+			<!--{loop $listfift $k $nav}-->
+			<li class="lf <!--{if in_array($k,array(2,5))}-->end<!--{/if}-->">
+				<dl>
+					<dt><img src="{IMG_TPL}{$nav[pic]}" width="180px" height="150px" /></dt>
+					<dd class="jf">需要积分：<span>{$nav[price]}分</span></dd>
+					<dd><a href="{LO_CURURL}&pluginop=order&type=1&loid={$nav[gid]}"></a></dd>
+				</dl>
+			</li>
+			<!--{/loop}-->
+		</ul>
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+	{$multipage}
+	<!-- <ul id="fy" class="rt">
+		<li class="lf b">
+			<a href="#">上一页</a>
+		</li>
+		<li class="lf">
+			<a href="#">1</a>
+		</li>
+		<li class="lf on">
+			<a href="#">2</a>
+		</li>
+		<li class="lf">
+			<a href="#">3</a>
+		</li>
+		<li class="lf">
+			<a href="#">4</a>
+		</li>
+		<li class="lf">
+			<a href="#">5</a>
+		</li>
+		<li class="lf">
+			<a href="#">6</a>
+		</li>
+		<li class="lf">
+			<a href="#">7</a>
+		</li>
+		<li class="lf">
+			<a href="#">8</a>
+		</li>
+		<li class="lf">
+			<a href="#">9</a>
+		</li>
+		<li class="lf b">
+			<a href="#">下一页</a>
+		</li>
+	</ul> -->
+</section>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

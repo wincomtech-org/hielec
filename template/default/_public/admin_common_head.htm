@@ -1,0 +1,31 @@
+
+<link rel="stylesheet" type="text/css" href="/template/default/_public/admin_common.css">
+<script type="text/javascript" src="/source/plugin/_public/js/jquery-1.12.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/source/plugin/_public/org/validform/validform.css">
+<script type="text/javascript" src="/source/plugin/_public/org/validform/Validform_v5.3.2_min.js"></script>
+
+<!-- 后台小导航 -->
+<!--{if $admin_head_nav}-->
+	{eval echo $admin_head_nav;}
+<!--{else}-->
+	<a href="{AURL}">列表页</a>
+	<a href="{AURL}&pluginop=page">发布</a>
+	<!--{if $admin_head_nav_bool[category]}-->
+	<a href="{AURL}&pluginop=commonlist&sign=cg">分类列表页</a>
+	<a href="{AURL}&pluginop=commonpage&sign=cg">新增分类</a>
+	<!--{/if}-->
+	<!--{if $admin_head_nav_bool[firm]}-->
+	<a href="{AURL}&pluginop=commonlist&sign=firm">厂商列表页</a>
+	<a href="{AURL}&pluginop=commonpage&sign=firm">新增厂商</a>
+	<!--{/if}-->
+	<!--{if $admin_head_nav_bool[article]}-->
+	<a href="{AURL}&pluginop=commonlist&sign=article">文章列表页</a>
+	<a href="{AURL}&pluginop=commonpage&sign=article">新增文章</a>
+	<!--{/if}-->
+	<!--{if $admin_head_nav_bool[gift]}-->
+	<a href="{AURL}&pluginop=gift">礼品列表页</a>
+	<a href="{AURL}&pluginop=giftpage">新增礼品</a>
+	<a href="{AURL}&pluginop=joinlist">活动审核</a>
+	<!--{/if}-->
+<!--{/if}-->
+<hr>

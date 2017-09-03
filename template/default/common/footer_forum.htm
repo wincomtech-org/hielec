@@ -1,0 +1,21 @@
+    </div><!-- 右栏 id="right" -->
+</div><!-- 主体 id="wp" -->
+<script>
+    var fourmright=$(".forum_right").width();
+    var h=$(window).height();
+    $("#hh").width(fourmright+182);
+    $("#left").height(h-170);
+    $(window).resize(function(){
+        var fourmright=$(".forum_right").width();
+        var h=$(window).height();
+        $("#hh").width(fourmright+182);
+        $("#left").height(h-170);
+    });
+    function ExChgClsName(Obj,NameA,NameB){
+        var Obj=document.getElementById(Obj)?document.getElementById(Obj):Obj;
+        Obj.className=Obj.className==NameA?NameB:NameA;
+    }
+    function showMenu(iNo){
+        ExChgClsName("Menu_"+iNo,"MenuBox","MenuBox2");
+    }
+</script>

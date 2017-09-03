@@ -1,0 +1,42 @@
+
+<div class="zoneConL_mess" {if $do!='index'}style="padding-top:10px;"{/if}>
+    {if $do=='index'}<h3 class="zct"><a href="javascript:void(0);" class=h1>头像</a><span>Head Sculpture</span></h3>{/if}
+    <div><a href="{$module_url}&uid={$uid}" class="ztc_img"><!--{avatar($sUid,small)}--></a><a class="ztc_name" href="{$module_url}&uid={$uid}">{$mInfo[username]}</a></div>
+    <ul>
+        <li><span class="t1">关注：</span><a href="javascript:void(0);">{$mInfo[following]}</a></li>
+        <li><span class="t2">粉丝：</span><a href="javascript:void(0);">{$mInfo[follower]}</a></li>
+        <li><span class="t3"></span><a href="javascript:zone_gz({$uid});void(0);">关注TA</a></li>
+        <li><span class="t4"></span><a href="javascript:zone_friend({$uid});void(0);">加为好友</a></li>
+        <li><span class="t5"></span><a href="javascript:zone_mess({$uid});void(0);">给我留言</a></li>
+        <li><span class="t7"></span><a href="javascript:zone_news({$uid});void(0);">发送消息</a></li>
+        <!-- <li><span class="t6"></span><a href="javascript:zone_zh({$uid});void(0);">打个招呼</a></li> -->
+    </ul>
+</div>
+<script type="text/javascript">
+    function zone_gz(u) {
+        $.post('{$module_url}&do=ajax', {uid: u,type: 'gz'}, function(data) {
+            // console.log(data)
+            if (data.s=='error') { alert(data.m); } else { alert(data.m); }
+        },'json');
+    }
+    function zone_friend(u) {
+        $.post('{$module_url}&do=ajax', {uid: u,type: 'friend'}, function(data) {
+            if (data.s=='error') { alert(data.m); } else { alert(data.m); }
+        },'json');
+    }
+    function zone_mess(u) {
+        $.post('{$module_url}&do=ajax', {uid: u,type: 'mess'}, function(data) {
+            if (data.s=='error') { alert(data.m); } else { alert(data.m); }
+        },'json');
+    }
+    function zone_news(u) {
+        $.post('{$module_url}&do=ajax', {uid: u,type: 'news'}, function(data) {
+            if (data.s=='error') { alert(data.m); } else { alert(data.m); }
+        },'json');
+    }
+    function zone_zh(u) {
+        $.post('{$module_url}&do=ajax', {uid: u,type: 'zh'}, function(data) {
+            if (data.s=='error') { alert(data.m); } else { alert(data.m); }
+        },'json');
+    }
+</script>

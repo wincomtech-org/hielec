@@ -1,0 +1,70 @@
+
+<!--{template loproject:layout/admin_header}-->
+<!--eval include template(THISPLUG.':layout/admin_header');-->
+<h3>{if $loid}修改{else}新增{/if}{$lang[thead]}</h3>
+
+<form id="demoform" class="lothar_form" action="{$form[action]}" method="post" enctype="multipart/form-data">
+    <!-- <div class="lothar_div">
+        <p class="lo_form_p"><span class="red">*</span>上级分类：</p>
+        <select name="pid">
+            {loop $categorys $item}
+            {if !$page[cid] || ($page[cid]!=$item[cid] && $page[pid]>=$item[pid])}
+            <option {if $page[pid]==$item[cid]}selected{/if} value="{$item[cid]}">{$item[name]}</option>
+            {/if}
+            {if $item[child]}
+            {loop $item[child] $child}
+            {if !$page[cid] || ($page[cid]!=$child[cid] && $page[pid]>=$child[pid])}
+            <option {if $page[pid]==$child[cid]}selected{/if} value="{$child[cid]}">--{$child[name]}</option>
+            {/if}
+            {/loop}
+            {/if}
+            {/loop}
+        </select>
+    </div>
+    <div class="clear"></div> -->
+
+    <div class="lothar_div">
+        <p class="lo_form_p">上级分类：</p>
+        <span class="lo_input">应用领域</span>
+    </div>
+
+    <div class="lothar_div">
+        <label>
+            <p class="lo_form_p">名称: </p>
+            <input class="lo_input" type="text" name="name" value="{$page[name]}" required placeholder="请输入分类名称" {$Validform[name]} />
+        </label>
+    </div>
+
+    <div class="lothar_div">
+        <label>
+            <p class="lo_form_p">描述: </p>
+            <textarea cols="80" rows="4" name="brief" placehoolder="请输入内容">{$page[brief]}</textarea>
+        </label>
+    </div>
+
+    <div class="lothar_div">
+        <p class="lo_form_p"><span class="red">*</span>是否显示：</p>
+        <label><input {if is_null($page[is_show]) || $page[is_show]==1}checked{/if} type="radio" name="is_show" value="1"> 是 &nbsp;&nbsp;&nbsp;</label>
+        <label><input {if !is_null($page[is_show]) && $page[is_show]==0}checked{/if} type="radio" name="is_show" value="0"> 否</label>
+    </div>
+    <div class="clear"></div>
+
+    <div class="lothar_div">
+        <p class="lo_form_p"><span class="red">*</span>排序：</p>
+        <input type="text" name="sort" value="{if $page[sort]}{$page[sort]}{else}50{/if}">
+    </div>
+
+    <!-- <div class="lothar_div">
+        <p class="lo_form_p">小图标：</p>
+        <input type="file" name="pic">
+        {if $page[pic]}<a href="{$page[pic_url]}">{$page[pic]}</a>{/if}
+    </div> -->
+
+    <div class="lothar_div">
+        <input type="hidden" name="formhash" value="{FORMHASH}" />
+        <input type="hidden" name="c" value="op">
+        <input type="hidden" name="{$lokey}" value="{$page[$lokey]}">
+        <input type="hidden" name="task_oldpic" value="{$page[pic]}">
+        <button class="lo_common_submit" type="submit" name="publishsubmit" value="true"><strong>{$form[button]}</strong></button>
+    </div>
+</form>

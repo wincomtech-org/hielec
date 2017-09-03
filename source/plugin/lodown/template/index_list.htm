@@ -1,0 +1,202 @@
+
+<!--{template _public/header}-->
+<!--{template _public/nav_main}-->
+
+<!-- 下载内容 -->
+<div class="f_down">
+	<div class="f_down_l">
+		<div >
+			<ul class="f_down_t">
+				<li class="f_down_t1">
+					<span>下载积分：</span>
+					<ul class="f_down_tc f_down_tc1">
+						<div class="f_down_tc1h">
+							<!--{loop $arrDownCredit $k $v}-->
+							<li><a href="{$url}&credit={$k}" {if $credit==$k}class="active"{/if}>{$v}</a></li>
+							<!--{/loop}-->
+						</div>
+					</ul>
+					<div class="luntan_more">更多<i class="fy_downjt"></i></div>
+				</li>
+				<li class="f_down_t1">
+					<span>资源属性：</span>
+					<ul class="f_down_tc f_down_tc1">
+						<div class="f_down_tc1h">
+							<!--{loop $resource_properties $v}-->
+							<li>
+								<a href="{$url}&resource={$v['cid']}" {if $v['cid']==$resource}class="active"{/if} name="$v['name']">{$v['name']}</a>
+							</li>
+							<!--{/loop}-->
+						</div>
+					</ul>
+					<div class="luntan_more">更多<i class="fy_downjt"></i></div>
+				</li>
+				<li class="f_down_t1">
+					<span>模&nbsp;&nbsp;&nbsp;&nbsp;块：</span>
+					<ul class="f_down_tc f_down_tc1">
+						<div class="f_down_tc1h">
+							<!--{loop $modules $v}-->
+							<li>
+								<a href="{$url}&module={$v['cid']}" {if $v['cid']==$module}class="active"{/if} name="$v['name']">{$v['name']}</a>
+							</li>
+							<!--{/loop}-->
+						</div>
+					</ul>
+					<div class="luntan_more">更多<i class="fy_downjt"></i></div>
+				</li>
+				<li class="f_down_t1">
+					<span>软&nbsp;&nbsp;&nbsp;&nbsp;件：</span>
+					<ul class="f_down_tc f_down_tc1">
+						<div class="f_down_tc1h">
+							<!--{loop $softwares $v}-->
+							<li>
+								<a href="{$url}&software={$v['cid']}" {if $v['cid']==$software}class="active"{/if} name="$v['name']">{$v['name']}</a>
+							</li>
+							<!--{/loop}-->
+						</div>
+					</ul>
+					<div class="luntan_more">更多<i class="fy_downjt"></i></div>
+				</li>
+				<li class="f_down_t1">
+					<span>编程语言：</span>
+					<ul class="f_down_tc f_down_tc1">
+						<div class="f_down_tc1h">
+							<!--{loop $program_languages $v}-->
+							<li>
+								<a href="{$url}&program_language={$v['cid']}" {if $v['cid']==$program_language}class="active"{/if}>{$v['name']}</a>
+							</li>
+							<!--{/loop}-->
+						</div>
+					</ul>
+					<div class="luntan_more">更多<i class="fy_downjt"></i></div>
+				</li>
+				<li class="f_down_t1">
+					<span>热点技术：</span>
+					<ul class="f_down_tc f_down_tc1">
+						<div class="f_down_tc1h">
+							<!--{loop $hot_skills $v}-->
+							<li>
+								<a href="{$url}&hot_skill={$v['cid']}" {if $v['cid']==$hot_skill}class="active"{/if}>{$v['name']}</a>
+							</li>
+							<!--{/loop}-->
+						</div>
+					</ul>
+					<div class="luntan_more">更多<i class="fy_downjt"></i></div>
+				</li>
+				<li class="f_down_t1">
+					<span>应&nbsp;&nbsp;&nbsp;&nbsp;用：</span>
+					<ul class="f_down_tc f_down_tc1">
+						<div class="f_down_tc1h">
+							<!--{loop $uses $v}-->
+							<li>
+								<a href="{$url}&use={$v['cid']}" {if $v['cid']==$use}class="active"{/if}>{$v['name']}</a>
+							</li>
+							<!--{/loop}-->
+						</div>
+					</ul>
+					<div class="luntan_more">更多<i class="fy_downjt"></i></div>
+				</li>
+				<li class="f_down_t1">
+					<span>电子基础：</span>
+					<ul class="f_down_tc f_down_tc1">
+						<div class="f_down_tc1h">
+							<!--{loop $eletron_basises $v}-->
+							<li>
+								<a href="{$url}&eletron_basis={$v['cid']}" {if $v['cid']==$eletron_basis}class="active"{/if}>{$v['name']}</a>
+							</li>
+							<!--{/loop}-->
+						</div>
+					</ul>
+					<div class="luntan_more">更多<i class="fy_downjt"></i></div>
+				</li>
+			</ul>
+			<div class="clear"></div>
+			<!-- 关键词 -->
+			<div class="f_keyword">
+				<span>关键词:</span>
+				<form method="post" action="{LO_CURURL}" name="fname">
+					<input type="text" id="ss" name="srcval" value="{$srcval}" required class="lf">
+					<input type="submit" id="submit" value="" >
+				</form>
+			</div>
+		</div>
+
+		<!-- 列表块 -->
+		<!--{if $lists}-->
+		<!--{loop $lists $v}-->
+		<div class="f_down_lcontent">
+			<div class="f_down_lcontent_t">	
+				<a href="{LO_CURURL}&pluginop=page&loid={$v['id']}">{$v['name']}</a>
+				<p class="huixing">标签<span class="orange">{$v['tags']}</span></p>
+				<p>{$v['brief']}</p>
+				<ul>
+					<li class="f_1">积分：<span>{$v['price']}</span></li>
+					<li class="f_2">上传用户：<span>{$v['username']}</span></li>
+					<li class="f_3"><span>{date($v['addtime'])}</span></li>
+					<li class="f_4">下载次数：<span>{$v['downs']}</span></li>
+				</ul>
+			</div>
+		</div>
+		<!--{/loop}-->
+		<!--{else}-->
+		<div class="f_down_lcontent">
+			<div class="f_down_lcontent_t">	
+				{$lang['no_resource']}
+			</div>
+		</div>
+		<!--{/if}-->
+		<div>{$multipage}</div>
+	</div>
+	<div class="f_down_r">
+		<div class="f_down_rt">
+			<p class="f_shangchuan"><a href="home.php?mod=down&do=up">上传资源</a></p>
+			<p class="f_duihuan"><a href="home.php?mod=down&do=cols">积分兑换</a></p>
+			<div class="denglu">{$adv_customs[1]}</div>
+		</div>
+		<!---最新下载-->
+		<div class="new_down">
+			<h3>热门下载</h3>
+			<ul>
+				<!--{loop $downinfo $v}-->
+				<li>
+					<p><span class="lighterblue">{$v[username]}</span>&nbsp;&nbsp;&nbsp;&nbsp;下载了：</p>
+					<p class="downfile"><a href="{LO_CURURL}&pluginop=page&loid={$v['id']}">{$v['name']}</a></p>
+				</li>
+				<!--{/loop}-->
+			</ul>
+		</div>
+		<!---最新上传-->
+		<div class="new_down new_shangchuang">
+			<h3>最新上传</h3>
+			<ul>
+				<!--{loop $addinfo $v}-->
+				<li>
+					<p><span class="lighterblue">{$v[username]}</span>&nbsp;&nbsp;&nbsp;&nbsp;刚刚上传了：</p>
+					<p class="downfile"><a href="{LO_CURURL}&pluginop=page&loid={$v['id']}">{$v['name']}</a></p>
+				</li>
+				<!--{/loop}-->
+			</ul>
+		</div>
+	</div>
+</div>
+<script src="{LO_PUB_JS}jquery-1.11.3.min.js"></script>
+<script>
+	$(function(){
+		var txt=document.getElementsByClassName('f_down_tc1h');
+		for(var i=0;i<txt.length;i++){
+			var x=txt[i].width;
+			console.log(x);
+		}
+	})
+	$(document).delegate('.luntan_more','click',function(){
+		$(this).siblings().children().removeClass('f_down_tc1h');
+		$(this).html('收起<i class="fy_downjt1"></i>').addClass('luntan_shouqi').removeClass('luntan_more');
+	})
+	$(document).delegate('.luntan_shouqi','click',function(){
+		$(this).siblings('.f_down_tc').children().addClass('f_down_tc1h');
+		$(this).addClass('luntan_more').html('更多<i class="fy_downjt"></i>').removeClass('luntan_shouqi');
+	})
+</script>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

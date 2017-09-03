@@ -1,0 +1,62 @@
+<!--{template _public/admin_common_head}-->
+<div>{if $loid}修改{else}新增{/if}{$head_title}</div><br>
+
+<form  class="lothar_form" action="{$formcheck['url']}" method="post" enctype="multipart/form-data">
+	<div class="lothar_div">
+		<label><span>名称:</span> <input type="text" name="name" value="{$page[name]}" required tabindex="1" /></label>
+	</div>
+	<div class="lothar_div">
+		<label><span>副标题:</span> <input type="text" name="subhead" value="{$page[subhead]}" /></label>
+	</div>
+	<div class="lothar_div">
+		<label><span>索引:</span> <input type="text" name="index" value="{$page[index]}" tabindex="2" /></label>
+	</div>
+	<div class="lothar_div">
+		<label><span>标签:</span> <textarea cols="40" rows="3" name="tags">{$page[tags]}</textarea></label>
+	</div>
+	<div class="lothar_div">
+		<label><span>积分:</span> <input type="number" name="price" value="{$page[price]}" tabindex="3" /></label>
+	</div>
+	<div class="lothar_div">分类:<span></span> 
+		<!--{loop $cates $v}-->
+		<label><input type="checkbox" name="cid[]" value="{$v[cid]}" {eval echo $page[cid]?(in_array($v[cid],json_decode($page[cid]))?'checked':''):'';} />{$v[name]}</label>
+		<!--{/loop}-->
+		<a href="{$formcheck['url_category']}"> 编辑分类</a>
+	</div>
+	<div class="lothar_div">
+		<label><span>简述:</span> <textarea cols="40" rows="5" name="brief">{$page[brief]}</textarea></label>
+	</div>
+	<div class="lothar_div">
+		<label><span>活动详情:</span><div  class="lothar_ueditor"><!--{template _public/ueditor}--></div></label>
+	</div>
+	<div class="lothar_div">
+		<label><span>结束时间:</span> <input type="date" name="endtime" value="{$page[endtime]}" /></label>
+	</div>
+	<div class="lothar_div">
+		<label><span>奖项设置:</span> <textarea cols="40" rows="5" name="prize">{$page[prize]}</textarea></label>
+	</div>
+
+	<div class="lothar_div">
+		<label><span>相关链接:</span> <input type="text" name="url" value="{$page[url]}" /></label>
+	</div>
+	<div class="lothar_div">
+		<label><span>主题图:</span> <input type="file" name="pic" tabindex="4" /></label>
+		<!--{if $page[pic]}--><a href="{$page[pichref]}">{$page[pic]}</a><!--{/if}-->
+	</div>
+	<div class="lothar_div"><label><span>状态：</span>
+		<select name="status">
+			{loop $lostatus $l $m}
+			<option value="{$l}" {if $page[status]==$l}selected{/if}>{$m}</option>
+			{/loop}
+		</select>
+	</label></div>
+
+	<div class="lothar_div">
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<input type="hidden" name="loid" value="{$loid}">
+		<input type="hidden" name="id_filter" value="{$lokey}">
+		<input type="hidden" name="table" value="{$table}">
+		<input type="hidden" name="sign" value="{$_REQUEST['sign']}">
+		<input type="submit" value="提交" />
+	</div>
+</form>

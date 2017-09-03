@@ -1,0 +1,59 @@
+
+<div class="phr_dc" style="display:block;">
+    <div class="phr_caseContent">
+        <form action="{$form[action]}" method="post" enctype="multipart/form-data" id="demoform" class="phr_mycase">
+            <h2>{if $page[$lokey]}修改{else}发布{/if}</h2>
+            <div class="p">
+                <span class="lf">案例标题：</span>
+                <input type="text" name="case_title" value="{$page[case_title]}" {$Validform[case_title]} placeholder="请输入案例标题" />
+            </div>
+            <div class="clear"></div>
+
+            <div class="p">
+                <span class="lf">项目类型：</span>
+                <select name="indus_id" class="fy_select">
+                    <option>请选择类型</option>
+                    <!--{loop $industrys $item}-->
+                    <option {if $item[cid]==$page[indus_id]}selected{/if} value="{$item[cid]}">{$item[name]}</option>
+                    <!--{/loop}-->
+                </select>
+            </div>
+            <div class="clear"></div>
+
+            <!-- <div class="p">
+                <span class="lf">项目类型：</span>
+                <div class="fy_select">
+                    <h3 onclick="stopPropagation()">请选择类型</h3>
+                     <ul class="fy_options">
+                         <li>类型1</li>
+                        <li>类型2</li>
+                        <li>类型3</li>
+                        <li>类型4</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clear"></div> -->
+
+            <div>
+                <span class="lf">案例内容：</span>
+                <textarea name="case_desc" placehoolder="请输入案例内容">{$page[case_desc]}</textarea>
+            </div>
+            <div class="clear"></div>
+
+            <!-- <div>
+                <span class="lf">案例图片：</span>
+                <input type="file" name="case_img">
+                {if $page[case_img]}<a href="{$page[case_img_url]}">{$page[case_img]}</a>{/if}
+            </div>
+            <div class="clear"></div> -->
+
+            <div>
+                <input type="hidden" name="formhash" value="{FORMHASH}" />
+                <input type="hidden" name="ac" value="op">
+                <input type="hidden" name="loid" value="{$page[$lokey]}">
+                <!-- <input type="hidden" name="case_oldimg" value="{$page[case_img]}"> -->
+                <button type="submit" name="casesubmit" value="true"><strong>{$form[button]}</strong></button>
+            </div>
+        </form>
+    </div>
+</div>

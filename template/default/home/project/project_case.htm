@@ -1,0 +1,28 @@
+
+<!--{template common/header}-->
+<div class="person_home">
+    <!--{template home/home_left}-->
+    <div class="person_homer rt">
+        <!--{template home/home_righton}-->
+        <div class="phr_content">
+            <div class="phr_bordermess"></div>
+            <div class="phr_MyReward">
+                <ul class="phr_tab">
+                    <li {if $ac=='list'}class="phr_active"{/if}><a href="{$jumpurl}">我的案例</a></li>
+                    <li {if $ac=='page'}class="phr_active"{/if}><a href="{$jumpurl}&ac=page">增加案例</a></li>
+                </ul>
+                <div class="phr_tab_content">
+                    <!--{if $ac=='list'}-->
+                    <!-- 我的案例列表 -->
+                    <!--{template home/project/project_case_list}-->
+                    <!--{elseif $ac=='page'}-->
+                    <!-- 我要发布 -->
+                    <!--{template home/project/project_case_page}-->
+                    <!--{/if}-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 通用底部 -->
+<!--{template common/footer}-->

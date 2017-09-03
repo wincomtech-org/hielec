@@ -1,0 +1,44 @@
+
+<!--{template common/header}-->
+<div class="person_home">
+    <!-- 个人中心左侧导航 -->
+    <!--{template home/home_left}-->
+    <div class="person_homer rt">
+        <!--{template home/home_righton}-->
+        <div class="phr_content">
+            <!-- <div class="phr_bordermess">写点什么……</div> -->
+            <div class="phr_MyReward">
+                <ul class=" phr_tab">
+                    <li  class="phr_active">兑换记录</li>
+                </ul>
+                <div class="phr_tab_content">
+                    <div class="phr_dc" style="display:block;">
+                        <div class="phr_Parti_records">
+                            <ul class="phr_Parti_records_ul">
+                                <!--{if $list}-->
+                                <!--{loop $list $nav}-->
+                                <li class="phr_Parti_records_li">
+                                    <div class="lf">
+                                        <p>我使用了<span class="jifen">{$nav[credits]}</span>积分兑换{$nav[number]}个<span class="goods">{$nav[name]}</span></p>
+                                        <span class="date">{date($nav[addtime])}</span>
+                                    </div>
+                                    <div class="rt">
+                                        <button style="cursor: pointer;" onclick="window.location.href='home.php?mod=activity&do=del&id={$nav[id]}&url=exchange&tab=activity_log'" class="phr_PR_remove">删除</button>
+                                    </div>
+                                </li>
+                                <!--{/loop}-->
+                                <!--{else}-->
+                                <tr><td  colspan="4">暂无信息</td></tr>
+                                <!--{/if}-->
+                            </ul>
+                        </div>
+                        {$multipage}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->

@@ -1,0 +1,51 @@
+body, p, h1, h2, h3, h4, ul, ol, li, dl, dt, dd, input, form, button { padding: 0; margin: 0; list-style: none; font-weight: normal;font-family: "微软雅黑", arial; word-break: break-all;color: #585858;}
+input, button { border: none; outline: none; }
+.lf { float: left; }
+.rt { float: right; }
+.clear { clear: both; }
+a { text-decoration: none; color:#585858;}
+a:hover {color: #f33e07}
+img { border: none; }
+input { outline: none; }
+.on{color:red;}
+
+section{width:1200px;margin:0 auto;}
+.title{border-bottom:2px solid #0e6fba;height:43px; font-size: 16px; margin-bottom: 33px;}
+.title .nav_t li{width:144px;line-height: 43px;text-align: center;}
+.title .nav_t li.on{border-top-left-radius:5px; border-top-right-radius:5px;background-color:#0e6fba;}
+.nav_t li.on a{color:#fff;}
+#left{width:900px; font-size: 15px;}
+#tj>li{border-bottom:1px dashed #ddd;line-height:49px; font-size: 14px; overflow: hidden;}
+#tj>li>ul>li:nth-child(10){margin-left:70px;}
+#tj>li a.current{color:red;}
+#tj li li{padding-left:30px;}
+#tj li li.one{padding-left:0;}
+#search{margin:18px 0 0px; overflow: hidden;}
+#search>span{padding-top: 5px;}
+.sear{border:1px solid #0d68b6;width:373px;height:29px; background:url(../image/esjy_07.jpg) no-repeat 277px 0px;}
+.text{height:29px;width:260px;padding-left: 13px;}
+.submit{height:29px;width:96px;cursor: pointer;opacity: 0;}
+#city .prov,#city .city{width:125px;height:23px;}
+
+#list li{border-bottom:1px solid #e8e8e8; overflow: hidden;padding:25px 0 28px 118px;background-repeat:no-repeat;background-position: 0px 25px;}
+#list .xmxx p{line-height: 30px;}
+#list .xmxx .ti{line-height:48px;}
+.xmxx .xm{margin-left:15px;}
+.xmxx .zt{margin-left: 33px;padding-left:29px;background:url(../image/xmsc_14.png) no-repeat 1px 0px;color:#ff6600;}
+.xmxx .rm{margin-left:35px;}
+#list .rt{margin-right:60px;}
+#list .details{position:relative;width:126px;height:65px;border:1px solid #e9e8e8;font-size: 12px;text-align: center;}
+.details .money{line-height: 26px;margin-top: 12px;}
+#list .details span{color:#f33e07;font-size:18px;}
+#list .details i{position:absolute;display:block;width:34px;height:35px;top:0;left:0;background:url(../image/market_09.png) no-repeat 0 0;}
+#list .xbz{height:32px;line-height:32px;background-color: #7fb4f6;margin-top: 10px;text-align: center;}
+#list .xbz a{color:#fff;font-size: 14px;}
+
+#right{width:280px;}
+#right .zl{height:86px;background-color:#eaecee;padding-top: 24px;margin-bottom: 30px;font-size: 16px;}
+#right .zl p{line-height: 36px;text-align: center;}
+#right>a{display:block;height:42px;text-align: center;line-height: 42px;color:#fff;background-color: #f33e07;border-radius:5px;margin-bottom: 18px; }
+#right>a span{display: inline-block;font-size: 15px;}
+#right .newest{height:45px;line-height: 45px;font-size: 16px;padding-left: 36px;background:url(../image/market_03.jpg) no-repeat 1px 12px;}
+#r_list li{overflow: hidden;padding:15px 0;border-bottom: 1px solid #eee;font-size: 12px;}
+#r_list .rt p{width:230px;line-height: 22px;}

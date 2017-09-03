@@ -1,0 +1,72 @@
+<!--{template common/header}-->
+<!-- <link rel="stylesheet" href="css/style.css" /> -->
+<script src="{LO_PUB_PATH}js/jquery-1.12.1.min.js"></script>
+
+<div>{$head_title}列表页</div>
+<div>
+	<table>
+		<thead>
+			<tr>
+				<!--{loop $tab['th'] $v}-->
+				<th align="center">{$v}</th>
+				<!--{/loop}-->
+			</tr>
+		</thead>
+		<tbody>
+			<!--{if $list}-->
+			<!--{loop $list $v}-->
+			<tr>
+				<!--{loop $tab['td'] $td}-->
+				<th align="center">{$v[$td]}</th>
+				<!--{/loop}-->
+				<td align="center">
+				<!--{loop $tab['operator'] $k $o}-->
+					<a style="cursor: pointer;" ajax_url="{$o[0]}{$v[$lokey]}" onclick="ajax_op(this,$k)" class="{$o[2]}">{$o[1]}</a>
+				<!--{/loop}-->
+				</td>
+			</tr>
+			<!--{/loop}-->
+			<!--{else}-->
+			<tr><td>没有数据</td></tr>
+			<!--{/if}-->
+		</tbody>
+	</table>
+</div>
+{$multipage}
+
+<script type="text/javascript">
+function ajax_op(o,k) {
+	var ht = $(o).parents('tr').find('a').eq(k),
+	th = ht.attr('class'),
+	ajax_url = ht.attr('ajax_url');
+	// console.log(o);
+	// alert(th)
+	// alert(ajax_url)
+	// alert(k)
+	$.post(ajax_url, {'event':th}, function(data){
+		alert(data.sign)
+		alert(data.status)
+		// alert('{LO_URL}')
+		if (data.status=='charge') {
+			alert(data.msg)
+			// $(ht).html('<div>提醒界面：'+data.msg+'</div>');
+			var openUrl = '{LO_URL}home.php?mod=spacecp&ac=credit&op=buy';//弹出窗口的url
+			var name = '充值界面';
+			var iWidth = 800; //弹出窗口的宽度;
+			var iHeight  = 600; //弹出窗口的高度;
+			var iTop = (window.screen.availHeight-30-iHeight)/2; //获得窗口的垂直位置;
+			var iLeft = (window.screen.availWidth-10-iWidth)/2; //获得窗口的水平位置;
+			var features = 'height='+iHeight+',width='+iWidth+',top='+iTop+',left='+iLeft;
+			if (confirm('前往充值？')) {
+				window.open(openUrl,name,features);
+			}
+		} else {
+			alert(data.msg)
+		}
+	},'json');
+}
+
+// $('.zan').click(function() {
+// {LO_URL}home.php?mod=spacecp&ac=credit&op=buy
+// });
+</script>

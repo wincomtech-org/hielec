@@ -1,0 +1,204 @@
+
+<!--{template _public/header}-->
+<!--{template _public/nav_main2}-->
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".tab_content_richtxt").hide();
+		$(".tab_content_richtxt").first().show();
+		$("#infor_dial").hide();
+	});
+</script>
+<!--提示框-->
+<script type="text/javascript">
+	function hideDail() {
+		document.getElementById('infor_dial').style.display='none';
+	}
+</script>
+
+<div class="contain_bg">
+	<div class="container">
+		<div class="left_cont lf">
+			<div class="tree_category">
+				<div class="t1">二手交易商品分类</div>
+				<!--{loop $cates $k $p}-->
+				<div class="TreeWrap">
+					<div class="MenuBox" id="Menu_{$k}">
+						<div class="titBox">
+							<h3 class="Fst">
+								<a href="javascript:showMenu({$k});">{$p[name]}</a>
+							</h3>
+						</div>
+						<div class="txtBox">
+							<ul>
+								<!--{loop $p[child] $c}-->
+								<li><a href="{$url}&type4={$c[cid]}">{$c[name]}</a></li>
+								<!--{/loop}-->
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!--{/loop}-->
+			</div>
+			<script type="text/javascript">
+				function ExChgClsName(Obj,NameA,NameB){
+					var Obj=document.getElementById(Obj)?document.getElementById(Obj):Obj;
+					Obj.className=Obj.className==NameA?NameB:NameA;
+				}
+				function showMenu(iNo){
+					ExChgClsName("Menu_"+iNo,"MenuBox","MenuBox2");
+				}
+			</script>
+			<div class="product_recommend">
+				<p>相关推荐</p>
+				<ul>
+					<!--{loop $recommend $nav}-->
+					<li>
+						<a href="{LO_CURURL}&pluginop=page&loid={$nav[id]}">
+							<img src="{IMG_TPL}{$nav[pic]}" alt="产品">
+							<span>{$nav[name]}</span>
+							<span>兑换<em>{$nav[shop_price]}</em></span>
+						</a>
+					</li>
+					<!--{/loop}-->
+				</ul>
+			</div>
+		</div>
+
+		<div class="right_cont rt">
+			<div class="product_about">
+				<div class="about_img lf">
+					<a href="#">
+						<img src="{IMG_TPL}{$list[pic]}" alt="产品缩略图">
+					</a>
+				</div>
+				<div class="about_cont lf">
+					<ul>
+						<li class="product_name">{eval echo cutstr($list['name'],20,'……');}
+							<a href="javascript:void(0);" {if $collect}style="display:none;"{/if} onclick="collect({$list[id]})" title="收藏" id="collect">
+								<img src="{LO_PUB_IMG}nocollect.png" alt="收藏" />
+							</a>
+							<a href="javascript:void(0);" {if !$collect}style="display:none;"{/if} onclick="nocollect({$list[id]})" title="取消收藏" id="nocollect">
+								<img src="{LO_PUB_IMG}collect.png" alt="取消收藏">
+							</a>
+						</li>
+						<li>地区：<span>{$list[area]}</span></li>
+						<li>数量：<span>{$list[store_count]}</span></li>
+						<li class="product_status">状态：<span>出售中</span></li>
+						<li class="product_price">价格：<span>￥{$list[shop_price]}</span></li>
+						<li>查看次数：<span>{$list[click_count]}</span></li>
+						<li class="product_action"><a href="{LO_CURURL}&pluginop=order&loid={$list[id]}">立即购买</a></li>
+						<li class="product_label">
+							<span>真实个人</span>
+							<span>实名认证</span>
+							<span>在线沟通</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="product_detail clear">
+				<div class="tab_cont">
+					<ul>
+						<li class="current">商品详情</li>
+						<li>产品图片</li>
+						<li>留言</li>
+					</ul>
+				</div>
+				<div class="tab_content1">
+					<ul class="tab_content_richtxt">
+						<li class="cont_title">商品详情</li>
+						<li clss="cont_introduce">{$list[brief]}</li>
+						<li class="cont_title">相关品牌</li>
+						<li>
+							<dl class="cont_detail">
+								<!--{loop $arrBrand $nav}-->
+								<dt>{$nav[name]}</dt>
+								<!--{/loop}-->
+							</dl>
+						</li>
+						<li class="cont_title">热门品牌</li>
+						<li>
+							<dl class="cont_detail">
+								<!--{loop $arrBrandHot $nav}-->
+								<dt>{$nav[name]}</dt>
+								<!--{/loop}-->
+							</dl>
+						</li>
+					</ul>
+				</div>
+				<div class="tab_content2 tab_content_richtxt">
+					{$list['details']}
+				</div>
+				<div class="tab_content3">
+					<div class="tab_content_richtxt">
+						<form action="{$url}&pluginop=message_op" method="POST" class="form_message">
+							<textarea name="message" class="mess_cont" maxlength="200" placeholder="留言内容"></textarea>
+							<!-- <a href="javascript:void(0);" click=""><img src="{LO_PUB_IMG}captcha.png" width="90" height="36" alt="验证码" class="lf"></a> -->
+							<!-- <input type="text" placeholder="验证码" class="txt_captcha lf" name="txt_captcha" maxlength="4"> -->
+							<input type="hidden" name="trade_id" value="{$loid}">
+							<input type="submit" value="提交" class="btn_submit lf">
+							<input type="reset" value="重填" name="btn_reset" class="btn_reset lf">
+						</form>
+						<script type="text/javascript">
+							$(".btn_submit").click(function(){
+								var textarea=$(".mess_cont").val().length;
+								var msg;
+								if(textarea>=6&&textarea<=100){
+									return true;
+								}else{
+									if(textarea<6){
+										msg="发布的留言不得少于6个字！"
+									}
+									if(textarea>200){
+										msg="发布的留言不能超过100个字！"
+									}
+									alert(msg);
+									return false;
+								}
+							});
+						</script>
+						<!--{loop $arrmessage $nav}-->
+						<ul>
+							<li class="comment_user">
+								<p class="name">{$nav[username]}</p>
+								<p class="time">{date($nav[addtime])}</p>
+							</li>
+							<li class="comment_cont">
+								{$nav[message]}
+							</li>
+						</ul>
+						<!--{/loop}-->
+						{$multipage}
+					</div>
+				</div>
+				<script type="text/javascript">
+					$(".tab_cont li").click(function(){
+						$(this).addClass('current').siblings().removeClass('current');
+						var suoyin=$(this).index();
+						$(".tab_content_richtxt").hide();
+						$(".tab_content_richtxt").eq(suoyin).show();
+					});
+					function collect(id){
+						$.post('{LO_CURURL}', {pluginop:'ajax',sign:'col',did:id},
+							function(data) {
+								alert(data);
+								$("#collect").hide();
+								$("#nocollect").show();
+							},"html");
+					};
+					function nocollect(id){
+						$.post('{LO_CURURL}', {pluginop:'ajax',sign:'delcol',did:id},
+							function(data) {        
+								alert(data);
+								$("#nocollect").hide();
+								$("#collect").show();
+							},"html");
+					};
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 通用底部 -->
+<!--{template common/footer}-->
