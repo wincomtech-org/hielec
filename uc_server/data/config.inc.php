@@ -1,7 +1,7 @@
 <?php 
 define('UC_DBHOST', 'localhost');
 define('UC_DBUSER', 'root');
-define('UC_DBPW', 'hc@123');
+define('UC_DBPW', 'root');
 define('UC_DBNAME', 'hielec');
 define('UC_DBCHARSET', 'utf8');
 define('UC_DBTABLEPRE', 'pre_ucenter_');
