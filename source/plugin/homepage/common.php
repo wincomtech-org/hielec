@@ -9,7 +9,7 @@ session_start();
 /*
  * 公共区域
 */
-require_once '/source/plugin/_public/common.php';
+require_once DISCUZ_ROOT .'source/plugin/_public/common.php';
 // 初始化URL
 define('LO_CURURL', LO_URL . '&pmod='.$pmod);// 前台或者 $_GET['id']
 // 初始化路径

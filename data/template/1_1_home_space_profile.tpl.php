@@ -1,6 +1,6 @@
 <?php if(!defined('IN_DISCUZ')) exit('Access Denied'); hookscriptoutput('space_profile');
 0
-|| checktplrefresh('./template/default/home/space_profile.htm', './template/default/home/space_profile_body.htm', 1504324682, '1', './data/template/1_1_home_space_profile.tpl.php', './template/default', 'home/space_profile')
+|| checktplrefresh('./template/default/home/space_profile.htm', './template/default/home/space_profile_body.htm', 1504581241, '1', './data/template/1_1_home_space_profile.tpl.php', './template/default', 'home/space_profile')
 ;?><?php include template('common/header'); ?><div class="person_home">
     <!-- 论坛左侧导航 -->
     <?php include template('home/home_left'); ?>    <div class="person_homer rt">

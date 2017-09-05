@@ -14,7 +14,7 @@ $mod = !in_array($discuz->var['mod'], $modarray) && (!preg_match('/^\w+$/', $dis
 define('CURMODULE', $mod);
 
 $discuz->init();
-require_once './public.php';
+require_once DISCUZ_ROOT .'public.php';
 
 
 if($mod == 'register' && $discuz->var['mod'] != $_G['setting']['regname']) {

@@ -5,7 +5,7 @@ session_start();
 // define('LO_URL', dirname('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']) . "/");
 define('LO_URL', $_G['siteurl']);// 域名
 // 初始化插件路径
-define('LO_PUB_PATH', '/source/plugin/_public/');// 公共文件位置
+define('LO_PUB_PATH', DISCUZ_ROOT .'source/plugin/_public/');// 公共文件位置
 define('LO_PUB_CSS', LO_PUB_PATH.'css/');// 公共样式位置
 define('LO_PUB_JS', LO_PUB_PATH.'js/');// 公共JS位置
 define('LO_PUB_IMG', LO_PUB_PATH.'image/');// 公共图片位置
