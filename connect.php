@@ -16,7 +16,7 @@ $discuz = C::app();
 
 $mod = $discuz->var['mod'];
 $discuz->init();
-require_once './public.php';
+require_once DISCUZ_ROOT .'public.php';
 
 if(!in_array($mod, array('config', 'login', 'feed', 'check', 'user'))) {
 	showmessage('undefined_action');

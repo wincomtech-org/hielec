@@ -18,7 +18,7 @@ function loadcore() {
 	$discuz->init_cron = false;
 	$discuz->init_session = false;
 	$discuz->init();
-    require_once './public.php';
+    require_once DISCUZ_ROOT .'public.php';
 }
 
 ?>

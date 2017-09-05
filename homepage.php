@@ -14,7 +14,7 @@ $discuz = C::app();//实例化desiuz_application类
 // $cachelist = array('magic','userapp','usergroups', 'diytemplatenamehome');
 // $discuz->cachelist = $cachelist;//设置缓存列表
 $discuz->init();//初始化整个应用
-// require_once './public.php';
+// require_once DISCUZ_ROOT .'public.php';
 
 
 

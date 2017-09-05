@@ -9,7 +9,7 @@ $discuz = C::app();
 $cachelist = array('grouptype', 'groupindex', 'diytemplatenamegroup');
 $discuz->cachelist = $cachelist;
 $discuz->init();
-require_once './public.php';
+require_once DISCUZ_ROOT .'public.php';
 
 $_G['disabledwidthauto'] = 0;
 

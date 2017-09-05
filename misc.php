@@ -91,7 +91,7 @@ switch ($mod) {
 }
 
 $discuz->init();
-require_once './public.php';
+require_once DISCUZ_ROOT .'public.php';
 
 define('CURMODULE', $mod);
 runhooks();

@@ -36,7 +36,7 @@ if(C::app()->var['mod'] == 'group') {
 }
 C::app()->cachelist = $cachelist;
 C::app()->init();
-require_once './public.php';
+require_once DISCUZ_ROOT .'public.php';
 
 loadforum();
 set_rssauth();

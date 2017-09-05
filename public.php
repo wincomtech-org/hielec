@@ -1,7 +1,7 @@
 <?php
 header('Content-Type:text/html;charset=UTF-8');//设置字符集
 
-require_once './source/plugin/_public/common.php';
+require_once DISCUZ_ROOT .'source/plugin/_public/common.php';
 require_once LO_PUB_PATH.'plugin_common.function.php';
 require_once LO_PUB_PATH.'plugin_common.class.php';
 require_once LO_PUB_PATH.'public_uc_menu.php';

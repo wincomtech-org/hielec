@@ -12,7 +12,7 @@ $discuz = C::app();// 原来是把discuz_application对象赋值给变量$discuz
 $cachelist = array('magic','userapp','usergroups', 'diytemplatenamehome');
 $discuz->cachelist = $cachelist;
 $discuz->init();// 哇靠，$discuz->init();这一行才是核心中的核心，具体功能是初始化整个discuz应用。discuz_application类是整个discuz的应用初始化类，相当于织梦的 /include/common.inc.php的功能
-require_once './public.php';
+require_once DISCUZ_ROOT .'public.php';
 
 $space = array();
 $mod = getgpc('mod');
