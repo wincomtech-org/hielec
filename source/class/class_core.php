@@ -1,13 +1,5 @@
 <?php
-
-/**
- *      [] (C)2001-2099 Comsenz Inc.
- *      This is NOT a freeware, use is subject to license terms
- *
- *      $Id: class_core.php 33982 2013-09-12 06:36:35Z hypowang $
- */
-
-error_reporting(E_ALL);// 报告所有错误
+error_reporting(E_ALL ^(E_NOTICE | E_WARNING));
 /*四个常量定义*/
 define('IN_DISCUZ', true);
 define('DISCUZ_ROOT', substr(dirname(__FILE__), 0, -12));

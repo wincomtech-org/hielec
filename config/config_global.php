@@ -100,8 +100,8 @@ $_config['input']['compatible'] = 1;
 // ----------------------  CONFIG PLUGINDEVELOPER  ---------------------- //
 // $_config['plugindeveloper'] = 1;
 
-
-
+// ----------------------  CONFIG DEBUG  ---------------------- //
+$_config['debug'] = 1; 
 
 // -------------------  THE END  -------------------- //
 

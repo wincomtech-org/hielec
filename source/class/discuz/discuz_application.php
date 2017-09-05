@@ -1,15 +1,5 @@
 <?php
-
-/**
- *      [] (C)2001-2099 Comsenz Inc.
- *      This is NOT a freeware, use is subject to license terms
- *
- *      $Id: discuz_application.php 34608 2014-06-11 02:07:39Z nemohou $
- */
-
-if(!defined('IN_DISCUZ')) {
-	exit('Access Denied');
-}
+if(!defined('IN_DISCUZ')) exit('Access Denied');
 
 class discuz_application extends discuz_base{
 	var $mem = null;
@@ -75,7 +65,8 @@ class discuz_application extends discuz_base{
 	}
 
 	private function _init_env() {
-		error_reporting(E_ERROR);
+		// error_reporting(E_ERROR);
+		error_reporting(E_ALL ^(E_NOTICE | E_WARNING));
 		if(PHP_VERSION < '5.3.0') {
 			set_magic_quotes_runtime(0);
 		}
@@ -289,7 +280,8 @@ class discuz_application extends discuz_base{
 			error_reporting(0);
 		} elseif($_config['debug'] === 1 || $_config['debug'] === 2 || !empty($_REQUEST['debug']) && $_REQUEST['debug'] === $_config['debug']) {
 			define('DISCUZ_DEBUG', true);
-			error_reporting(E_ERROR);
+			// error_reporting(E_ERROR);
+			error_reporting(E_ALL ^(E_NOTICE | E_WARNING));
 			if($_config['debug'] === 2) {
 				error_reporting(E_ALL);
 			}
