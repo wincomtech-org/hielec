@@ -1,5 +1,5 @@
 <?php 
-require_once '/source/plugin/_public/plugin_common.config.php';
+require_once DISCUZ_ROOT.'source/plugin/_public/plugin_common.config.php';
 
 define('IMG_TPL', '/uploads/trade/pic/');
 

@@ -1,6 +1,6 @@
 <?php 
 // require_once $_G['siteurl'].'source/plugin/_public/plugin_common_config.php';
-require_once '/source/plugin/_public/plugin_common.config.php';
+require_once DISCUZ_ROOT.'source/plugin/_public/plugin_common.config.php';
 
 $tpre = 'datasheet';$lang['thead'] = 'DT';
 $upload_common_path = dirname(LO_URL) . LO_UPLOAD . $tpre.'/';// realpath(LO_URL) 会除去 / ./ ../ 根路径

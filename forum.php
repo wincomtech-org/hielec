@@ -94,5 +94,5 @@ $_G['setting']['threadhidethreshold'] = 1;
 
 
 
-require_once DISCUZ_ROOT.'./source/module/forum/forum_'.$mod.'.php';
+require_once DISCUZ_ROOT.'source/module/forum/forum_'.$mod.'.php';
 ?>

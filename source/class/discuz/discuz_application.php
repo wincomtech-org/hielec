@@ -280,8 +280,8 @@ class discuz_application extends discuz_base{
 			error_reporting(0);
 		} elseif($_config['debug'] === 1 || $_config['debug'] === 2 || !empty($_REQUEST['debug']) && $_REQUEST['debug'] === $_config['debug']) {
 			define('DISCUZ_DEBUG', true);
-			// error_reporting(E_ERROR);
-			error_reporting(E_ALL ^(E_NOTICE | E_WARNING));
+			// error_reporting(E_ALL ^(E_NOTICE | E_WARNING));
+			error_reporting(E_ERROR);
 			if($_config['debug'] === 2) {
 				error_reporting(E_ALL);
 			}

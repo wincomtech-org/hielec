@@ -1,6 +1,6 @@
 <?php
 //当前公共
-require_once '/source/plugin/_public/plugin_common.config.php';
+require_once DISCUZ_ROOT.'source/plugin/_public/plugin_common.config.php';
 
 $tpre = 'down';$lang['thead'] = '下载';
 $upload_common_path = dirname(LO_URL) . LO_UPLOAD . $tpre.'/';// realpath(LO_URL) 会除去 / ./ ../ 根路径
