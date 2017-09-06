@@ -5,11 +5,12 @@ session_start();
 // define('LO_URL', dirname('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']) . "/");
 define('LO_URL', $_G['siteurl']);// 域名
 // 初始化插件路径
-define('LO_PUB_PATH', DISCUZ_ROOT .'source/plugin/_public/');// 公共文件位置
-define('LO_PUB_CSS', LO_PUB_PATH.'css/');// 公共样式位置
-define('LO_PUB_JS', LO_PUB_PATH.'js/');// 公共JS位置
-define('LO_PUB_IMG', LO_PUB_PATH.'image/');// 公共图片位置
-define('LO_PUB_ORG', LO_PUB_PATH.'org/');// 第三方工具位置
+define('LO_PUB_PATH', '/source/plugin/_public/');// 公共文件位置
+define('PUB_R', DISCUZ_ROOT .'source/plugin/_public/');
+define('LO_PUB_CSS', PUB_R .'css/');// 公共样式位置
+define('LO_PUB_JS', PUB_R .'js/');// 公共JS位置
+define('LO_PUB_IMG', PUB_R .'image/');// 公共图片位置
+define('LO_PUB_ORG', PUB_R .'org/');// 第三方工具位置
 // 初始化文件上传位置
 define('LO_UPLOAD', '/uploads/');// 文件上传位置
 define('LO_PIC', 'pic/');// 图片文件位置
