@@ -15,7 +15,7 @@ define('LO_CURURL', LO_URL . '&pmod='.$pmod);// 前台或者 $_GET['id']
 // 初始化路径
 define('LO_PATH', '/source/plugin/'.THISPLUG.'/');// 插件位置
 define('LO_ROOT', realpath(DISCUZ_ROOT).LO_PATH);// 当前目录位置 DISCUZ_ROOT物理路径 realpath()真实路径
-define('LO_TPL', LO_PATH.'template/');// 模板位置
+define('LO_TPL', LO_ROOT.'template/');// 模板位置
 
 
 
