@@ -250,7 +250,8 @@ function cache_data($sql, $mkey, $result_type='fetch_all', $cachetime, $index_ty
     // $mkey 为空时不缓存
     if ($getextension['memcache'] && $mkey) {
         if (strlen($mkey)>32) { $mkey = md5(strrev($mkey)); } else { $mkey = strrev($mkey); }
-        if (memory('get',$mkey)===false) {
+        // if (memory('get',$mkey)===false) {
+        if (!memory('get',$mkey)) {
             // $data = DB::$result_type($sql);// 特殊写法
             switch ($result_type) {
                 // case 'fetch_first':$data=call_user_func(array('DB','fetch_first'),$sql);break;
