@@ -5,7 +5,7 @@
 	<!--{if $_G['config']['output']['iecompatible']}--><meta http-equiv="X-UA-Compatible" content="IE=EmulateIE{$_G['config']['output']['iecompatible']}" /><!--{/if}-->
 	<title><!--{if !empty($SEO['title'])}-->{$SEO['title']} - <!--{elseif !empty($navtitle)}-->{$navtitle} - <!--{/if}--><!--{if empty($nobbname)}--> {$_G['setting']['bbname']} - <!--{/if}--></title>
 	{$_G['setting']['seohead']}
-	
+
 	<meta name="keywords" content="{if $metakeywords}{echo dhtmlspecialchars($metakeywords)}{/if}" />
 	<meta name="description" content="{if $metadescription} {echo dhtmlspecialchars($metadescription)} {/if}{if empty($nobbname)} ,{$_G['setting']['bbname']} {/if}" />
 	<meta name="generator" content="Lothar! {$_G['setting']['version']}" />
@@ -14,28 +14,28 @@
 	<meta name="MSSmartTagsPreventParsing" content="True" />
 	<meta http-equiv="MSThemeCompatible" content="Yes" />
 	<base href="{$_G['siteurl']}" />
-	
+
 	<!--{csstemplate}-->
 	<script type="text/javascript">
 		// 定义总变量
 		var STYLEID = '{STYLEID}',
 			STATICURL = '{STATICURL}',
-			IMGDIR = '{IMGDIR}', 
-			VERHASH = '{VERHASH}', 
-			charset = '{CHARSET}', 
-			discuz_uid = '$_G[uid]', 
-			cookiepre = '{$_G[config][cookie][cookiepre]}', 
-			cookiedomain = '{$_G[config][cookie][cookiedomain]}', 
-			cookiepath = '{$_G[config][cookie][cookiepath]}', 
-			showusercard = '{$_G[setting][showusercard]}', 
-			attackevasive = '{$_G[config][security][attackevasive]}', 
-			disallowfloat = '{$_G[setting][disallowfloat]}', 
-			creditnotice = '<!--{if $_G[setting][creditnotice]}-->$_G[setting][creditnames]<!--{/if}-->', 
-			defaultstyle = '$_G[style][defaultextstyle]', 
-			REPORTURL = '$_G[currenturl_encode]', 
-			SITEURL = '$_G[siteurl]', 
-			JSPATH = '$_G[setting][jspath]', 
-			CSSPATH = '$_G[setting][csspath]', 
+			IMGDIR = '{IMGDIR}',
+			VERHASH = '{VERHASH}',
+			charset = '{CHARSET}',
+			discuz_uid = '$_G[uid]',
+			cookiepre = '{$_G[config][cookie][cookiepre]}',
+			cookiedomain = '{$_G[config][cookie][cookiedomain]}',
+			cookiepath = '{$_G[config][cookie][cookiepath]}',
+			showusercard = '{$_G[setting][showusercard]}',
+			attackevasive = '{$_G[config][security][attackevasive]}',
+			disallowfloat = '{$_G[setting][disallowfloat]}',
+			creditnotice = '<!--{if $_G[setting][creditnotice]}-->$_G[setting][creditnames]<!--{/if}-->',
+			defaultstyle = '$_G[style][defaultextstyle]',
+			REPORTURL = '$_G[currenturl_encode]',
+			SITEURL = '$_G[siteurl]',
+			JSPATH = '$_G[setting][jspath]',
+			CSSPATH = '$_G[setting][csspath]',
 			DYNAMICURL = '$_G[dynamicurl]';
 	</script>
 	<script type="text/javascript" src="{$_G[setting][jspath]}common.js?{VERHASH}"></script>

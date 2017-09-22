@@ -12,6 +12,9 @@
         <link rel="stylesheet" id="css_widthauto" type="text/css" href="{$_G[setting][csspath]}{STYLEID}_widthauto.css?{VERHASH}" />
         <script type="text/javascript">HTMLNODE.className += ' widthauto'</script>
     <!--{/if}-->
+        <link rel="stylesheet" id="css_widthauto" type="text/css" href='/template/default/_public/cache/style_1_widthauto.css' />
+        <script type="text/javascript">HTMLNODE.className += ' widthauto'</script>
+
     <!--{if in_array($_G['basescript'],array('forum','group'))}-->
         <script type="text/javascript" src="{$_G[setting][jspath]}forum.js?{VERHASH}"></script>
     <!--{elseif in_array($_G['basescript'],array('home','userapp'))}-->
@@ -42,11 +45,13 @@
             <link rel="stylesheet" type="text/css" href="/template/default/_public/cache/style_1_forum_viewthread.css">
         <!--{elseif $mod=='post'}-->
             <link rel="stylesheet" type="text/css" href="/template/default/_public/cache/style_1_forum_post.css">
+        <!--{elseif $mod=='guide'}-->
+            <link rel="stylesheet" type="text/css" href="/template/default/_public/cache/style_1_forum_guide.css">
         <!--{/if}-->
         <!-- 下面的 jquery-1.12.1.min.js 会导致系统自带的富文本编辑器上小按钮失效 -->
         <script type="text/javascript" src="{LO_PUB_JS}jquery-1.12.1.min.js"></script>
         <script type="text/javascript">
-            var jq = jQuery.noConflict();// noConflict() 方法会释放会 $ 标识符的控制，这样其他脚本就可以使用它了。
+            var jq = jQuery.noConflict();// noConflict() 方法会释放会 $ 标识符的控制，这样其他JS框架就可以使用它了。
         </script>
     <!--{/if}-->
     <!-- 省得麻烦，就写在这里共用了 如果遇到与系统冲突的请用 jq符 替换 $符-->

@@ -5,7 +5,6 @@ data/log/
 data/template/
 data/threadcache/
 source/plugin/_public/cache/
-template/default/_public/cache/
 uc_server/data/config.inc.php
 uploads/
 git update-index --assume-unchanged config/
