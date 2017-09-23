@@ -1,19 +1,21 @@
  @charset "utf-8";
+ textarea, input, select{padding:1px;resize:both;}
  .red{color:#F00;}
 .lothar_div{margin:10px auto;}
 .lothar_div label span,.lothar_div span{display:inline-block;}
 .lothar_div input[type="submit"]{border:none;background-color:#09C;color:#fff;padding:5px 20px;box-shadow:1px 1px 2px #ddd;margin:0 auto;display:block;cursor:pointer;}
 .lothar_div textarea{vertical-align:middle;}
-.lothar_ueditor {display:inline-block;width:calc(100%-140px);vertical-align:middle;}
+.lothar_ueditor {display:inline-block;width:1024px;width:calc(100%-140px);vertical-align:middle;}
 
 .lo_common_ul{}
 .lo_common_ul li{float: left;margin-right: 10px;}
-.lo_form_p{width:5%;height:32px;line-height:32px;float: left;}
-.lo_input{width:300px;height:32px;line-height:32px;}
+.lo_form_p,.lo_input{height:30px;line-height:30px;}
+.lo_form_p{width:5%;float:left;}
+.lo_input{width:300px;}
 .lo_submit_div{width:100%;}
-.lo_common_submit{ 
-    padding: 5px 20px; 
-    color: #fff; background-color: #09C;; 
+.lo_common_submit{
+    padding: 5px 20px;
+    color: #fff; background-color: #09C;;
     font-size: 14px;font-weight: bold;
     border: 1px solid #666;
     border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; -moz-border-radius: 5px;

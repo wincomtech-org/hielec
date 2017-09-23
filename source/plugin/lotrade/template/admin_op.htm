@@ -4,98 +4,140 @@
 
 <form  class="lothar_form" action="{$formcheck['url']}" method="post" enctype="multipart/form-data">
 	<div class="lothar_div">
-		<label><span>名称: </span><input type="text" name="name" value="{$page[name]}" required tabindex="1" /></label>
-	</div>
-	<div class="lothar_div">
-		<label><span>商品编号:</span> <input type="text" name="goods_sn" value="{$page[goods_sn]}" tabindex="2" /></label>
-	</div>
-	<div class="lothar_div">
-		<label><span>价格:</span> <input type="number" name="shop_price" value="{$page[shop_price]}" tabindex="3" /></label>
-	</div>
-	<div class="lothar_div"><span>分类:</span> 
-		<select name="cat_id">
-			<option {if !$page[cat_id]}selected{/if} value="0">-->无极<--</option>
-			<!--{loop $cates $p}-->
-			<option {if $page[cat_id]==$p[cid]}selected{/if} value="{$p[cid]}">{$p[name]}</option>
-				<!--{loop $p[child] $c}-->
-				<option {if $page[cat_id]==$c[cid]}selected{/if} value="{$c[cid]}"><!--{eval echo str_repeat('&nbsp;',4).$c[name]}--></option>
-					<!--{loop $c[child] $t}-->
-					<option {if $page[cat_id]==$t[cid]}selected{/if} value="{$t[cid]}"><!--{eval echo str_repeat('&nbsp;',8).$t[name]}--></option>
-					<!--{/loop}-->
-				<!--{/loop}-->
-			<!--{/loop}-->
-		</select>
-		<a href="{$formcheck['url_category']}"> 编辑分类</a>
-	</div>
-	<div class="lothar_div"><span>品牌: </span>
-		<!--{loop $brands $v}-->
-		<label><input type="radio" name="brand_id" value="{$v[id]}" {eval echo $page[brand_id]?(in_array($v[id],(array)json_decode($page[brand_id]))?'checked':''):'';} />{$v[name]}</label>
-		<!--{/loop}-->
-		<a href="{$formcheck['url_brand']}"> 编辑品牌</a>
-	</div>
-	<div class="lothar_div">
-		<label><span>详情:</span> <textarea cols="40" rows="5" name="brief">{$page[brief]}</textarea></label>
-	</div>
-	<div class="lothar_div">
-		<label><span>产品图片:</span> 
-		
-		<div class="lothar_ueditor">
-		{template _public/ueditor}
-		</div>
-
+		<label>
+			<span class="lo_form_p">名称: </span>
+			<input class="lo_input" class="lo_input" type="text" name="name" value="{$page[name]}" required />
 		</label>
 	</div>
 
 	<div class="lothar_div">
-		<label><span>标签/关键词:</span> <textarea cols="40" rows="3" name="keywords">{$page[keywords]}</textarea></label>
+		<label>
+			<span class="lo_form_p">商品编号:</span>
+			<input class="lo_input" type="text" name="goods_sn" value="{$page[goods_sn]}" />
+		</label>
+	</div>
+
+	<div class="lothar_div">
+		<label>
+			<span class="lo_form_p">价格:</span>
+			<input class="lo_input" type="number" name="shop_price" value="{$page[shop_price]}" />
+		</label>
+	</div>
+
+	<div class="lothar_div">
+		<span class="lo_form_p">分类:</span>
+		<select name="cat_id">
+			<option {if !$page[cat_id]}selected{/if} value="0">-->无极<--</option>
+			<!--{loop $cates $p}-->
+			<option {if $page[cat_id]==$p[cid]}selected{/if} value="{$p[cid]}">{$p[name]}</option>
+			<!--{loop $p[child] $c}-->
+			<option {if $page[cat_id]==$c[cid]}selected{/if} value="{$c[cid]}"><!--{eval echo str_repeat('&nbsp;',4).$c[name]}--></option>
+			<!--{loop $c[child] $t}-->
+			<option {if $page[cat_id]==$t[cid]}selected{/if} value="{$t[cid]}"><!--{eval echo str_repeat('&nbsp;',8).$t[name]}--></option>
+			<!--{/loop}-->
+			<!--{/loop}-->
+			<!--{/loop}-->
+		</select>
+		<a href="{$formcheck['url_category']}"> 编辑分类</a>
+	</div>
+	<div class="clear"></div>
+
+	<div class="lothar_div">
+		<span class="lo_form_p">品牌: </span>
+		<select name="brand_id">
+			<!--{loop $brands $v}-->
+			<option value="{$v[id]}" {if $page[brand_id]==$v[id]}selected{/if}>{$v[name]}</option>
+			<!--{/loop}-->
+		</select>
+		<a href="{$formcheck['url_brand']}"> 编辑品牌</a>
+	</div>
+	<div class="clear"></div>
+
+	<div class="lothar_div">
+		<label>
+			<span class="lo_form_p">简介:</span>
+			<textarea cols="40" rows="5" name="brief">{$page[brief]}</textarea>
+		</label>
 	</div>
 	<div class="lothar_div">
-		<label><span>商品原始图:</span> <input type="file" name="pic" tabindex="4" /></label>
+		<span class="lo_form_p">详情:</span>
+		<div class="lothar_ueditor">
+			<!--{template _public/ueditor}-->
+		</div>
+	</div>
+	<div class="clear"></div>
+
+	<div class="lothar_div">
+		<label>
+			<span class="lo_form_p">标签/关键词:</span>
+			<textarea cols="40" rows="3" name="keywords">{$page[keywords]}</textarea>
+		</label>
+	</div>
+
+	<div class="lothar_div">
+		<label>
+			<span class="lo_form_p">商品原始图:</span>
+			<input class="lo_input" type="file" name="pic" />
+		</label>
 		<!--{if $page[pic]}--><a href="{$page[pichref]}">{$page[pic]}</a><!--{/if}-->
 	</div>
+
 	<div class="lothar_div">
-		<label><span>库存数量：</span><input type="number" name="store_count" value="{$page[store_count]}"></label>
+		<label>
+			<span class="lo_form_p">库存数量：</span>
+			<input class="lo_input" type="number" name="store_count" value="{$page[store_count]}">
+		</label>
 	</div>
 
-	<div class="lothar_div"><label><span>交易类型：</span>
-		<select name="trade_type1">
-			{loop $trade_type1 $m}
-			<option value="{$m[id]}" {if $page[trade_type1]==$m[id]}selected{/if}>{$m[name]}
-			</option>
-			{/loop}
-		</select>
-	</label></div>
-
-	<div class="lothar_div"><label><span>所在地区：</span>
-		<select name="trade_type2">
-			{loop $district $m}
-			<option value="{$m[id]}" {if $page[trade_type2]==$m[id]}selected{/if}>{$m[name]}
-			</option>
-			{/loop}
-		</select>
-	</label></div>
-
-	<div class="lothar_div"><label><span>交易状态：</span>
-		<select name="trade_type3">
-			{loop $trade_type3 $m}
-			<option value="{$m[id]}" {if $page[trade_type3]==$m[id]}selected{/if}>{$m[name]}
-			</option>
-			{/loop}
-		</select>
-	</label></div>
-	<input type="hidden" name="uid" value="{$_G[uid]}">
 	<div class="lothar_div">
-		<label><span>点击数：</span><input type="number" name="click_count" value="{$page[click_count]}"></label>
+			<span class="lo_form_p">交易类型：</span>
+			<select name="trade_type1">
+				{loop $trade_type1 $m}
+				<option value="{$m[id]}" {if $page[trade_type1]==$m[id]}selected{/if}>{$m[name]}</option>
+				{/loop}
+			</select>
 	</div>
-	<div class="lothar_div"><label><span>状态：</span>
-		<select name="status">
-			{loop $lostatus $l $m}
-			<option value="{$l}" {if $page[status]==$l}selected{/if}>{$m}</option>
-			{/loop}
-		</select>
-	</label></div>
+	<div class="clear"></div>
 
 	<div class="lothar_div">
+			<span class="lo_form_p">所在地区：</span>
+			<select name="trade_type2">
+				{loop $district $m}
+				<option value="{$m[id]}" {if $page[trade_type2]==$m[id]}selected{/if}>{$m[name]}</option>
+				{/loop}
+			</select>
+	</div>
+	<div class="clear"></div>
+
+	<div class="lothar_div">
+			<span class="lo_form_p">交易状态：</span>
+			<select name="trade_type3">
+				{loop $trade_type3 $m}
+				<option value="{$m[id]}" {if $page[trade_type3]==$m[id]}selected{/if}>{$m[name]}</option>
+				{/loop}
+			</select>
+	</div>
+	<div class="clear"></div>
+
+	<div class="lothar_div">
+		<label>
+			<span class="lo_form_p">点击数：</span>
+			<input class="lo_input" type="number" name="click_count" value="{$page[click_count]}">
+		</label>
+	</div>
+
+	<div class="lothar_div">
+			<span class="lo_form_p">状态：</span>
+			<select name="status">
+				{loop $lostatus $l $m}
+				<option value="{$l}" {if $page[status]==$l}selected{/if}>{$m}</option>
+				{/loop}
+			</select>
+	</div>
+	<div class="clear"></div>
+
+	<div class="lothar_div">
+		<input type="hidden" name="uid" value="{$_G[uid]}">
 		<input type="hidden" name="formhash" value="{FORMHASH}" />
 		<input type="hidden" name="loid" value="{$loid}">
 		<input type="hidden" name="id_filter" value="{$lokey}">

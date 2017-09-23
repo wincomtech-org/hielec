@@ -17,13 +17,13 @@ case 'ajax':
 	// 		echo "colajax";
 	// 		break;
 	// }
-	
+
 	include 'ajaxjson.php';
 	break;
-case 'join':	
+case 'join':
 	$leftmenu = '';
 	$formcheck['url'] = LO_CURURL.'&pluginop=join_op';
-	
+
 	$loid = $_GET['loid']?intval($_GET['loid']):0;
 	$url=LO_CURURL.'&pluginop=page&loid='.$loid;
 	$oppo = looppo($_REQUEST['sign'], $_REQUEST['table']);
@@ -47,7 +47,7 @@ case 'join':
 	break;
 
 case 'join_op':
-		# code...			
+		# code...
 		$url=LO_CURURL.'&pluginop=page&loid='.$_POST['activityid'];
 		$_POST['uid']=$_G['uid'];
 		$insert_id = DB::insert('activity_apply',$_POST,true);
@@ -114,7 +114,7 @@ case 'order':
 	echo "</pre>";
 	include template(THISPLUG.':order');
 	break;
-case 'dellog':	
+case 'dellog':
 	# code...
 	break;
 case 'order_op':
@@ -129,7 +129,7 @@ case 'order_op':
 	$SEO['title'] = '支付积分';
 	$SEO = lo_seo($SEO);
 	$arrorderid=$_POST['orderid'];
-	
+
 	try {
 		if($_G['member']['credits']<$_POST['coountsum']){
 			$error = '积分不足！';
@@ -146,7 +146,7 @@ case 'order_op':
             	DB::update('activity_log', array('addressid'=>$_POST[address],'credits'=>$extcredits4,'brief'=>$_POST['remark'],'status'=>1), array('id'=>$value));
             }
 
-		}                    
+		}
     } catch (Exception $e) {
     	showmessage($e->getMessage(),$formcheck['url']);
     }
@@ -155,7 +155,7 @@ case 'order_op':
 	echo "<pre>";
 	// print_r($_G['member']['credits']);
 	echo "</pre>";
-	
+
 	break;
 case 'exchange':
 	# code...
@@ -223,7 +223,7 @@ case 'gift':
 			// array(LO_CURURL.'&pluginop=del'.$jumpext.'&loid=', '删除', 'del')
 		);
 	// if ($tab['ajax']) $tab['operator'] = array_merge($tab['ajax'], $tab['operator']);
-	
+
 	// 数据查询处理
 	$where = array(
 			array('start', $_REQUEST['start'], 'addtime'),
@@ -313,7 +313,7 @@ case 'page':
 
 	$arrTuijian = cache_list_table($table, $fields, null, 'modtime desc');// 最新活动
 
-	$arrHotDown = cache_list_table($table, $fields, null, 'views desc');// 热门活动 
+	$arrHotDown = cache_list_table($table, $fields, null, 'views desc');// 热门活动
 
 	$arrMore = cache_list_table($table, $fields, null, 'id desc');;// 更多活动
 
@@ -346,8 +346,6 @@ default:
 
 	$tab['th'] = array('标题','简述','活动时间','奖项设置');
 	$tab['td'] = array('name','brief','views','prize');
-	
-
 
 
 	$wh=' where recycle=\'\' and is_show=1 and (status=2||status=6) ';
@@ -360,7 +358,7 @@ default:
 	$startlimit = ($page - 1) * $pagesize;// 查询起始的偏移量
 	$multipage = multi($amount, $pagesize, $page, LO_CURURL.$url, $pagecount);// 显示分页
 		// 查询记录集
-		
+
 	$list = DB::fetch_all("SELECT * FROM ".DB::table('activity').$wh."  order by id desc  LIMIT {$startlimit},{$pagesize}");
 
 
@@ -369,12 +367,8 @@ default:
 
 	// // 数据查询、处理
 	// $list = cache_list_table($table, $fields, null, 'modtime desc','6');// 活动列表
-
 	// $listfift = cache_list_table('activity_gift', $fields, null, 'gid desc','6');// 礼物列表
-	
-	echo "<pre>";
-	
-	echo "</pre>";
+
 	include template(THISPLUG.':index_list');
 	break;
 }

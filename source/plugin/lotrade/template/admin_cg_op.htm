@@ -1,0 +1,60 @@
+
+<!--{template _public/admin_common_head}-->
+<div>{if $loid}修改{else}新增{/if}{$head_title}</div><br>
+
+<form  class="lothar_form" action="{$formcheck['url']}" method="post" enctype="multipart/form-data">
+    <div class="lothar_div">
+        <label>
+            <span class="lo_form_p">品牌名称:</span>
+            <input class="lo_input" type="text" name="name" value="{$page[name]}" required />
+        </label>
+    </div>
+
+    <div class="lothar_div">
+        <label>
+            <span class="lo_form_p">品牌logo:</span>
+            <input class="lo_input" type="file" name="logo" />
+        </label>
+        <!--{if $page[logo]}--><a href="{$page[logohref]}">{$page[logo]}</a><!--{/if}-->
+    </div>
+
+    <div class="lothar_div">
+        <label>
+            <span class="lo_form_p">品牌描述:</span>
+            <textarea cols="40" rows="5" name="desc">{$page[desc]}</textarea>
+        </label>
+    </div>
+
+    <div class="lothar_div">
+        <label>
+            <span class="lo_form_p">品牌外链:</span>
+            <input class="lo_input" type="text" name="url" value="{$page[url]}" />
+        </label>
+    </div>
+
+    <div class="lothar_div">
+        <span class="lo_form_p">是否热门</span>
+        <label><input {if $page[is_hot]!=1}checked{/if} type="radio" name="is_hot" value="0"> 否</label>
+        <label><input {if $page[is_hot]==1}checked{/if} type="radio" name="is_hot" value="1"> 是</label>
+    </div>
+    <div class="clear"></div>
+
+    <div class="lothar_div">
+        <label>
+            <span class="lo_form_p">排序:</span>
+            <input class="lo_input" type="number" name="sort" value="{if $page[sort]}{$page[sort]}{else}50{/if}">
+        </label>
+    </div>
+
+    <div class="lothar_div">
+        <input type="hidden" name="formhash" value="{FORMHASH}" />
+        <input type="hidden" name="loid" value="{$loid}">
+        <input type="hidden" name="id_filter" value="{$lokey}">
+        <input type="hidden" name="table" value="{$table}">
+        <input type="hidden" name="sign" value="{$_REQUEST[sign]}">
+        <input type="hidden" name="url_return_ok" value="{$formcheck[url_return_ok]}">
+        <input type="hidden" name="url_return_no" value="{$formcheck[url_return_no]}">
+        <input type="submit" value="提交" />
+    </div>
+</form>
+<!--{template _public/admin_common_foot}-->

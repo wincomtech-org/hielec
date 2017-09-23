@@ -11,24 +11,20 @@ switch ($_GET['pluginop']) {
 case 'ajax':
 	# code...
 	break;
-case 'article':
+
+case 'message':
 	// 初始化变量
 	$leftmenu = 'list';
-	// $formcheck['url'] = AURL.'&pluginop=commonpage';
-	// $oppo = looppo($_REQUEST['pluginop']);
 	$table = $tpre.'_message';
 	$lokey = 'id';
-	$head_title = '品牌';
+	$head_title = '留言';
 	// 预设table表格
 	$tab['th'] = array('ID','活动名称','信息','添加人','添加时间','操作');
 	$tab['td'] = array('id','name','message','username','addtime');
 	$tab['operator'] = array(
 			// array(AURL.'&pluginop=ajax&opera=show'.$jumpext.'&loid=','显隐'),
-			
 			array(AURL.'&pluginop=del&mark=article&del_filekey=pic&loid=', '删除')
-			// array(AURL.'&pluginop=del'.$jumpext.'&loid=', '删除')
 		);
-
 	// 数据查询、处理
 	$where = array(
 			array('start', $_REQUEST['start'], 'addtime'),
@@ -38,7 +34,7 @@ case 'article':
 			array('uid', $_REQUEST['uid'], 'uid')
 		);
 	$order = $lokey .' DESC';
-	$jumpext = 'brand'.$jumpext;
+	$jumpext = 'message'.$jumpext;
 	$fields = implode(',', $tab['td']);
 	$fields = $fields=='*'?$fields:($lokey?$lokey.','.$fields:$fields);
 	$join = array(
@@ -100,19 +96,16 @@ case 'brandpage':
 	$table = $tpre.'_brand';
 	$lokey = 'id';
 	$head_title = '品牌';
-	$fields = "name,cat_pid,cat_id,logo,'desc',url,is_hot,sort";
+	$fields = 'name,cat_pid,cat_id,logo,`desc`,url,is_hot,sort';
 	// $fields = plugin_common::create_fields_quote($fields);
-	
-	// 数据查询、处理
-	$fields_info = session_ob($table, $fields, '', 'column');
 
+	// 数据查询、处理
 	$where = ' where ' . $lokey . '=' . $loid;
 	$page = DB::fetch_first('select '.$fields.' from '.DB::table($table) . $where);
-
 	$page['logohref'] = $page['logo'] ? $upload_common_path . LO_PIC .$page['logo'] : '';
 	// $cates = plugin_common::get_category($table,'cid,pid,name');
-	include template('_public/admin_common_op');
-	// include template(THISPLUG.':admin_common_op');
+
+	include template(THISPLUG.':admin_brand_op');
 	break;
 
 case 'cg':
@@ -129,7 +122,6 @@ case 'cg':
 	$tab['th'] = array('名称','级别','是否显示','是否热门','分类图片','排序','操作');
 	$tab['td'] = array('name','level','is_show','is_hot','pic','sort');
 	$tab['operator'] = array(
-			// array(AURL.'&pluginop=ajax&opera=show'.$jumpext.'&loid=','显隐'),
 			array(AURL.'&pluginop=cgpage'.$jumpext.'&loid=', '编辑'),
 			array(AURL.'&pluginop=del&mark=cg&loid=', '删除')
 			// array(AURL.'&pluginop=del'.$jumpext.'&loid=', '删除')
@@ -171,15 +163,19 @@ case 'cgpage':
 
 	// 数据查询、处理
 	$fields_info = session_ob($table, $fields, '', 'column');
-// print_r($fields_info);
 	$where = ' where ' . $lokey . '=' . $loid;
 	$page = DB::fetch_first('select '.$fields.' from '.DB::table($table) . $where);
 	$page['pichref'] = $page['pic'] ? $upload_common_path . LO_PIC .$page['pic'] : '';
 	$cates = plugin_common::get_category($table,'cid,pid,name');
 	include template('_public/admin_common_op');
-	// include template(THISPLUG.':admin_common_op');
+	// include template(THISPLUG.':admin_cg_op');
 	break;
-	
+
+case 'op':
+// debug($_POST,1);
+	plugin_common::common_op($_POST);
+	break;
+
 case 'del':
 	$wh = array();
 	if ($_GET['loid']) {
@@ -195,7 +191,7 @@ case 'del':
 		case 'brand':
 			$table = 'trade_brand';// $tpre.'_brand'
 			$wh['lokey'] = 'id';
-			// $del_filekey = 'pic';
+			// $del_filekey = 'logo';
 			$is_del = '';
 			$jumpext = '&pluginop=brand' . $oppo['jumpext'];
 			break;
@@ -234,15 +230,6 @@ case 'del':
 	plugin_common::common_taskdel($table, $wh, $is_del, $skip, $del_filekey);
 	break;
 
-case 'op':
-// print_r($_POST);
-// die;
-	plugin_common::common_op($_POST);
-	// $a = plugin_common::common_op($_POST);
-	// echo "<pre>";
-	// var_dump($a)
-	break;
-
 case 'page':
 	$leftmenu = 'page';
 	$formcheck['url'] = AURL.'&pluginop=op';
@@ -273,9 +260,7 @@ case 'page':
 	$district = DB::fetch_all("SELECT `id`,`name` from ".DB::table('common_district')." WHERE level=1");//地区
 	$trade_type1 =  DB::fetch_all("SELECT `id`,`name` from ".DB::table('trade_type')." WHERE type=1");//交易类型
 	$trade_type3 =  DB::fetch_all("SELECT `id`,`name` from ".DB::table('trade_type')." WHERE type=3");//交易状态
-	echo "<pre>";
-	// print_r($brands);
-	echo "</pre>";
+
 	include template(THISPLUG.':admin_op');
 	// include template('_public/admin_common_op');
 	break;

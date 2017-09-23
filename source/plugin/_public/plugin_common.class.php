@@ -17,7 +17,7 @@ class plugin_common {
 	// 	# code...
 	// }
 
-	// function __construct($_G){  
+	// function __construct($_G){
 	// }
 
 	// public function fc()
@@ -153,7 +153,7 @@ class plugin_common {
     {
     	# code...
     }
-    
+
     /**
      * +----------------------------------------------------------
      * 获取有层次的栏目分类，有几层分类就创建几维数组
@@ -234,7 +234,7 @@ class plugin_common {
 
 	/*
 	 * 数据分页
-	 * 
+	 *
 	*/
 	public static function pager($sql, $page, $jumpurl, $pagesize)
 	{
@@ -422,18 +422,14 @@ class plugin_common {
 			if ($data['name']) {
 				$name = $data['name'];
 				$name_key = 'name';
+			} elseif ($data['title']) {
+				$name = $data['title'];
+				$name_key = 'title';
+			} elseif ($data['goods_name']) {
+				$name = $data['goods_name'];
+				$name_key = 'goods_name';
 			} else {
-				if ($data['title']) {
-					$name = $data['title'];
-					$name_key = 'title';
-				} else {
-					if ($data['goods_name']) {
-						$name = $data['goods_name'];
-						$name_key = 'goods_name';
-					} else {
-						self::jumpgo('名称或标题不能为空！');
-					}
-				}
+				self::jumpgo('名称或标题不能为空！');
 			}
 
 			if ($_FILES['pic']['name']) {
@@ -450,6 +446,11 @@ class plugin_common {
 				$data['attach'] = self::upload_file('attach', $upload_common_path_op . LO_ATTACH);
 				$im_path = DB::result_first("SELECT attach FROM ".DB::table($table)." WHERE {$id_filter}={$loid}");
 				$del_files[] = array('attach', $im_path);
+			}
+			if ($_FILES['logo']['name']) {
+				$data['logo'] = self::upload_file('logo', $upload_common_path_op . LO_PIC);
+				$im_path = DB::result_first("SELECT logo FROM ".DB::table($table)." WHERE {$id_filter}={$loid}");
+				$del_files[] = array('logo', $im_path);
 			}
 
 			/*预处理值*/
@@ -477,7 +478,7 @@ class plugin_common {
 						break;
 				}
 			}
-// return $fields_info;
+// debug($fields_info,1);
 
 			/*新增、编辑非公共区域*/
 			if ($loid) {
@@ -490,22 +491,17 @@ class plugin_common {
 					}
 				}
 			}
-
+// debug($data,1);
 			try {
 				if ($loid) {
-					$affected_rows = DB::update($table,$data,$wh);
-					if (!$affected_rows) {
-						throw new Exception('更新失败');
-					}
+					$affected = DB::update($table,$data,$wh);
 				} else {
-					$insert_id = DB::insert($table,$data,true);
-					if (!$insert_id) {
-						throw new Exception('添加失败');
-					}
+					$affected = DB::insert($table,$data,true);
 				}
+				if (!$affected) throw new Exception('操作失败');
 				# 删除相应的旧文件
 				if (!empty($del_files) && $loid) self::standard_file_del($loid, $del_files);
-				
+
 				// 记录 record_log
 				// $data = array();
 				// DB::insert($table.'_log', $data);
@@ -546,7 +542,7 @@ class plugin_common {
 				'urlno' => LO_CURURL.'&pluginop=managelist',
 				'ext' => '&loid=1'
 			);*/
-		
+
 		$condition = array();
 		foreach ($wh as $k => $v) {
 			$where .= $k.'='.(is_numeric($v)?$v:'\''.$v.'\'');
@@ -680,7 +676,7 @@ class plugin_common {
      * $upfile 上传的文件域
      * $file_rename 给上传的文件重命名 true/false:原名 null:随机名 其它:原名
      * $file_dir 文件上传路径，结尾加斜杠
-     * $dir_ext 上传文件目录分类方式 time:时间 type:格式 user_?:用户 
+     * $dir_ext 上传文件目录分类方式 time:时间 type:格式 user_?:用户
      * $thumb_dir 缩略图路径（相对于$file_dir ）,结尾加斜杠，留空则跟$file_dir相同
      * $upfile_type 允许的文件格式
      * $upfile_size_max 文件大小最大值
@@ -711,7 +707,7 @@ class plugin_common {
 
 		if (@empty($file_name))
 			self::jumpgo('上传的文件名'.$upfile.'是空的！');
-		
+
 		// 文件格式合法性的判断
 		$fname = explode(".", $file_name); // 将上传前的文件以“.”分开取得文件类型
 		$fcount = count($fname); // 获得截取的数量，避免后缀前面还有其他点
@@ -742,10 +738,10 @@ class plugin_common {
 		if ($upfile_ok===false) {
 			self::jumpgo('上传失败！');
 		}
-		
+
 		return $file;
 	}
-	
+
 	public static function update_file($upfile,$oldfile='')
 	{
 		global $upload_common_path_op;
@@ -895,24 +891,24 @@ class plugin_common {
 	public static function del_dir($dir, $sub_dir = false) {
 		if ($handle = @opendir($dir)) {
 	       // 删除目录下子目录和文件
-			while (false !== ($item=@readdir($handle))) {  
-				if ($item!='.' && $item!='..') {  
-					if (is_dir("$dir/$item")) {  
+			while (false !== ($item=@readdir($handle))) {
+				if ($item!='.' && $item!='..') {
+					if (is_dir("$dir/$item")) {
 						self::del_dir("$dir/$item");
-					} else {  
-						@unlink("$dir/$item");  
-					}  
-				}  
-			}  
+					} else {
+						@unlink("$dir/$item");
+					}
+				}
+			}
 			closedir($handle);
 			// 删除目录本身
-			if (!$sub_dir) @rmdir($dir);  
-		} 
+			if (!$sub_dir) @rmdir($dir);
+		}
 	}
 
 	/*
 	 * 获取文件的大小
-	 * 远程 
+	 * 远程
 	*/
 	static function get_filesize($url='') {
 	    // 选用适当的方法保证获取文件大小 需要打开allow_url_fopen!
@@ -990,11 +986,11 @@ class plugin_common {
     */
 	public static function replace_preg($str, $destarr, $sourcearr){
 		if (isset($sourcearr)) {
-			for ($i=0; isset($sourcearr[$i]); $i++) { 
+			for ($i=0; isset($sourcearr[$i]); $i++) {
 				if($sourcearr[$i]==$str) $res = $destarr[$i];
 			}
 		} else {
-			for ($i=0; $i < 99; $i++) { 
+			for ($i=0; $i < 99; $i++) {
 				if($i==$str) $res = $destarr[$i];
 			}
 		}
@@ -1002,7 +998,7 @@ class plugin_common {
 	}
 	/*public static function replace_preg($str, $arrDest, $arrSource){
 		if (isset($arrSource)) {
-			for ($i=0; isset($arrSource[$i]); $i++) { 
+			for ($i=0; isset($arrSource[$i]); $i++) {
 				if($arrSource[$i]==$str) $res = $arrDest[$i];
 			}
 		} elseif ($arrDest) {
@@ -1025,15 +1021,15 @@ class plugin_common {
 				 iconv("gbk", "utf-8//ignore",$str);
 				 mb_convert_encoding($str, 'utf-8', 'gbk');// 将gbk转为utf-8
 	 * mb_convert_encoding 开启这个函数低版本需要开启mb扩展
-		echo $str= '你好,这里是卖咖啡!'; 
-		echo '<br />'; 
-		echo iconv('GB2312', 'UTF-8', $str); //将字符串的编码从GB2312转到UTF-8 
-		echo '<br />'; 
-		echo iconv_substr($str, 1, 1, 'UTF-8'); //按字符个数截取而非字节 
-		print_r(iconv_get_encoding()); //得到当前页面编码信息 
-		echo iconv_strlen($str, 'UTF-8'); //得到设定编码的字符串长度 
-		//也有这样用的 
-		$content = iconv("UTF-8","gbk//TRANSLIT",$content); 
+		echo $str= '你好,这里是卖咖啡!';
+		echo '<br />';
+		echo iconv('GB2312', 'UTF-8', $str); //将字符串的编码从GB2312转到UTF-8
+		echo '<br />';
+		echo iconv_substr($str, 1, 1, 'UTF-8'); //按字符个数截取而非字节
+		print_r(iconv_get_encoding()); //得到当前页面编码信息
+		echo iconv_strlen($str, 'UTF-8'); //得到设定编码的字符串长度
+		//也有这样用的
+		$content = iconv("UTF-8","gbk//TRANSLIT",$content);
 	 * +----------------------------------------------------------
 	*/
 	public static function convert($str, $out_charset='utf-8', $in_charset='auto', $extra = '//IGNORE'){
@@ -1053,7 +1049,7 @@ class plugin_common {
 	* +----------------------------------------------------------
 	* 生成随机数
 	* +----------------------------------------------------------
-	* $type 随机字符类型 
+	* $type 随机字符类型
 	* $length 长度
 	* $prefix 前缀
 	* nlL（number.letter.LETTER） 通配，去掉了容易混淆的字符oOLl和数字01
@@ -1214,25 +1210,25 @@ class plugin_common {
 	 * $arr 二维数组
 	 * $keys 指定方式
 	*/
-	static function getArrayUniqueByKeys($arr,$keys)  
-	{  
+	static function getArrayUniqueByKeys($arr,$keys)
+	{
 		$arr_out = array();
 		foreach($arr as $k => $v) {
 			$key_out = '';// 避免累计
 			// $key_out = $v['name']."-".$v['age'];// 提取内部一维数组的key(name age)作为外部数组的键
-			foreach ($keys as $vl) { 
+			foreach ($keys as $vl) {
 				$key_out .= $key_out ? '_'.$v[$vl] : $v[$vl];
 			}
-			if(array_key_exists($key_out,$arr_out)){ 
+			if(array_key_exists($key_out,$arr_out)){
 				continue;
-			} else { 
+			} else {
 				$arr_out[$key_out] = $arr[$k];// 以key_out作为外部数组的键
 				$arr_wish[$k] = $arr[$k];// 实现二维数组唯一性
 			}
 		}
 		// return $arr_wish;
 		return array_values($arr_wish);
-	}  
+	}
 
 	/*
 	 * function:二维数组按指定的键值排序
@@ -1283,8 +1279,8 @@ class plugin_common {
 
 
 /**
- * 只有运行member.php下注册页面时才运行的钩子 register_top 
-*/ 
+ * 只有运行member.php下注册页面时才运行的钩子 register_top
+*/
 /*
 class plugin_loadv_member extends plugin_loadv {
 	function register_top(){

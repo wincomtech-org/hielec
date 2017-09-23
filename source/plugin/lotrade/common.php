@@ -28,8 +28,7 @@ if (isset($_REQUEST['do'])) {
 	$admin_head_nav .= "<a href=\"".AURL."&pluginop=cgpage\">新增分类</a>\t";
 	$admin_head_nav .= "<a href=\"".AURL."&pluginop=brand\">品牌列表页</a>\t";
 	$admin_head_nav .= "<a href=\"".AURL."&pluginop=brandpage\">新增品牌</a>\t";
-	$admin_head_nav .= "<a href=\"".AURL."&pluginop=article\">文章列表页</a>\t";
-	$admin_head_nav .= "<a href=\"".AURL."&pluginop=articlepage\">新增文章</a>\t";
+	$admin_head_nav .= "<a href=\"".AURL."&pluginop=message\">留言列表页</a>\t";
 } else {
 	// 前台小导航 \template\default\_public\common_head.htm
 	$head_nav = <<<NAV

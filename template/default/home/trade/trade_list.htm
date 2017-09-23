@@ -40,7 +40,7 @@
                                             <li>成色：<span>全新</span></li>
                                             <li>数量：<span class="num">{$nav[store_count]}</span></li>
                                             <li>价格：<span class="money">￥{$nav[shop_price]}</span></li>
-                                        </ul>                                       
+                                        </ul>
                                         <p class="phr_sg phr_sg_txt">
                                             {$nav[brief]}
                                         </p>
@@ -76,9 +76,9 @@
                                         <div class="clear"></div>
                                     </li>
                                     <li>
-                                        <span class="lf">产品价格：</span>
+                                        <span class="lf">所需嗨币：</span>
                                         <div class="lf phr_ig_fu_content ">
-                                            <input name="shop_price" type="text" placeholder="请输入商品价格" {$Validform['shop_price']}/>
+                                            <input name="shop_price" type="text" placeholder="请输入商品价" {$Validform['shop_price']}/>
                                             <!-- onchange="this.value=price_format(this.value)" -->
                                         </div>
                                         <div class="clear"></div>
@@ -121,7 +121,7 @@
                                     </li>
                                     <li><span class="lf">交易类型：</span>
                                         <div class="lf phr_ig_fu_content ">
-                                            <div class="fy_select">                 
+                                            <div class="fy_select">
                                                 <select name="trade_type1">
                                                     {loop $trade_type1 $m}
                                                     <option value="{$m[id]}" {if $page[trade_type1]==$m[id]}selected{/if}>{$m[name]}
@@ -183,7 +183,7 @@
                 $("#sjld").sjld("#shenfen","#chengshi","#quyu");
             });
            function price_format(s){
-                if(/[^0-9\.]/.test(s)){ 
+                if(/[^0-9\.]/.test(s)){
                     return "";
                 }
                 s=s.replace(/^(\d*)$/,"$1.");

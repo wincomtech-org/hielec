@@ -1,13 +1,19 @@
 <script>
 	//项目所在路径，在引入script脚本前声明并复制就可以正常使用了。
-	// window.UEDITOR_HOME_URL = '{LO_PUB_PATH}ueditor/';
-	var UEDITOR_HOME_URL = '{LO_PUB_PATH}ueditor/';
+	// window.UEDITOR_HOME_URL = '{PUB_R}ueditor/';
+	var UEDITOR_HOME_URL = '{PUB_R}ueditor/';
 </script>
 
 <!-- 配置文件 -->
-<script type="text/javascript" charset="utf-8" src="{LO_PUB_PATH}ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="{PUB_R}ueditor/ueditor.config.js"></script>
 <!-- 编辑器核心源码文件 -->
-<script type="text/javascript" charset="utf-8" src="{LO_PUB_PATH}ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="{PUB_R}ueditor/ueditor.all.min.js"> </script>
+
+<!-- 加载编辑器的容器 -->
+<!--style给定宽度可以影响编辑器的最终宽度-->
+<script type="text/plain" id="container" name="<!--{if $f[field]}-->{$f[field]}<!--{elseif $uekey}-->{$uekey}<!--{else}-->details<!--{/if}-->" style="max-width:1024px;max-height:500px;">
+    <p><!--{if $f[field]}-->{$page[$f[field]]}<!--{elseif $uekey}-->{$page[$uekey]}<!--{else}-->{$page[details]}<!--{/if}--></p>
+</script>
 
 <script type="text/javascript">
 	//实例化编辑器
@@ -41,10 +47,4 @@
 		//    {tag:'span',name:'hi', label:'', style:'font-style:italic;font-weight:bold;color:rgb(51, 153, 204)'}
 		//]
 	});
-</script>
-
-<!-- 加载编辑器的容器 -->
-<!--style给定宽度可以影响编辑器的最终宽度-->
-<script type="text/plain" id="container" name="<!--{if $f[field]}-->{$f[field]}<!--{elseif $uekey}-->{$uekey}<!--{else}-->details<!--{/if}-->" style="max-width:1024px;max-height:500px;">
-    <p><!--{if $f[field]}-->{$page[$f[field]]}<!--{elseif $uekey}-->{$page[$uekey]}<!--{else}-->{$page[details]}<!--{/if}--></p>
 </script>

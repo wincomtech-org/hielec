@@ -5,7 +5,7 @@
 <form class="lothar_form" action="{$formcheck['url']}" method="post" enctype="multipart/form-data" id="demoform">
 	<!--{loop $fields_info $f}-->
 	<div class="lothar_div">
-	<span> {$f['comment']}</span>
+		<span class="lo_form_p">{$f['comment']}</span>
 		<label>
 		<!--{if $f[type]=='tinyint' || $f[type]=='smallint' || $f[type]=='mediumint' || $f[type]=='int'}-->
 			<!--{if in_array($f[field],array('is_hot','is_new','is_recommend','is_show','is_real','is_on_sale','is_free_shipping'))}-->
@@ -32,11 +32,11 @@
 					<a href="{$formcheck['url_category']}"> 编辑分类</a>
 				<!--{/if}-->
 			<!--{else}-->
-				<input size="40" type="number" name="{$f['field']}" value="<!--{eval echo $page[$f[field]]?$page[$f[field]]:($f[def]?$f[def]:'0');}-->" maxlength="11" required />
+				<input class="lo_input" type="number" name="{$f['field']}" value="<!--{eval echo $page[$f[field]]?$page[$f[field]]:($f[def]?$f[def]:'0');}-->" maxlength="11" required />
 			<!--{/if}-->
 		<!--{elseif $f[type]=='varchar' || $f[type]=='char' }-->
 			<!--{if $f[field]=='brief'}-->
-				<textarea cols="40" rows="4" name="{$f[field]}">{$page[$f[field]]}</textarea>
+				<textarea cols="40" rows="3" name="{$f[field]}">{$page[$f[field]]}</textarea>
 			<!--{elseif in_array($f[field],array('pic','pdf','attach','logo','image'))}-->
 				<input type="file" name="$f[field]" />
 				<!--{if $page[$f[field]]}--><a href="{$page[$f[field].'href']}">{$page[$f[field]]}</a><!--{/if}-->
@@ -44,7 +44,7 @@
 				<textarea cols="40" rows="2" name="{$f[field]}">{$page[$f[field]]}</textarea>
 				<!--{if $page[$f[field]]}--><a href="{$page[$f[field]]}">{$page[$f[field]]}</a><!--{/if}-->
 			<!--{else}-->
-				<input size="40" type="text" name="{$f[field]}" value="{$page[$f[field]]}" />
+				<input class="lo_input" type="text" name="{$f[field]}" value="{$page[$f[field]]}" />
 			<!--{/if}-->
 		<!--{elseif $f[type]=='text' || $f[type]=='longtext'}-->
 			<!-- UEditor -->
@@ -53,44 +53,12 @@
 			</div>
 			<!-- <textarea cols="40" rows="4" name=""></textarea> -->
 		<!--{else}-->
-			<input size="40" type="text" name="{$f[field]}" value="{$page[$f[field]]}" />
+			<input class="lo_input" type="text" name="{$f[field]}" value="{$page[$f[field]]}" />
 		<!--{/if}-->
 		</label>
 	</div>
+    <div class="clear"></div>
 	<!--{/loop}-->
-
-	<!-- <div>
-		<label>积分: <input type="number" name="price" value="0" tabindex="1" /></label>
-	</div>
-	<div>
-		<label>分类: 
-			<select name="cid">
-				<option selected value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-			</select>
-		</label>
-		<a href="#"> 编辑分类</a>
-	</div>
-	<div>
-		<label>图片: <input type="file" name="pic" /></label>
-		<a href="#">图片名</a>
-	</div>
-	<div>
-		<h4>单选: </h4>
-		<label>开 <input type="radio" name="radio" tabindex="6" value="1" /></label>
-		<label>关 <input type="radio" name="radio" tabindex="7" value="2" /></label>
-	</div>
-
-	<div>
-		<label>多选1: <input type="checkbox" name="checkbox" /></label>
-		<label>多选2: <input type="checkbox" name="checkbox[]" /></label>
-	</div>
-	<div>
-		<input type="hidden" name="formhash" value="FORMHASH" />
-		<input type="hidden" name="loid" value="">
-		<input type="submit" value="提交" />
-	</div> -->
 
 	<div class="lo_submit_div">
 		<input type="hidden" name="formhash" value="{FORMHASH}" />

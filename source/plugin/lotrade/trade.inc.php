@@ -85,7 +85,7 @@ case 'order_op':
             foreach ($arrorderid as $key => $value) {
             	DB::update('trade_log', array('addressid'=>$_POST['address'],'cos'=>$_POST['paycount'],'brief'=>$_POST['remark'],'status'=>1), array('orderid'=>$data['orderid']));
             }
-		}                    
+		}
     } catch (Exception $e) {
     	showmessage($e->getMessage(),$formcheck['url'].'&pluginop=page&loid='.$data['tradeid']);
     }
@@ -116,39 +116,8 @@ case 'order':
 	include template(THISPLUG.':order');
 	break;
 
-case 'page':
-	$leftmenu = 'page';
-	$formcheck['url'] = LO_CURURL.'&pluginop=op';
-	$url=LO_CURURL;
-	$loid = $_GET['loid']?intval($_GET['loid']):0;
-	$oppo = looppo('', $_REQUEST['table']);
-	$table = $oppo['table'];
-	$lokey = $oppo['lokey'];
-	$fields = $oppo['fields'];
-	$head_title = $oppo['head_title'];
-	$SEO['title'] = '商品详情';
-	$SEO = lo_seo($SEO);
-	$recommend = DB::fetch_all("select ". $fields ." from ".DB::table($table)." where (status=2||status=6) and is_on_sale=1 and is_recommend=1 order by id desc LIMIT 0,3");//推荐
-
-	$list =  DB::fetch_first(sprintf("SELECT a.*,b.name as area FROM %s as a LEFT JOIN %s as b ON a.trade_type2=b.id WHERE a.id='%s' ",DB::table($table),DB::table('common_district'),$loid));
-	$cates = plugin_common::get_category($tpre.'_category','cid,pid,name');//商品分类
-
-	DB::update($table, array('click_count'=>$list['click_count']+1), array('id'=>$loid));//浏览次数增加
-	
-	$pagesize = 6;// 每页记录数
-	$multi = plugin_common::pager("SELECT COUNT(*) FROM ".DB::table('trade_message')." where trade_id=".$loid,$_GET['page'],$page,$url."&pluginop=page&loid=".$loid,$pagesize);
-	$multipage = $multi[0];
-	// 查询记录集
-	$limit = $multi[1];
-	$arrmessage = DB::fetch_all(sprintf("SELECT a.*,b.username FROM %s as a LEFT JOIN %s as b ON a.uid=b.uid WHERE a.trade_id=%d order by a.id desc %s",DB::table('trade_message'),DB::table('common_member'),$loid,$limit));
-	// $arrmessage = DB::fetch_all(sprintf("SELECT a.*,b.username FROM %s as a LEFT JOIN %s as b ON a.uid=b.uid WHERE a.trade_id='%s' ",DB::table('trade_message'),DB::table('common_member'),$loid));
-
-	$arrBrand = cache_list_table('trade_brand', $fields, " is_hot=0 ", 'id desc ','7');// 相关品牌
-	$arrBrandHot = cache_list_table('trade_brand', $fields, " is_hot=1 ", 'id desc ','7');// 相关品牌
-
-	$collect = DB::result_first(sprintf('SELECT uid from %s where uid=%d and tradeid=%d',DB::table('trade_log'),$gUid,$loid));
-
-	include template(THISPLUG.':detail');
+case 'op':
+	plugin_common::common_op($_POST);
 	break;
 
 case 'del':
@@ -178,8 +147,39 @@ case 'del':
 	plugin_common::common_taskdel($table, $wh, $is_del, $skip, $del_filekey);
 	break;
 
-case 'op':
-	plugin_common::common_op($_POST);
+case 'page':
+	$leftmenu = 'page';
+	$formcheck['url'] = LO_CURURL.'&pluginop=op';
+	$url=LO_CURURL;
+	$loid = $_GET['loid']?intval($_GET['loid']):0;
+	$oppo = looppo('', $_REQUEST['table']);
+	$table = $oppo['table'];
+	$lokey = $oppo['lokey'];
+	$fields = $oppo['fields'];
+	$head_title = $oppo['head_title'];
+	$SEO['title'] = '商品详情';
+	$SEO = lo_seo($SEO);
+	$recommend = DB::fetch_all("select ". $fields ." from ".DB::table($table)." where (status=2||status=6) and is_on_sale=1 and is_recommend=1 order by id desc LIMIT 0,3");//推荐
+
+	$list =  DB::fetch_first(sprintf("SELECT a.*,b.name as area FROM %s as a LEFT JOIN %s as b ON a.trade_type2=b.id WHERE a.id='%s' ",DB::table($table),DB::table('common_district'),$loid));
+	$cates = plugin_common::get_category($tpre.'_category','cid,pid,name');//商品分类
+
+	DB::update($table, array('click_count'=>$list['click_count']+1), array('id'=>$loid));//浏览次数增加
+
+	$pagesize = 6;// 每页记录数
+	$multi = plugin_common::pager("SELECT COUNT(*) FROM ".DB::table('trade_message')." where trade_id=".$loid,$_GET['page'],$page,$url."&pluginop=page&loid=".$loid,$pagesize);
+	$multipage = $multi[0];
+	// 查询记录集
+	$limit = $multi[1];
+	$arrmessage = DB::fetch_all(sprintf("SELECT a.*,b.username FROM %s as a LEFT JOIN %s as b ON a.uid=b.uid WHERE a.trade_id=%d order by a.id desc %s",DB::table('trade_message'),DB::table('common_member'),$loid,$limit));
+	// $arrmessage = DB::fetch_all(sprintf("SELECT a.*,b.username FROM %s as a LEFT JOIN %s as b ON a.uid=b.uid WHERE a.trade_id='%s' ",DB::table('trade_message'),DB::table('common_member'),$loid));
+
+	$arrBrand = cache_list_table('trade_brand', $fields, " is_hot=0 ", 'id desc ','7');// 相关品牌
+	$arrBrandHot = cache_list_table('trade_brand', $fields, " is_hot=1 ", 'id desc ','7');// 相关品牌
+
+	$collect = DB::result_first(sprintf('SELECT uid from %s where uid=%d and tradeid=%d',DB::table('trade_log'),$gUid,$loid));
+
+	include template(THISPLUG.':detail');
 	break;
 
 default:
@@ -273,7 +273,7 @@ default:
 	// 		array('c','name,1id as t','trade','tradeid','=','id')
 	// 	);
 	// $cmt = plugin_common::common_list('trade_log', 7, 1, $where, $order, '', 'brief', $join);
-	
+
 	include template(THISPLUG.':index_list');
 	break;
 }

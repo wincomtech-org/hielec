@@ -1,6 +1,6 @@
-<?php 
+<?php
 /*
- * 
+ *
  * 统一函数
  * 状态：0未审核 1审核中 2审核通过 3未过 4禁用 5暂停 6完成
  * 操作类型：pre预览 view访问 search搜索 zan点赞 cai踩 col收藏 down下载 buy购买 cmt评论 login登录 reg注册 admin管理员
@@ -87,7 +87,7 @@ function cache_list_table($table, $fields='*', $condition, $order, $limit='9', $
 	$getextension = C::memory()->getextension();
 	if ($getextension['memcache']) {
 		// $mkey = md5(strrev($mkey));
-		if (strlen($mkey)>32) { 
+		if (strlen($mkey)>32) {
 			// $mkey = substr($mkey,0,200);
 			$mkey = md5(strrev($mkey));
 		} else {
@@ -124,7 +124,7 @@ function cache_list_table($table, $fields='*', $condition, $order, $limit='9', $
 			$data = unserialize($data);
 			// $data = json_decode($data);// 需要把对象转成数组
 		}*/
-	
+
 		// session_ob($table, $fields, $wol, $sign);
 		$data = DB::fetch_all($sql);
 	}
@@ -160,7 +160,7 @@ function session_ob($table='', $fields='*', $wol='', $sign='op')
 		$infos = $_SESSION[$skey]['infos'];
 	} else {
 		foreach ($infos_all as $k => $v) {
-			if ($sign=='column') { 
+			if ($sign=='column') {
 				if (preg_match('/'.$v['field'].'/', $fields)) {
 					$infos[] = $v;
 				}
@@ -314,13 +314,13 @@ function lo_seo($seo=array())
 	} else {
 		$seo['title'] = $_G['setting']['bbname'] . ($seo['title']?' - '.$seo['title']:'');
 	}
-	
+
 	if (!isset($seo['keywords'])) {
 		$seo['keywords'] = '';
 	} else {
 		$seo['keywords'] = dhtmlspecialchars($seo['keywords']);
 	}
-	
+
 	if (!isset($seo['description'])) {
 		$seo['description'] = '';
 	} else {
@@ -357,7 +357,7 @@ function lo_advs($role='')
  * $msg
  * $status success/error/charge
  * $sign col/zan/cai/down/
- * $url 
+ * $url
  * $type json/html/xml
 */
 

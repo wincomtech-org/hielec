@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 // 初始化URL
@@ -38,6 +38,7 @@ define('ENDTIME', mktime(0,0,0,date('m'),date('d')+1,date('Y'))-1);
 /*语言设置*/
 $lang['no_resource'] = '暂缺……';
 /*导航*/
+// 会导致 在home.php下 当$_GET['do'] 为空时，$_GET['mod']='space' 变成 $_GET['mod']='follow'
 $mnid = getcurrentnav();// 当前模块标志
 
 
@@ -114,7 +115,7 @@ if ($getIP=='127.0.0.1') {
         // UTF-8转GBK
         $curaddr = mb_convert_encoding($ll['province'],'GBK','UTF-8');
         // $curaddr = $ll['province'];
-        
+
         $GPS = $map->locationByGPS($ll['lng'], $ll['lat']);
         $sql = "SELECT `id` from ".DB::table('common_district')." WHERE name LIKE '%".$curaddr."%' ";
         $location = DB::fetch_first($sql);
@@ -138,7 +139,7 @@ if ($_G['clientip']) {
         define('CURIP', plugin_common::getIP());
     } else {
         define('CURIP', '127.0.0.1');
-    } 
+    }
 }
 
 

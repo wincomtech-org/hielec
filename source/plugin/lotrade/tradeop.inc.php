@@ -19,7 +19,7 @@ case 'buyrecord':
 	$lokey = $oppo['lokey'];
 	$head_title = $oppo['head_title'];
 	$jumpext = $oppo['jumpext'];
-	
+
 	// 预设table表格
 	// $tab['th'] = array('名称','索引','简述','外链','主题图','发布时间','修改时间','操作ip','显隐','排序','操作');
 	// $tab['td'] = array('name','index','brief','url','pic','addtime','modtime','ip','is_show','sort');
@@ -28,7 +28,7 @@ case 'buyrecord':
 	// 		array(LO_CURURL.'&pluginop=page'.$jumpext.'&loid=', '编辑'),
 	// 		array(LO_CURURL.'&pluginop=del'.$jumpext.'&loid=', '删除')
 	// 	);
-	
+
 	// 数据查询、处理
 	// $fields = $fields=='*'?$fields:($lokey?$lokey.','.$fields:$fields);
 
@@ -62,6 +62,10 @@ case 'del':
 	plugin_common::common_taskdel($table, $wh, $is_del, $skip, $del_filekey);
 	break;
 
+case 'op':
+	plugin_common::common_op($_POST);
+	break;
+
 case 'page':
 	$leftmenu = 'page';
 	$formcheck['url'] = LO_CURURL.'&pluginop=op';
@@ -88,10 +92,6 @@ case 'page':
 	include template(THISPLUG.':uc_op');
 	break;
 
-case 'op':
-	plugin_common::common_op($_POST);
-	break;
-
 default:
 	$leftmenu = 'list';
 	$oppo = looppo($_REQUEST['sign'], $_REQUEST['table']);
@@ -99,7 +99,7 @@ default:
 	$lokey = $oppo['lokey'];
 	$head_title = $oppo['head_title'];
 	$jumpext = $oppo['jumpext'];
-	
+
 	// 预设table表格
 	// $tab['th'] = array('名称','索引','简述','外链','主题图','发布时间','修改时间','操作ip','显隐','排序','操作');
 	// $tab['td'] = array('name','index','brief','url','pic','addtime','modtime','ip','is_show','sort');
@@ -108,7 +108,7 @@ default:
 	// 		array(LO_CURURL.'&pluginop=page'.$jumpext.'&loid=', '编辑'),
 	// 		array(LO_CURURL.'&pluginop=del'.$jumpext.'&loid=', '删除')
 	// 	);
-	
+
 	// 数据查询、处理
 	// $fields = $fields=='*'?$fields:($lokey?$lokey.','.$fields:$fields);
 
