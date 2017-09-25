@@ -9,9 +9,9 @@
 
 .lo_common_ul{}
 .lo_common_ul li{float: left;margin-right: 10px;}
-.lo_form_p,.lo_input{height:30px;line-height:30px;}
-.lo_form_p{width:5%;float:left;}
-.lo_input{width:300px;}
+.lo_form_p,.lo_input{height:30px;}
+.lo_form_p{width:10%;float:left;}
+.lo_input{min-width:300px;}
 .lo_submit_div{width:100%;}
 .lo_common_submit{
     padding: 5px 20px;

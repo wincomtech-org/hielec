@@ -5,8 +5,8 @@
 <form class="lothar_form" action="{$formcheck['url']}" method="post" enctype="multipart/form-data" id="demoform">
 	<!--{loop $fields_info $f}-->
 	<div class="lothar_div">
-		<span class="lo_form_p">{$f['comment']}</span>
 		<label>
+		<span class="lo_form_p">{$f['comment']}</span>
 		<!--{if $f[type]=='tinyint' || $f[type]=='smallint' || $f[type]=='mediumint' || $f[type]=='int'}-->
 			<!--{if in_array($f[field],array('is_hot','is_new','is_recommend','is_show','is_real','is_on_sale','is_free_shipping'))}-->
 				<label><input type="radio" name="{$f[field]}" value="0" {eval echo $page[$f[field]]==0?'checked':($f[def]==0?'checked':'');} /> 否</label>

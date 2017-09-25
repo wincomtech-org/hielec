@@ -20,6 +20,7 @@ case 'ajax':
 
 	include 'ajaxjson.php';
 	break;
+
 case 'join':
 	$leftmenu = '';
 	$formcheck['url'] = LO_CURURL.'&pluginop=join_op';
@@ -41,8 +42,6 @@ case 'join':
 	}else{
 		$list = DB::fetch_first("select ". $fields ." from ".DB::table($table)." where id=".$loid);
 	}
-
-
 	include template(THISPLUG.':join_op');
 	break;
 
@@ -71,8 +70,7 @@ case 'order':
 	$head_title = $oppo['head_title'];
 	$SEO['title'] = '置换礼物';
 	$SEO = lo_seo($SEO);
-	// print_r($type);
-	// die();
+
 	if($type=='1'){
 		$page = DB::fetch_first("select ". $fields ." from ".DB::table('activity_log')." where type ='exchange' and gid=".$loid." and uid=".$_G['uid']);
 		if($page['id']){
@@ -108,15 +106,13 @@ case 'order':
 	if($arrcount==0){
 		showmessage('没有相关信息',LO_CURURL);
 	}
-
-	echo "<pre>";
-	// print_r(count($arrorder));
-	echo "</pre>";
 	include template(THISPLUG.':order');
 	break;
+
 case 'dellog':
 	# code...
 	break;
+
 case 'order_op':
 	$leftmenu = 'exchange';
 	$formcheck['url'] = LO_CURURL."&pluginop=order";
@@ -152,11 +148,8 @@ case 'order_op':
     }
     showmessage('兑换礼物成功',LO_CURURL);
 	// showmessage('111',$formcheck['url']);
-	echo "<pre>";
-	// print_r($_G['member']['credits']);
-	echo "</pre>";
-
 	break;
+
 case 'exchange':
 	# code...
 	$leftmenu = 'exchange';
@@ -200,7 +193,6 @@ case 'exchange':
 	// }
 	break;
 
-
 case 'gift':
 	// 初始化变量
 	$leftmenu = 'list';
@@ -210,7 +202,7 @@ case 'gift':
 	// $fields = $oppo['fields'];
 	$head_title = $oppo['head_title'];
 	$jumpext = $oppo['jumpext'];
-// var_dump($oppo);die;
+
 	// 预设table表格
 	$tab['th'] = array('名称','简述','价格','兑换次数','相关链接','logo','点赞','反对','发布时间','操作');
 	$tab['td'] = array('name','brief','price','buys','url','pic','supports','unsupports','addtime');
@@ -245,14 +237,9 @@ case 'gift':
 	$cmt = plugin_common::common_list($table, $pluginvar['pagesize'], $_GET['page'], $where, $order, '', $fields);
 	$multipage = $cmt['multipage'];
 	$list = $cmt['list'];
-	echo "<pre>";
-	// print_r($cmt);
-	// print_r($cmt2);
-	// var_dump($tab);
-	echo "</pre>";
+
 	include template(THISPLUG.':index_list');
 	break;
-
 
 case 'del':
 	$wh = array();
@@ -303,26 +290,18 @@ case 'page':
 
 	$ur_here = ur_here($_REQUEST['sign'],$page['cid'],$page['name']);
 
-
 	if ($table==$tpre.'_category') {
 		$cates = plugin_common::get_category($tpre.'_category','cid,pid,name');
 	} else {
 		$cates = session_ob($tpre.'_category', 'cid,pid,name', 'order by sort');
 	}
 
-
 	$arrTuijian = cache_list_table($table, $fields, null, 'modtime desc');// 最新活动
-
 	$arrHotDown = cache_list_table($table, $fields, null, 'views desc');// 热门活动
-
 	$arrMore = cache_list_table($table, $fields, null, 'id desc');;// 更多活动
 
 
-echo "<pre>";
-
-echo "</pre>";
-include template(THISPLUG.':details');
-// print_r($cates);
+	include template(THISPLUG.':details');
 	// include template(THISPLUG.':index_op');
 	break;
 
@@ -347,7 +326,6 @@ default:
 	$tab['th'] = array('标题','简述','活动时间','奖项设置');
 	$tab['td'] = array('name','brief','views','prize');
 
-
 	$wh=' where recycle=\'\' and is_show=1 and (status=2||status=6) ';
 	$pagesize = 6;// 每页记录数
 	$query = DB::query("SELECT COUNT(*) FROM ".DB::table('activity').$wh);
@@ -357,13 +335,10 @@ default:
 	$page = $page > $pagecount ? 1 : $page;// 取得当前页值
 	$startlimit = ($page - 1) * $pagesize;// 查询起始的偏移量
 	$multipage = multi($amount, $pagesize, $page, LO_CURURL.$url, $pagecount);// 显示分页
-		// 查询记录集
 
+	// 查询记录集
 	$list = DB::fetch_all("SELECT * FROM ".DB::table('activity').$wh."  order by id desc  LIMIT {$startlimit},{$pagesize}");
-
-
 	$listfift = DB::fetch_all("SELECT * FROM ".DB::table('activity_gift').$wh."  order by gid desc LIMIT {$startlimit},{$pagesize}");
-
 
 	// // 数据查询、处理
 	// $list = cache_list_table($table, $fields, null, 'modtime desc','6');// 活动列表

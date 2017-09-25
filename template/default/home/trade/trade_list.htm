@@ -11,7 +11,7 @@
         .m_zlxg2{ position:absolute; top:29px; border:1px solid #ded3c1;background:#fff; width:91px; display:none; max-height:224px;-height:224px; overflow-x:hidden; overflow-y:auto;white-space:nowrap;}
         .m_zlxg2 li{line-height:28px;white-space:nowrap; padding-left:10px;font-family:"微软雅黑";color:#333333; font-size:12px;}
         .m_zlxg2 li:hover{ color:#7a5a21;}
-        .clear{both:clear;}
+        .clear{clear: both}
     </style>
 
     <div class="person_homer rt">
@@ -20,7 +20,7 @@
             <!-- <div class="phr_bordermess">写点什么……</div> -->
             <div class="phr_MyReward">
                 <ul class=" phr_tab">
-                    <li  class="phr_active">闲置品列表</li>
+                    <li class="phr_active">闲置品列表</li>
                     <li >我要发布</li>
                 </ul>
                 <div class="phr_tab_content">
@@ -78,7 +78,7 @@
                                     <li>
                                         <span class="lf">所需嗨币：</span>
                                         <div class="lf phr_ig_fu_content ">
-                                            <input name="shop_price" type="text" placeholder="请输入商品价" {$Validform['shop_price']}/>
+                                            <input name="shop_price" type="number" placeholder="请输入商品价(数字型)" {$Validform['shop_price']}/>
                                             <!-- onchange="this.value=price_format(this.value)" -->
                                         </div>
                                         <div class="clear"></div>
@@ -147,16 +147,27 @@
                                             <!--{/loop}-->
                                         </select>
                                     </li>
+
                                     <li>
                                         <span class="lf">品牌：</span>
+                                        <label><input type="radio" style="width:20px;" name="brand_id" value="0">自定义</label>
                                         <!--{loop $brands $k $v}-->
                                         <label><input type="radio" style="width:20px;" name="brand_id" value="{$v[id]}" {if $k==0}checked {$Validform['brand_id']}{/if} />{$v[name]}</label>
                                         <!--{/loop}-->
+                                        <div class="clear"></div>
                                     </li>
+                                    <li>
+                                        <span class="lf">品牌名：</span>
+                                        <div class="lf phr_ig_fu_content ">
+                                            <input type="text" name="brand_name" placeholder="请输入自定义品牌名" {$Validform['name']}/>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </li>
+
                                     <li>
                                         <span class="lf">产品简介：</span>
                                         <div class="lf phr_ig_fu_content ">
-                                            <input type="text" name="brief" placeholder="请输入商品简介" min-height="60" {$Validform['brief']}/>
+                                            <textarea style="border:1px solid #CCC" cols="95" rows="3" name="brief" placeholder="请输入商品简介" {$Validform['brief']}></textarea>
                                         </div>
                                         <div class="clear"></div>
                                     </li>
@@ -168,7 +179,7 @@
                                         <span class="lf">原始图片：</span>
                                         <input type="file" name="pic"  {$Validform['pic']} />
                                     </li>
-                                    <li><button style="cursor: pointer;" type="submit">我要发布</button></li>
+                                    <li><button style="cursor:pointer;" type="submit">我要发布</button></li>
                                 </ul>
                             </form>
                         </div>

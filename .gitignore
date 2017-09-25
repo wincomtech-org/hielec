@@ -1,5 +1,6 @@
 config/config_global.php
 config/config_ucenter.php
+data/attachment/
 data/cache/
 data/log/
 data/template/

@@ -52,12 +52,12 @@
 			<div class="product_recommend">
 				<p>相关推荐</p>
 				<ul>
-					<!--{loop $recommend $nav}-->
+					<!--{loop $recommend $r}-->
 					<li>
-						<a href="{LO_CURURL}&pluginop=page&loid={$nav[id]}">
-							<img src="{IMG_TPL}{$nav[pic]}" alt="产品">
-							<span>{$nav[name]}</span>
-							<span>兑换<em>{$nav[shop_price]}</em></span>
+						<a href="{LO_CURURL}&pluginop=page&loid={$r[id]}">
+							<img src="{IMG_TPL}{$r[pic]}" alt="产品图">
+							<span>{$r[name]}</span>
+							<span>兑换<em>{$r[shop_price]}</em></span>
 						</a>
 					</li>
 					<!--{/loop}-->
@@ -68,26 +68,25 @@
 		<div class="right_cont rt">
 			<div class="product_about">
 				<div class="about_img lf">
-					<a href="#">
-						<img src="{IMG_TPL}{$list[pic]}" alt="产品缩略图">
-					</a>
+					<img src="{IMG_TPL}{$page[pic]}" alt="产品缩略图">
 				</div>
 				<div class="about_cont lf">
 					<ul>
-						<li class="product_name">{eval echo cutstr($list['name'],20,'……');}
-							<a href="javascript:void(0);" {if $collect}style="display:none;"{/if} onclick="collect({$list[id]})" title="收藏" id="collect">
+						<li class="product_name">
+							<!--{eval echo cutstr($page[name],20,'…')}-->
+							<a href="javascript:void(0);" {if $collect}style="display:none;"{/if} onclick="collect({$page[id]})" title="收藏" id="collect">
 								<img src="{LO_PUB_IMG}nocollect.png" alt="收藏" />
 							</a>
-							<a href="javascript:void(0);" {if !$collect}style="display:none;"{/if} onclick="nocollect({$list[id]})" title="取消收藏" id="nocollect">
+							<a href="javascript:void(0);" {if !$collect}style="display:none;"{/if} onclick="nocollect({$page[id]})" title="取消收藏" id="nocollect">
 								<img src="{LO_PUB_IMG}collect.png" alt="取消收藏">
 							</a>
 						</li>
-						<li>地区：<span>{$list[area]}</span></li>
-						<li>数量：<span>{$list[store_count]}</span></li>
+						<li>地区：<span>{$page[area]}</span></li>
+						<li>数量：<span>{$page[store_count]}</span></li>
 						<li class="product_status">状态：<span>出售中</span></li>
-						<li class="product_price">价格：<span>￥{$list[shop_price]}</span></li>
-						<li>查看次数：<span>{$list[click_count]}</span></li>
-						<li class="product_action"><a href="{LO_CURURL}&pluginop=order&loid={$list[id]}">立即购买</a></li>
+						<li class="product_price">价格：<span>￥{$page[shop_price]}</span></li>
+						<li>查看次数：<span>{$page[click_count]}</span></li>
+						<li class="product_action"><a href="{LO_CURURL}&pluginop=order&loid={$page[id]}">立即购买</a></li>
 						<li class="product_label">
 							<span>真实个人</span>
 							<span>实名认证</span>
@@ -99,35 +98,39 @@
 			<div class="product_detail clear">
 				<div class="tab_cont">
 					<ul>
-						<li class="current">商品详情</li>
-						<li>产品图片</li>
+						<li class="current">商品介绍</li>
+						<li>商品详情</li>
 						<li>留言</li>
 					</ul>
 				</div>
 				<div class="tab_content1">
 					<ul class="tab_content_richtxt">
-						<li class="cont_title">商品详情</li>
-						<li clss="cont_introduce">{$list[brief]}</li>
+						<li class="cont_title">商品简介</li>
+						<li clss="cont_introduce">{$page[brief]}</li>
+						{if $page[brand_name]}
+						<li class="cont_title">商品品牌</li>
+						<li clss="cont_introduce" style="color:#5ABEF2">{$page[brand_name]}</li>
+						{/if}
 						<li class="cont_title">相关品牌</li>
 						<li>
 							<dl class="cont_detail">
-								<!--{loop $arrBrand $nav}-->
-								<dt>{$nav[name]}</dt>
+								<!--{loop $arrBrand $v}-->
+								<dt>{$v[name]}</dt>
 								<!--{/loop}-->
 							</dl>
 						</li>
 						<li class="cont_title">热门品牌</li>
 						<li>
 							<dl class="cont_detail">
-								<!--{loop $arrBrandHot $nav}-->
-								<dt>{$nav[name]}</dt>
+								<!--{loop $arrBrandHot $v}-->
+								<dt>{$v[name]}</dt>
 								<!--{/loop}-->
 							</dl>
 						</li>
 					</ul>
 				</div>
 				<div class="tab_content2 tab_content_richtxt">
-					{$list['details']}
+					{$page[details]}
 				</div>
 				<div class="tab_content3">
 					<div class="tab_content_richtxt">
@@ -157,14 +160,14 @@
 								}
 							});
 						</script>
-						<!--{loop $arrmessage $nav}-->
+						<!--{loop $arrmessage $v}-->
 						<ul>
 							<li class="comment_user">
-								<p class="name">{$nav[username]}</p>
-								<p class="time">{date($nav[addtime])}</p>
+								<p class="name">{$v[username]}</p>
+								<p class="time"><!--{date($v[addtime])}--></p>
 							</li>
 							<li class="comment_cont">
-								{$nav[message]}
+								{$v[message]}
 							</li>
 						</ul>
 						<!--{/loop}-->
@@ -188,7 +191,7 @@
 					};
 					function nocollect(id){
 						$.post('{LO_CURURL}', {pluginop:'ajax',sign:'delcol',did:id},
-							function(data) {        
+							function(data) {
 								alert(data);
 								$("#nocollect").hide();
 								$("#collect").show();

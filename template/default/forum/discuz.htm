@@ -118,51 +118,54 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!--{loop $cat[forums] $forumid}--><!-- 类型 (forum:普通论坛 @板块) -->
+                    <!--{loop $cat[forums] $forumid}--><!-- 类型 (forum:普通论坛 @板块) -->
                         <!--{eval $forum=$forumlist[$forumid];}-->
                         <!--{eval $forumurl = !empty($forum['domain']) && !empty($_G['setting']['domain']['root']['forum']) ? 'http://'.$forum['domain'].'.'.$_G['setting']['domain']['root']['forum'] : 'forum.php?mod=forumdisplay&fid='.$forum['fid'];}-->
+
                         <!--{if $cat['forumcolumns']}-->
                         <!--{else}-->
-                        <tr style="border-top:1px solid #ddd;">
-                            <td class="w1">
-                                <span class="ic1 lf"{if !empty($forum[extra][iconwidth]) && !empty($forum[icon])} style="width:{$forum[extra][iconwidth]}px;"{/if}>
-                                    <!--{if $forum[icon]}-->
-                                    {$forum[icon]}
-                                    <!--{else}-->
-                                    <a  href="{$forumurl}" {if $forum[redirect]}target="_blank"{/if}><img src="{IMGDIR}/forum{if $forum[folder]}_new{/if}.gif" alt="{$forum[name]}" /></a>
-                                    <!--{/if}-->
-                                </span>
-                                <div class="lf">
-                                    <p class="ic4">
-                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;<a class="c6" href="{$forumurl}" {if $forum[redirect]}target="_blank"{/if}>{$forum[name]}</a></span>
-                                        <span class="ic3"><!--{if $forum[todayposts] && !$forum['redirect']}--><em title="{lang forum_todayposts}"> ($forum[todayposts])</em><!--{/if}--></span>
-                                    </p>
-                                    <!--{if $forum[description]}--><p class="xg2">{$forum[description]}</p><!--{/if}-->
-                                    <!--{if $forum['subforums']}--><p>{lang forum_subforums}: {$forum['subforums']}</p><!--{/if}-->
-                                </div>
-                            </td>
-                            <td class="w2 c6"><!--{echo dnumber($forum[threads])}--></td>
-                            <td class="w3 c6"><!--{echo dnumber($forum[posts])}--></td>
-                            <td class="w5 c6"><!--{if $forum['moderators']}--><p><span class="c6 aaaa">{$forum[moderators]}</span></p><!--{/if}--></td>
-                            <td class="w4">
-                                <div>
-                                    <!--{if $forum['permission'] == 1}-->
-                                    {lang private_forum}
-                                    <!--{else}-->
-                                    <!--{if $forum['redirect']}-->
-                                    <a href="{$forumurl}" class="c6">{lang url_link}</a>
-                                    <!--{elseif is_array($forum['lastpost'])}-->
-                                    <p class="ic4 ic6 c6"><a href="forum.php?mod=redirect&tid={$forum[lastpost][tid]}&goto=lastpost#lastpost" class="c6"><!--{echo cutstr($forum[lastpost][subject], 30)}--></a></p>
-                                    <p class="ic5 ic6"><cite>{$forum[lastpost][dateline]}&nbsp;&nbsp;<!--{if $forum['lastpost']['author']}-->{$forum['lastpost']['author']}<!--{else}-->{$_G[setting][anonymoustext]}<!--{/if}--></cite></p>
-                                    <!--{else}-->
-                                    {lang never}
-                                    <!--{/if}-->
-                                    <!--{/if}-->
-                                </div>
-                            </td>
-                        </tr>
+                            <tr style="border-top:1px solid #ddd;">
+                                <td class="w1">
+                                    <span class="ic1 lf"{if !empty($forum[extra][iconwidth]) && !empty($forum[icon])} style="width:{$forum[extra][iconwidth]}px;"{/if}>
+                                        <!--{if $forum[icon]}-->
+                                        {$forum[icon]}
+                                        <!--{else}-->
+                                        <a  href="{$forumurl}" {if $forum[redirect]}target="_blank"{/if}><img src="{IMGDIR}/forum{if $forum[folder]}_new{/if}.gif" alt="{$forum[name]}" /></a>
+                                        <!--{/if}-->
+                                    </span>
+                                    <div class="lf">
+                                        <p class="ic4">
+                                            <span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <a class="c6" href="{$forumurl}" {if $forum[redirect]} target="_blank"{/if}{if $forum[extra][namecolor]} style="color:{$forum[extra][namecolor]}"{/if}>{$forum[name]}</a>
+                                            </span>
+                                            <span class="ic3"><!--{if $forum[todayposts] && !$forum['redirect']}--><em title="{lang forum_todayposts}"> ($forum[todayposts])</em><!--{/if}--></span>
+                                        </p>
+                                        <!--{if $forum[description]}--><p class="xg2">{$forum[description]}</p><!--{/if}-->
+                                        <!--{if $forum['subforums']}--><p>{lang forum_subforums}: {$forum['subforums']}</p><!--{/if}-->
+                                    </div>
+                                </td>
+                                <td class="w2 c6"><!--{echo dnumber($forum[threads])}--></td>
+                                <td class="w3 c6"><!--{echo dnumber($forum[posts])}--></td>
+                                <td class="w5 c6"><!--{if $forum['moderators']}--><p><span class="c6 aaaa">{$forum[moderators]}</span></p><!--{/if}--></td>
+                                <td class="w4">
+                                    <div>
+                                        <!--{if $forum['permission'] == 1}-->
+                                        {lang private_forum}
+                                        <!--{else}-->
+                                        <!--{if $forum['redirect']}-->
+                                        <a href="{$forumurl}" class="c6">{lang url_link}</a>
+                                        <!--{elseif is_array($forum['lastpost'])}-->
+                                        <p class="ic4 ic6 c6"><a href="forum.php?mod=redirect&tid={$forum[lastpost][tid]}&goto=lastpost#lastpost" class="c6"><!--{echo cutstr($forum[lastpost][subject], 30)}--></a></p>
+                                        <p class="ic5 ic6"><cite>{$forum[lastpost][dateline]}&nbsp;&nbsp;<!--{if $forum['lastpost']['author']}-->{$forum['lastpost']['author']}<!--{else}-->{$_G[setting][anonymoustext]}<!--{/if}--></cite></p>
+                                        <!--{else}-->
+                                        {lang never}
+                                        <!--{/if}-->
+                                        <!--{/if}-->
+                                    </div>
+                                </td>
+                            </tr>
                         <!--{/if}-->
-                        <!--{/loop}-->
+                    <!--{/loop}-->
                     </tbody>
                 </table>
             </div>

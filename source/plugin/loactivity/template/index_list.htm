@@ -42,10 +42,10 @@
 		<p class="title">积分兑换</p>
 		<ul id="list">
 			<!--{loop $listfift $k $nav}-->
-			<li class="lf <!--{if in_array($k,array(2,5))}-->end<!--{/if}-->">
+			<li class="lf <!--{if ($k+1)%3 == 0}-->end<!--{/if}-->">
 				<dl>
 					<dt><img src="{IMG_TPL}{$nav[pic]}" width="180px" height="150px" /></dt>
-					<dd></dd>
+					<dd><!--{eval echo cutstr($nav[name],15,'…');}--></dd>
 					<dd class="jf">需要积分：<span>{$nav[price]}分</span></dd>
 					<dd><a href="{LO_CURURL}&pluginop=order&type=1&loid={$nav[gid]}"></a></dd>
 				</dl>

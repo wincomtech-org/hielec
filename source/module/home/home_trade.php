@@ -17,7 +17,6 @@ define('IMG_TPL', '/uploads/trade/pic/');
 
 switch ($do) {
 case 'del':
-	# code...		
 	// $str=DB::update('activity_log', array('is_show'=>'0'), array('id'=>$id));
 	$del=DB::delete($_GET['tab']," id = '$_GET[id]' and uid='$_G[uid]' ");
 	if($del){
@@ -29,21 +28,27 @@ case 'del':
 
 case 'cols':
 	$SEO['title'] = '收藏的商品';
+	$table = DB::table('trade_log');
+	$where = " where b.uid='$_G[uid]' and b.type='col' ";
+	$order = 'order by b.id desc';
 
-	$wh.=" where uid='$_G[uid]' and type='col' ";
-	$wh1.=" where b.uid='$_G[uid]' and b.type='col' ";
-	$pagesize = 6;// 每页记录数
-	
-	$query = DB::query("SELECT COUNT(*) FROM ".DB::table('trade_log').$wh);
-	$amount = DB::result($query, 0);// 查询记录总数
-	$pagecount = $amount?(($amount<$pagesize)?1:(($amount%$pagesize)?((int)($amount/$pagesize)+1):($amount/$pagesize))):0;// 计算总页数
-	$page = !empty($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
-	$page = $page > $pagecount ? 1 : $page;// 取得当前页值
-	$startlimit = ($page - 1) * $pagesize;// 查询起始的偏移量
-	$multipage = multi($amount, $pagesize, $page, $jumpurl, $pagecount);// 显示分页
-		// 查询记录集
-	// $list = DB::fetch_all("SELECT * FROM ".DB::table('trade').$wh."  order by id desc  LIMIT {$startlimit},{$pagesize}");
-	$list =  DB::fetch_all(sprintf("SELECT a.pic,a.id,b.id as gid,a.name,a.brief,a.shop_price FROM %s as a LEFT JOIN %s as b ON a.id=b.tradeid %s order by b.id desc LIMIT %s,%s",DB::table('trade'),DB::table('trade_log'),$wh1,$startlimit,$pagesize));
+    // 数据分页
+    // 如果条件来自一张表，则替换
+    $where2 = str_replace('b.','',$where);
+    $sql = sprintf("SELECT count(*) from %s %s;",$table,$where2);
+    $multi = plugin_common::pager($sql, $_GET['page'], $jumpurl,10);
+    $multipage = $multi[0];
+
+    // 查询结果集并处理
+    // $fields = plugin_common::create_fields_quote($fields,'a',$lokey);
+    $limit = $multi[1];
+    $sql = sprintf("SELECT a.pic,a.id,b.id as gid,a.name,a.brief,a.shop_price FROM %s as a LEFT JOIN %s as b ON a.id=b.tradeid %s %s %s",DB::table('trade'),$table,$where,$order,$limit);
+	$list =  DB::fetch_all($sql);
+    // $list_c = cache_data($sql);
+    // foreach ($list_c as $v) {
+    //     $v['pub_time'] = date('Y-m-d H:i:s',$v['pub_time']);
+    //     $list[] = $v;
+    // }
 
 	break;
 
@@ -63,14 +68,14 @@ case 'list_post':
 	}
 
 	if ($_FILES['pic']['name']) {
-		$pic = plugin_common::upload_file('pic',$upload_common_path_op . LO_PIC);		
+		$pic = plugin_common::upload_file('pic',$upload_common_path_op . LO_PIC);
 	}
 	$_POST['pic']=$pic;
 	$_POST['modtime']=time();
 	$_POST['uid']=$_G['uid'];
 	$_POST['status']=1;
 
-	$insert_id = DB::insert('trade',$_POST,true);	
+	$insert_id = DB::insert('trade',$_POST,true);
 	if ($insert_id) {
 		showmessage('添加成功',$mainurl);
 	}else{
@@ -91,13 +96,12 @@ case 'log':
 	$page = $page > $pagecount ? 1 : $page;// 取得当前页值
 	$startlimit = ($page - 1) * $pagesize;// 查询起始的偏移量
 	$multipage = multi($amount, $pagesize, $page, $jumpurl.$jumpext, $pagecount);// 显示分页
-		// 查询记录集
-		
+
+	// 查询记录集
 	// $list = DB::fetch_all(sprintf("SELECT a.name,b.addtime,a.*,b.* FROM %s as a LEFT JOIN %s as b ON a.id=b.tradeid WHERE b.uid=%d AND b.type ='%s' AND b.status=1 ",DB::table('trade'),DB::table('trade_log'),$_G['uid'],'buy'));
-	
 	$list = DB::fetch_all(sprintf("SELECT a.name,b.addtime,c.username,b.id,a.id as gid FROM %s as a LEFT JOIN %s as b ON a.id=b.tradeid  LEFT join %s as c on a.uid=c.uid  WHERE b.uid=%d AND b.type ='%s' AND b.status=1 limit %s,%s",DB::table('trade'),DB::table('trade_log'),DB::table('common_member'),$_G['uid'],'buy',$startlimit,$pagesize));
 
-	$list1 = DB::fetch_all(sprintf("SELECT a.name,b.addtime,c.username,b.id,a.id as gid FROM %s as a LEFT JOIN %s as b ON a.id=b.tradeid  LEFT join %s as c on a.uid=c.uid  WHERE a.uid=%d AND b.type ='%s' AND b.status=1 limit %s,%s",DB::table('trade'),DB::table('trade_log'),DB::table('common_member'),$_G['uid'],'buy',$startlimit,$pagesize));
+	// $list1 = DB::fetch_all(sprintf("SELECT a.name,b.addtime,c.username,b.id,a.id as gid FROM %s as a LEFT JOIN %s as b ON a.id=b.tradeid  LEFT join %s as c on a.uid=c.uid  WHERE a.uid=%d AND b.type ='%s' AND b.status=1 limit %s,%s",DB::table('trade'),DB::table('trade_log'),DB::table('common_member'),$_G['uid'],'buy',$startlimit,$pagesize));
 
 	// $selid = DB::fetch_all(sprintf("SELECT id FROM %s WHERE uid = %s  ",DB::table('trade'),$_G['uid']));
 	// $ids="(";
@@ -124,7 +128,7 @@ default:
 	$startlimit = ($page - 1) * $pagesize;// 查询起始的偏移量
 	$multipage = multi($amount, $pagesize, $page, $jumpurl.$jumpext, $pagecount);// 显示分页
 		// 查询记录集
-		
+
 	// $list = DB::fetch_all(sprintf("SELECT * FROM %s  WHERE uid=%d  limit %s,%s ",DB::table('trade'),$_G['uid'],$startlimit,$pagesize));
 	$list =  DB::fetch_all(sprintf("SELECT a.id,a.pic,a.brief,a.name,a.store_count,a.shop_price,b.name as area FROM %s as a LEFT JOIN %s as b ON a.trade_type2=b.id WHERE a.uid=%s AND a.recycle='' order by a.id desc LIMIT %s,%s",DB::table('trade'),DB::table('common_district'),$_G['uid'],$startlimit,$pagesize));
 

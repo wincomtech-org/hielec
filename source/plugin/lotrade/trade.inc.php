@@ -150,22 +150,27 @@ case 'del':
 case 'page':
 	$leftmenu = 'page';
 	$formcheck['url'] = LO_CURURL.'&pluginop=op';
-	$url=LO_CURURL;
-	$loid = $_GET['loid']?intval($_GET['loid']):0;
-	$oppo = looppo('', $_REQUEST['table']);
-	$table = $oppo['table'];
-	$lokey = $oppo['lokey'];
-	$fields = $oppo['fields'];
+	$url = LO_CURURL;
 	$head_title = $oppo['head_title'];
 	$SEO['title'] = '商品详情';
 	$SEO = lo_seo($SEO);
-	$recommend = DB::fetch_all("select ". $fields ." from ".DB::table($table)." where (status=2||status=6) and is_on_sale=1 and is_recommend=1 order by id desc LIMIT 0,3");//推荐
 
-	$list =  DB::fetch_first(sprintf("SELECT a.*,b.name as area FROM %s as a LEFT JOIN %s as b ON a.trade_type2=b.id WHERE a.id='%s' ",DB::table($table),DB::table('common_district'),$loid));
-	$cates = plugin_common::get_category($tpre.'_category','cid,pid,name');//商品分类
+	$loid = $_GET['loid']?intval($_GET['loid']):0;
+	$table_c = 'trade';
+	$table = DB::table($table_c);
+	$lokey = 'id';
+	$fields = 'name,pic,store_count,shop_price,click_count,brand_name,brief,details';
 
-	DB::update($table, array('click_count'=>$list['click_count']+1), array('id'=>$loid));//浏览次数增加
+	$fields2 = plugin_common::create_fields_quote($fields,'a',$lokey);
+	// debug(sprintf("SELECT %s,b.name as area FROM %s as a LEFT JOIN %s as b ON a.trade_type2=b.id WHERE a.id='%s' ",$fields,$table,DB::table('common_district'),$loid),1);
+	$page =  DB::fetch_first(sprintf("SELECT %s,b.name as area FROM %s as a LEFT JOIN %s as b ON a.trade_type2=b.id WHERE a.id=%d ",$fields2,$table,DB::table('common_district'),$loid));
 
+	//商品分类
+	$cates = plugin_common::get_category($tpre.'_category','cid,pid,name');
+	//推荐商品
+	$recommend = DB::fetch_all('select '. $fields .' from '. $table ." where (status=2||status=6) and is_on_sale=1 and is_recommend=1 order by id desc LIMIT 3");
+
+	// 留言
 	$pagesize = 6;// 每页记录数
 	$multi = plugin_common::pager("SELECT COUNT(*) FROM ".DB::table('trade_message')." where trade_id=".$loid,$_GET['page'],$page,$url."&pluginop=page&loid=".$loid,$pagesize);
 	$multipage = $multi[0];
@@ -174,10 +179,14 @@ case 'page':
 	$arrmessage = DB::fetch_all(sprintf("SELECT a.*,b.username FROM %s as a LEFT JOIN %s as b ON a.uid=b.uid WHERE a.trade_id=%d order by a.id desc %s",DB::table('trade_message'),DB::table('common_member'),$loid,$limit));
 	// $arrmessage = DB::fetch_all(sprintf("SELECT a.*,b.username FROM %s as a LEFT JOIN %s as b ON a.uid=b.uid WHERE a.trade_id='%s' ",DB::table('trade_message'),DB::table('common_member'),$loid));
 
-	$arrBrand = cache_list_table('trade_brand', $fields, " is_hot=0 ", 'id desc ','7');// 相关品牌
-	$arrBrandHot = cache_list_table('trade_brand', $fields, " is_hot=1 ", 'id desc ','7');// 相关品牌
-
+	// 品牌
+	$arrBrand = cache_list_table('trade_brand', 'name', " is_hot=0 ", 'id desc ','7');// 相关品牌
+	$arrBrandHot = cache_list_table('trade_brand', 'name', " is_hot=1 ", 'id desc ','7');// 相关品牌
+	// 收藏
 	$collect = DB::result_first(sprintf('SELECT uid from %s where uid=%d and tradeid=%d',DB::table('trade_log'),$gUid,$loid));
+
+	//浏览次数增加
+	DB::update($table_c, array('click_count'=>$page['click_count']+1), array('id'=>$loid));
 
 	include template(THISPLUG.':detail');
 	break;
@@ -263,11 +272,6 @@ default:
 	// $arrHot=DB::fetch_all(sprintf("SELECT a.brief,b.username,c.name,c.id as t FROM %s as a LEFT JOIN `%s` as b ON a.uid=b.uid LEFT JOIN `%s` as c ON a.tradeid=c.id LIMIT 0,7",DB::table('trade_log'),DB::table('common_member'),DB::table('trade')));
 	$arrHot=DB::fetch_all(sprintf("SELECT a.brief,b.username,c.name,c.id FROM %s as a LEFT JOIN `%s` as b ON a.uid=b.uid LEFT JOIN `%s` as c ON a.tradeid=c.id where a.type='buy' and (a.status=2||a.status=1) LIMIT 0,7",DB::table('trade_log'),DB::table('common_member'),DB::table('trade')));
 
-	// $arrid = array();
-	// foreach ($arrids as $key => $value) {
-	// 	# code...
-	// 	$arrid[]=$value['id'];
-	// }
 	// $join = array(
 	// 		array('b','username','common_member','uid','=','uid'),
 	// 		array('c','name,1id as t','trade','tradeid','=','id')

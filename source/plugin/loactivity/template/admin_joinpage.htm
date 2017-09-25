@@ -1,45 +1,55 @@
 <!--{template _public/admin_common_head}-->
 <div>{if $loid}修改{else}新增{/if}{$head_title}</div><br>
+
 <form action="{$formcheck['url']}" method="post" enctype="multipart/form-data">
-<input type="hidden" name="id" value="{$page[id]}">
-            <div class="act_form"><span>活动名<b>*</b>：</span>
-            <input type="text" name="activityname"  value="{$page[activityname]}">
-            <input type="hidden" name="activityid" value="{$page[activityid]}">
-            </div>
+    <div class="lothar_div">
+        <span class="lo_form_p">活动名<b>*</b>：</span>
+        <input class="lo_input" type="text" name="activityname"  value="{$page[activityname]}">
+    </div>
 
-            <div class="act_form"><span>姓名<b>*</b>：</span>
-            <input type="text" name="username" value="{$page[username]}">
-            </div>
+    <div class="lothar_div">
+        <span class="lo_form_p">姓名<b>*</b>：</span>
+        <input class="lo_input" type="text" name="username" value="{$page[username]}">
+    </div>
 
-            <div class="act_form"><span>学校或者工作单位<b>*</b>：</span>
-            <input type="text" name="unit" value="{$page[unit]}" >
-            </div>
-            
-            <div class="act_form"><span>参与活动的原因<b>*</b>：</span>
-            <textarea type="text" name="reason"> {$page['reason']}</textarea>
-            </div>
+    <div class="lothar_div">
+        <span class="lo_form_p">学校或者工作单位<b>*</b>：</span>
+        <input class="lo_input" type="text" name="unit" value="{$page[unit]}" >
+    </div>
 
-            <div class="act_form"><span>邮箱<b>*</b>：</span>
-            <input type="text" id="email"  value="{$page[email]}" name="email"/><i class="om4">此项不能为空</i><i class="om5">邮箱填写错误</i>
-            </div>
+    <div class="lothar_div">
+        <span class="lo_form_p">参与活动的原因<b>*</b>：</span>
+        <textarea cols="40" rows="4" type="text" name="reason"> {$page['reason']}</textarea>
+    </div>
 
-            <div class="act_form"><span>手机<b>*</b>：</span>
-            <input type="text" id="phone" value="{$page[phone]}" name="phone" /><i class="om4">此项不能为空</i><i class="om5">号码填写错误</i>
-            </div>
+    <div class="lothar_div">
+        <span class="lo_form_p">邮箱<b>*</b>：</span>
+        <input class="lo_input" type="text" id="email"  value="{$page[email]}" name="email"/>
+        <i class="om4">此项不能为空</i><i class="om5">邮箱填写错误</i>
+    </div>
 
-            <div class="act_form"><span>留言<b>*</b>：</span>
-            <input type="text" name="message" value="{$page[message]}">
-            </div>
+    <div class="lothar_div"><span class="lo_form_p">手机<b>*</b>：</span>
+        <input class="lo_input" type="text" id="phone" value="{$page[phone]}" name="phone" />
+        <i class="om4">此项不能为空</i><i class="om5">号码填写错误</i>
+    </div>
 
-            <div><label>状态：
-            <select name="status">
-                  {loop $lostatus $l $m}
-                  <option value="{$l}" {if $page[status]==$l}selected{/if}>{$m}</option>
-                  {/loop}
-            </select>
-            </label></div>
-            
-           <div class="act_form2"><input type="submit" value="提交申请" /></div>
+    <div class="lothar_div"><span class="lo_form_p">留言<b>*</b>：</span>
+        <input class="lo_input" type="text" name="message" value="{$page[message]}">
+    </div>
+
+    <div>
+        <span class="lo_form_p">状态：</span>
+        <select name="status">
+            {loop $lostatus $l $m}
+            <option value="{$l}" {if $page[status]==$l}selected{/if}>{$m}</option>
+            {/loop}
+        </select>
+    </div>
+    <div class="clear"></div>
+
+    <div class="lothar_div2">
+        <input type="hidden" name="loid" value="{$loid}">
+        <input type="hidden" name="activityid" value="{$page[activityid]}">
+        <input class="lo_common_submit" type="submit" value="提交申请" />
+    </div>
 </form>
-	
-		
