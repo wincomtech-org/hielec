@@ -4,7 +4,7 @@
 在Linux下安装
 './'、'/' 换成 DISCUZ_ROOT .'
 赋予读写权限
-chmod 777 hielec -R
+chmod 777 -R hielec
 
 
 

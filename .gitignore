@@ -5,6 +5,7 @@ data/cache/
 data/log/
 data/template/
 data/threadcache/
+data/sysdata/
 source/plugin/_public/cache/
 uc_server/data/config.inc.php
 uploads/
